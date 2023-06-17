@@ -3,5 +3,61 @@
 .home-container {
   background-color: var(--primary-gray);
   min-height: 100vh;
-  
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.products-list {
+  padding: 10px;
+  width: 740px;
+  height: 100%;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
+}
+
+.top-list-container {
+  display: flex;
+  /* background-color: blue; */
+  width: 740px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch-button {
+  /* display: flex; */
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.search {
+  top: -5px;
+  position: absolute;
+  left: 0;
+}
+
+.input {
+  border: 2px solid var(--primary-dark-blue);
+  border-radius: 20px;
+  text-align: center;
+  padding-right: 30px; /* Adjust the spacing to make room for the icon */
+}
+
+.search-icon {
+  position: relative;
+  top: 19px;
+  right: 30px;
+  transform: translateY(-50%);
+  color:var(--primary-dark-blue);
+  font-size: 22px;
 }

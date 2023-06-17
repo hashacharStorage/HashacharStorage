@@ -9,3 +9,9 @@
   --font-arimo: "Arimo", sans-serif;
   --font-varela: "Varela Round", sans-serif;
 }
+
+* {
+  font-family: var(--font-varela);
+  line-height: 150%;
+  box-sizing: border-box;
+}
