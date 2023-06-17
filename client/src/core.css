@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Varela+Round&display=swap");
+
+:root {
+  --primary-blue: #2596be;
+  --primary-dark-blue: #1b214c;
+  --primary-gray: #f7f7f7;
+  --primary-white: #ffffff;
+
+  --font-arimo: "Arimo", sans-serif;
+  --font-varela: "Varela Round", sans-serif;
+}

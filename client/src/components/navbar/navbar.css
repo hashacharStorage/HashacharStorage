@@ -1,0 +1,33 @@
+/* @import url("../../core.css"); */
+
+.navbar-container {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
+}
+
+.navbar-container img {
+  width: 150px;
+  cursor: pointer;
+}
+.navbar-container ul {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 25px;
+  list-style-type: none;
+}
+
+.navbar-links {
+  font-family: var(--font-varela);
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--primary-blue);
+}
+
+.navbar-links:hover {
+  text-decoration: underline;
+}
