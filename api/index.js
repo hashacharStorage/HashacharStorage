@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 const userRouter = require("./router/user");
 const companyRouter = require("./router/company");
@@ -15,6 +16,7 @@ dotenv.config();
 const app = express();
 
 //middlewares
+app.use(cors());
 app.use(express.json());
 
 //routes
