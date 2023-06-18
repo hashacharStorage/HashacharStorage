@@ -4,63 +4,43 @@ import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Product from "../../components/product/Product";
 import { BiSearchAlt } from "react-icons/bi";
-
-
-
+import axios from "axios";
+import Cookies from "js-cookie";
 const Home = () => {
-  const dumyData = [
-    {
-      product_id: 0,
-      title: "ממיר",
-      serial: "12",
-      desc: "ממיר",
-      companies: [0, 1],
-      image:
-        "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2020/01/20210816_112730.jpg",
-      minQuantity: 1,
-      black: false,
-    },
-    {
-      product_id: 1,
-      title:
-        "Armored  C LC/APC-SC/APC SS Simplex 3.0mm LSZH Anti-UV-30MArmored  C LC/APC-SC/APC SS Simplex 3.0mm LSZH Anti-UV-40MArmored  C LC/APC-SC/APC SS Simplex 3.0mm LSZH Anti-UV-40MArmored  C LC/APC-SC/APC SS Simplex 3.0mm LSZH Anti-UV-40M      ",
-      serial: "23",
-      desc: "ממיר",
-      companies: [0, 1],
-      image:
-        "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2020/01/20210816_112730.jpg",
-
-      minQuantity: 1,
-      black: true,
-    },
-    {
-      product_id: 2,
-      title: "ממיר",
-      serial: "123451dd2a56",
-      desc: "ממיר",
-      companies: [0, 1],
-      image:
-        "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2020/01/20210816_112730.jpg",
-
-      minQuantity: 8,
-      black: false,
-    },
-  ];
-
+  const [productsData, setProductsData] = useState([{}]);
   const [currOrder, setCurrOrder] = useState({});
   const [isBlack, setIsBlack] = useState(true);
   const [filterData, setFilterData] = useState(
-    dumyData.filter((item) => {
-      return item.black === isBlack;
+    productsData.filter((item) => {
+      console.log(item);
+      return item.isBlack === isBlack;
     })
   );
 
   useEffect(() => {
-    const updatedFilterData = dumyData.filter((item) => {
-      return item.black === isBlack;
+    const company =
+      Cookies.get("company") === "0" ? "" : Cookies.get("company");
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products", {
+          params: {
+            companies: company,
+          },
+        });
+        setProductsData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const updatedFilterData = productsData.filter((item) => {
+      return item.isBlack === isBlack;
     });
     setFilterData(updatedFilterData);
-  }, [isBlack]);
+  }, [isBlack,productsData]);
 
   const handleEditCurrOrder = (productId, productCounter) => {
     let copyCurrOrder = { ...currOrder, [productId]: productCounter };
@@ -76,8 +56,8 @@ const Home = () => {
       <div className="content-container">
         <div className="top-list-container">
           <div className="search">
-            <input className="input" type="text" placeholder="חיפוש"/>
-            <BiSearchAlt className="search-icon"/>
+            <input className="input" type="text" placeholder="חיפוש" />
+            <BiSearchAlt className="search-icon" />
           </div>
           <div className={"switch-button"} onClick={handleIsBlack}>
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}

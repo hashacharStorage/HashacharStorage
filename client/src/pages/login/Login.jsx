@@ -33,7 +33,10 @@ const Login = () => {
         .then((res) => {
           user = res.data.others;
           token = res.data.accessToken;
-          Cookies.set("token", token);
+          console.log(user);
+          Cookies.set("token", "Bearer,"+token);
+          Cookies.set("company", user.company);
+          Cookies.set("firstName", user.firstname);
           navigate("/home");
         })
         .catch((err) => console.log(err));

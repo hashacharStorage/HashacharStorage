@@ -48,7 +48,6 @@ const getProduct = async (req, res) => {
 //get all products
 const getProducts = async (req, res) => {
   const qCompanies = req.query.companies;
-  const qBlack = req.query.black;
   const filter = {};
 
   if (qCompanies) {
@@ -56,10 +55,6 @@ const getProducts = async (req, res) => {
       .split(",")
       .map((company) => parseInt(company));
     filter.companies = { $in: companiesArray };
-  }
-
-  if (qBlack) {
-    filter.black = qBlack;
   }
 
   try {
