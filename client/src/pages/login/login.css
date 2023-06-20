@@ -12,10 +12,11 @@
 }
 
 .login-content-container {
-  background-color: red;
-  width: 30%;
+  /* background-color: red; */
+  width: 20%;
   padding: 40px;
   border-radius: 6px;
+  aspect-ratio: 1;
   /* align-items: center; */
   /* justify-content: center; */
   box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
@@ -30,7 +31,7 @@
 
 .login-content-container input {
   flex: 1;
-  min-width: 70%;
+  min-width: 100%;
   margin: 20px 10px 0px 0px;
   border-radius: 6px;
   text-align: right;
@@ -52,7 +53,7 @@
 
 .login-form {
   width: 100%;
-  background-color: #fff;
+  /* background-color: #fff; */
   display: flex;
   flex-wrap: wrap;
 }
