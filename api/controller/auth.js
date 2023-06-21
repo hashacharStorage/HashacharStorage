@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("user not found");
+    if (user === null) res.status(401).json("user not found");
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
 
     const { password, ...others } = user._doc;
 
-    res.status(200).json({others, accessToken});
+    res.status(200).json({ others, accessToken });
   } catch (error) {
     res.status(500).send(error);
   }

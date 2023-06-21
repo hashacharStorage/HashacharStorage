@@ -12,7 +12,7 @@
 }
 
 .login-content-container {
-  background-color: red;
+  /* background-color: red; */
   width: 30%;
   padding: 40px;
   border-radius: 6px;
@@ -52,7 +52,7 @@
 
 .login-form {
   width: 100%;
-  background-color: #fff;
+  /* background-color: #fff; */
   display: flex;
   flex-wrap: wrap;
 }

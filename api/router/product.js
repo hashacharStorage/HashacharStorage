@@ -5,7 +5,10 @@ const {
   getProducts,
   updateproduct,
 } = require("../controller/product");
-const { verifyTokenAndAdmin } = require("../controller/verifyToken");
+const {
+  verifyTokenAndAdmin,
+  verifyTokenAndAuthorization,
+} = require("../controller/verifyToken");
 
 const router = require("express").Router();
 
@@ -22,6 +25,6 @@ router.delete("/:id", verifyTokenAndAdmin, deleteProduct);
 router.get("/find/:id", getProduct);
 
 //get all users
-router.get("/", getProducts);
+router.get("/", verifyTokenAndAuthorization, getProducts);
 
 module.exports = router;

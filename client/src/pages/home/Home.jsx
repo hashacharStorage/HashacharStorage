@@ -18,13 +18,16 @@ const Home = () => {
   );
 
   useEffect(() => {
-    const company =
-      Cookies.get("company") === "0" ? "" : Cookies.get("company");
     const fetchData = async () => {
+      const company = Cookies.get("company");
+      const toekn = "Bearer " +  Cookies.get("token");
       try {
         const response = await axios.get("http://localhost:5000/api/products", {
           params: {
             companies: company,
+          },
+          headers: {
+            token: toekn,
           },
         });
         setProductsData(response.data);
@@ -40,7 +43,7 @@ const Home = () => {
       return item.isBlack === isBlack;
     });
     setFilterData(updatedFilterData);
-  }, [isBlack,productsData]);
+  }, [isBlack, productsData]);
 
   const handleEditCurrOrder = (productId, productCounter) => {
     let copyCurrOrder = { ...currOrder, [productId]: productCounter };
