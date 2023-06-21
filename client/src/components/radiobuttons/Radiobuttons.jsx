@@ -22,7 +22,7 @@ const RadioButtons = ({ title, options, checkedValue, onChange }) => {
             />
             <span className="custom-radio-icon">
               {checkedValue === option.value ? (
-                <ImRadioChecked />
+                <ImRadioChecked  />
               ) : (
                 <ImRadioUnchecked />
               )}

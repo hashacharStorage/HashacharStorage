@@ -1,36 +1,6 @@
-.add-product-container {
-    min-height: 100vh;
-    min-width: 100vw;
-    background-color: var(--primary-gray);
-}
-
-.add-product-secondery-container {
-    margin-top: 2%;
-    min-width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.add-product-content-container {
-    background-color: white;
-    width: 40%;
-    padding: 40px;
-    border-radius: 6px;
-    box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
 
 
-}
-
-.add-product-content-container h1 {
-    font-size: 30px;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 10px;
-
-}
-
-.add-product-content-container input {
+.whiteboard-container input {
     flex: 1;
     min-width: 30%;
     margin: 20px 0px 0px 0px; 
@@ -42,8 +12,8 @@
 .add-product-desc {
     background-color: white;
     min-width: 100%;
+    margin-top: 5px !important;
 }
-
 
 
 .add-product-submit-button {
@@ -63,4 +33,30 @@
     flex-wrap: wrap;
     /* flex-direction: column; */
     align-items: center;
+    gap: 10px;
+}
+
+
+
+/* Mobile : MAX WIDTH 748px
+   Tablets & laptops : MAX WIDTH 1330px
+   
+
+*/
+
+@media (max-width:640px) {  
+    .add-product-secondery-container{
+        background-color: red !important;
+        padding: 0px 20px;
+    }
+
+    .whiteboard-container{
+        width: 100%;
+    }
+
+    .custom-checkbox{
+        grid-template-columns: 1fr !important;
+        justify-items: start !important;
+    }
+  
 }

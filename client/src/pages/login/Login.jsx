@@ -46,31 +46,34 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <>
+   
       <Navbar />
-      <div className="login-secondery-container">
-        <div className="login-content-container">
-          <h1>כניסה למערכת</h1>
-          <div className="login-form">
-            <input
-              type="text"
-              placeholder="אימייל"
-              value={email}
-              onChange={handleEmail}
-            />
-            <input
-              type="password"
-              placeholder="סיסמא"
-              value={password}
-              onChange={handlePassword}
-            />
-            <div onClick={handleClick} className="submit-button">
-              התחברות
+      <div className="body-container">
+        <div className="login-container">
+          <div className="whiteboard-container">
+            <h1>כניסה למערכת</h1>
+            <div className="login-form">
+              <input
+                type="text"
+                placeholder="אימייל"
+                value={email}
+                onChange={handleEmail}
+              />
+              <input
+                type="password"
+                placeholder="סיסמא"
+                value={password}
+                onChange={handlePassword}
+              />
+              <div onClick={handleClick} className="submit-button">
+                התחברות
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

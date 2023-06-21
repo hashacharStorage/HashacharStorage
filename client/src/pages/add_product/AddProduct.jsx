@@ -29,10 +29,10 @@ const AddProduct = () => {
   ];
 
   return (
-    <div className="add-product-container">
+    <>
       <Navbar />
-      <div className="add-product-secondery-container">
-        <div className="add-product-content-container">
+      <div className="body-container">
+        <div className="whiteboard-container">
           <h1>הוספת פריט חדש</h1>
           <div className="add-product-form">
             <input type="number" placeholder="כמות מינימאלית" min="1" />
@@ -56,10 +56,10 @@ const AddProduct = () => {
             checkedValue={selectedValue}
             onChange={handleValueChange}
           />
-              <div className="add-product-submit-button">הוספת פריט</div>
+            <div className="add-product-submit-button">הוספת פריט</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

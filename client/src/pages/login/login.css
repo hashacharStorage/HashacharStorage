@@ -1,33 +1,4 @@
-.login-container {
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: var(--primary-gray);
-}
 
-.login-secondery-container {
-  margin-top: 5%;
-  min-width: 100vw;
-  display: flex;
-  justify-content: center;
-}
-
-.login-content-container {
-  /* background-color: red; */
-  width: 20%;
-  padding: 40px;
-  border-radius: 6px;
-  aspect-ratio: 1;
-  /* align-items: center; */
-  /* justify-content: center; */
-  box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
-}
-
-.login-content-container h1 {
-  font-size: 30px;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 10px;
-}
 
 .login-content-container input {
   flex: 1;
@@ -56,4 +27,10 @@
   /* background-color: #fff; */
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+
+
+.login-container > .whiteboard-container{
+  width: var(--col-4) ;
 }

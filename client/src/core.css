@@ -8,10 +8,57 @@
 
   --font-arimo: "Arimo", sans-serif;
   --font-varela: "Varela Round", sans-serif;
+  --col-4: 372px;
+  --col-6: 556px;
+  --col-8: 740px;
+  --col-10: 924px;
+
 }
 
 * {
   font-family: var(--font-varela);
   line-height: 150%;
   box-sizing: border-box;
+}
+
+.body-container {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.whiteboard-container{
+  background-color: white;
+  width: var(--col-6);
+  padding: 40px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
+}
+
+.whiteboard-container h1 {
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+
+@media (max-width: 640px) {
+
+  .body-container{
+    padding: 30px 15px !important;
+    width: 100%;
+  }
+
+
+  .whiteboard-container , .login-container > .whiteboard-container {
+    width: 100% !important;
+  }
+
+  
+  
 }

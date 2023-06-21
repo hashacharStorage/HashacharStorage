@@ -14,18 +14,25 @@
 .custom-radio {
   display: flex;
   justify-content: center;
+  padding: 10px 0px;
 }
 
 .custom-radio-label {
-  width: 33%;
-  direction: rtl;
+  width: fit-content;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+ 
 }
 
 .custom-radio-input {
   display: none;
 }
 
-.custom-radio-icon {
+.custom-radio-icon > svg {
   margin-left: 5px;
-  margin-bottom: 2px;
+  margin-top: 6px;
+  cursor: pointer;
 }
