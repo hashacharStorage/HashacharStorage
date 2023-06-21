@@ -12,7 +12,7 @@ const ClientRouter = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/addProduct" element={<AddProduct />} />
+        <Route path="/add/product" element={<AddProduct />} />
 
       </Routes>
     </Router>
