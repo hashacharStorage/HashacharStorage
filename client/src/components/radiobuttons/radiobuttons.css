@@ -1,0 +1,31 @@
+@import url("../../core.css");
+
+.custom-radio-container {
+  margin: 20px 0px;
+  text-align: center;
+  border: 2px dashed var(--primary-dark-blue);
+  border-radius: 9px;
+  user-select: none;
+  padding: 10px;
+}
+.radio-title {
+  margin-bottom: 5px;
+}
+.custom-radio {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-radio-label {
+  width: 33%;
+  direction: rtl;
+}
+
+.custom-radio-input {
+  display: none;
+}
+
+.custom-radio-icon {
+  margin-left: 5px;
+  margin-bottom: 2px;
+}

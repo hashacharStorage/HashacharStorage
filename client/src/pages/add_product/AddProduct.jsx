@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import "./addProduct.css";
 import Navbar from "../../components/navbar/Navbar";
-// import CustomCheckbox from "../../components/checkbox/CustomCheckBox";
+import Checkbox from "../../components/checkbox/Checkbox";
+import RadioButtons from "../../components/radiobuttons/Radiobuttons";
 
 const AddProduct = () => {
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [checkedValues, setCheckedValues] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const handleCheckboxChange = (event) => {
-    const optionValue = event.target.value;
-
-    if (event.target.checked) {
-      setSelectedOption((prevSelectedOptions) => [
-        ...prevSelectedOptions,
-        optionValue,
-      ]);
-    } else {
-      setSelectedOption((prevSelectedOptions) =>
-        prevSelectedOptions.filter((option) => option !== optionValue)
-      );
-    }
+  const handleCheckboxChange = (values) => {
+    setCheckedValues(values);
+  };
+  const handleValueChange = (value) => {
+    setSelectedValue(value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Selected Options:", selectedOption);
-    // Perform any additional actions with the selected options
-  };
+  const options = [
+    { label: "cellcom", value: "cellcom" },
+    { label: "yes", value: "yes" },
+    { label: "hot", value: "hot" },
+    { label: "bezeq", value: "bezeq" },
+    { label: "עברית", value: "bezeq" },
+  ];
+
+  const isBlack = [
+    { label: "ציוד סיראלי", value: "option1" },
+    { label: "ציוד שחור", value: "option2" },
+  ];
 
   return (
     <div className="add-product-container">
@@ -43,92 +44,19 @@ const AddProduct = () => {
               placeholder="תיאור הפריט"
             />
           </div>
-
-          {/* <div className="checkboxes-container">
-            <div className="checkbox-container">
-              <div className="checkbox-title">חברה</div>
-              <input
-                type="checkbox"
-                id="option1-checkbox"
-                name="company"
-                value="option1"
-                onChange={handleCheckboxChange}
-              />
-              cellcom
-              <input
-                type="checkbox"
-                id="option2-checkbox"
-                name="company"
-                value="option2"
-                onChange={handleCheckboxChange}
-              />
-              yes
-              <input
-                type="checkbox"
-                id="option3-checkbox"
-                name="company"
-                value="option3"
-                onChange={handleCheckboxChange}
-              />
-              hot
-            </div>
-
-            <div className="checkbox-container">
-              <div className="checkbox-title">חברה</div>
-              <input
-                type="checkbox"
-                id="option1-checkbox"
-                name="company"
-                value="option1"
-                onChange={handleCheckboxChange}
-              />
-              cellcom
-              <input
-                type="checkbox"
-                id="option2-checkbox"
-                name="company"
-                value="option2"
-                onChange={handleCheckboxChange}
-              />
-              yes
-              <input
-                type="checkbox"
-                id="option3-checkbox"
-                name="company"
-                value="option3"
-                onChange={handleCheckboxChange}
-              />
-              hot
-            </div>
-            <div className="checkbox-container">
-              <div className="checkbox-title">חברה</div>
-              <input
-                type="checkbox"
-                id="option1-checkbox"
-                name="company"
-                value="option1"
-                onChange={handleCheckboxChange}
-              />
-              cellcom
-              <input
-                type="checkbox"
-                id="option2-checkbox"
-                name="company"
-                value="option2"
-                onChange={handleCheckboxChange}
-              />
-              yes
-              <input
-                type="checkbox"
-                id="option3-checkbox"
-                name="company"
-                value="option3"
-                onChange={handleCheckboxChange}
-              />
-              hot
-            </div>
-          </div> */}
-          {/* <div className="add-product-submit-button">הוספת פריט</div> */}
+          <Checkbox
+            title={"חברה"}
+            options={options}
+            checkedValues={checkedValues}
+            onChange={handleCheckboxChange}
+          />
+          <RadioButtons
+            title=":סוג ציוד"
+            options={isBlack}
+            checkedValue={selectedValue}
+            onChange={handleValueChange}
+          />
+              <div className="add-product-submit-button">הוספת פריט</div>
         </div>
       </div>
     </div>
