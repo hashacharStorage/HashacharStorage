@@ -1,4 +1,4 @@
-
+@import url("../../core.css");
 
 .whiteboard-container input {
     flex: 1;
@@ -7,6 +7,7 @@
     border-radius: 6px;
     text-align: right;
     padding: 8px;
+    border: 2px solid var(--primary-dark-blue);
 }
 
 .add-product-desc {
@@ -21,7 +22,7 @@
     margin-top: 20px;
     user-select: none;
     cursor: pointer;
-    border: solid;
+    border: 2px solid var(--primary-dark-blue);
     font-size: 26px;
     font-weight: 700;
     text-align: center;
