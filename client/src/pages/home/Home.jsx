@@ -55,6 +55,27 @@ const Home = () => {
     setIsBlack(!isBlack);
   };
 
+  const handlefinishOrder = () => {
+    const allItems = {};
+    const keysToRemove = [];
+    console.log(localStorage.length);
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.split("-")[0] !== "product") {
+        continue;
+      } else {
+        const value = localStorage.getItem(key);
+        allItems[key.split("-")[1]] = value;
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => {
+      localStorage.removeItem(key);
+    });
+    console.log(allItems);
+    alert("הזמנתך נשלחה למחסן בהצלחה")
+  };
+
   return (
     <div className="home-container">
       <Navbar />
@@ -68,7 +89,13 @@ const Home = () => {
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}
           </div>
         </div>
-        <ProductsList products={filterData}/>
+        <ProductsList products={filterData} />
+        <button
+          onClick={() => handlefinishOrder()}
+          className="complete-order-button"
+        >
+          שליחת פריטים
+        </button>
       </div>
     </div>
   );

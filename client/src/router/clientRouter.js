@@ -4,12 +4,13 @@ import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import AddProduct from "../pages/add_product/AddProduct";
 import UpdateUser from "../pages/update_user/UpdateUser";
+import ExcelTableGenerator from "../utils/xslxMaker/GenerateExcel";
 
 const ClientRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>henlo</h1>} />
+        <Route path="/" element={<ExcelTableGenerator/>} />
         <Route path="/home" element={<Home />} />
         <Route path="add/user" element={<Register />} />
         <Route path="/login" element={<Login />} />

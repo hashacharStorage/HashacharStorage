@@ -58,6 +58,19 @@
   top: 19px;
   right: 30px;
   transform: translateY(-50%);
-  color:var(--primary-dark-blue);
+  color: var(--primary-dark-blue);
   font-size: 22px;
+}
+
+.complete-order-button {
+  flex:1;
+  min-width: 30%;
+  margin-top: 10px;
+  user-select: none;
+  cursor: pointer;
+  border: 2px solid var(--primary-dark-blue);
+  border-radius: 6px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
 }
