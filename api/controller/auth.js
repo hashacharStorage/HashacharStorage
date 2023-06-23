@@ -7,8 +7,22 @@ dotenv.config();
 
 const registerUser = async (req, res) => {
   try {
+    //check if email is already exist
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(400).send({ message: "אימייל כבר קיים במערכת" });
+    }
+    //check if warehouse number is vacant
+    const userWithSameWarehouse = await User.findOne({
+      warehouse: req.body.warehouse,
+      company: req.body.company,
+    });
+    if (userWithSameWarehouse) {
+      return res.status(400).send({ message: "המחסן תפוס עבור החברה הזאת" });
+    }
+
     const newUser = new User({
-      id: req.body.id,
+      warehouse: req.body.warehouse,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
@@ -21,6 +35,7 @@ const registerUser = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(200).send(savedUser);
   } catch (error) {
+    console.log(error)
     res.status(500).send(error);
   }
 };
@@ -28,16 +43,20 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    if (user === null) res.status(401).json("user not found");
-
+    if (user === null) {
+      res.status(401).json({ msg: "המשתמש אינו קיים" });
+      return;
+    }
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
       process.env.PASS
     );
     const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    if (originalPassword !== req.body.password)
-      res.status(401).json("wrong username or password");
+    if (originalPassword !== req.body.password) {
+      res.status(401).json({ msg: "שם משתמש או סיסמא אינם נכונים" });
+      return;
+    }
 
     const accessToken = jwt.sign(
       {

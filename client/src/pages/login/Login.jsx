@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
   let user = {};
   let token = "";
@@ -39,7 +41,7 @@ const Login = () => {
           Cookies.set("firstName", user.firstname);
           navigate("/home");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err.response.data.msg));
     } else {
       alert("invalid email");
     }
@@ -47,7 +49,6 @@ const Login = () => {
 
   return (
     <>
-   
       <Navbar />
       <div className="body-container">
         <div className="login-container">

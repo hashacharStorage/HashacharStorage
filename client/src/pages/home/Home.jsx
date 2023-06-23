@@ -12,7 +12,6 @@ const Home = () => {
   const [isBlack, setIsBlack] = useState(true);
   const [filterData, setFilterData] = useState(
     productsData.filter((item) => {
-      console.log(item);
       return item.isBlack === isBlack;
     })
   );

@@ -13,9 +13,7 @@
   justify-content: center;
 }
 
-.register-content-container {
-  
-}
+
 
 .register-content-container input {
   flex: 1;
@@ -50,6 +48,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+flex-direction: row-reverse;
+}
 
-
+.input-error {
+  color: red;
 }

@@ -4,7 +4,6 @@ let AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const ProductSchema = new mongoose.Schema(
   {
-
     title: {
       type: String,
       required: true,

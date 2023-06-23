@@ -16,16 +16,21 @@ const Product = ({
 
   useEffect(() => {
     const savedProductCounter = localStorage.getItem(`product-${product_id}`);
-    if (savedProductCounter) setCounter(Number(savedProductCounter));
-    else setCounter(0)
-  }, );
+    if (savedProductCounter) {
+      setCounter(Number(savedProductCounter));
+    } else setCounter(0);
+  });
 
   const handleCounter = (multiplier) => {
     if (!(counter === 0 && multiplier === -1)) {
       const newCounter = minQuantity * multiplier + counter;
       setCounter(newCounter);
       handleEditCurrOrder(product_id, newCounter);
-      localStorage.setItem(`product-${product_id}`, newCounter);
+      if (newCounter === 0) {
+        localStorage.removeItem(`product-${product_id}`);
+      } else {
+        localStorage.setItem(`product-${product_id}`, newCounter);
+      }
     }
   };
 

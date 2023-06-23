@@ -1,3 +1,5 @@
+const Company = require("../models/Company");
+
 const getAllCompanies = async (req, res) => {
   try {
     const companies = await Company.find();

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
+let AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const UserSchema = new mongoose.Schema(
   {
-    id: {
+    warehouse: {
       type: Number,
       required: true,
     },
@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema(
     team: {
       type: Schema.Types.Number,
       ref: "Team",
-      default: 1
+      default: 1,
     },
     villa: {
       type: Boolean,
@@ -41,10 +41,10 @@ const UserSchema = new mongoose.Schema(
     },
     shirtSize: {
       type: String,
-      default: 'L',
+      default: "L",
     },
   },
   { timestamps: true }
 );
-
+UserSchema.plugin(AutoIncrement, { inc_field: "user_id", start_seq: 1 });
 module.exports = mongoose.model("User", UserSchema);
