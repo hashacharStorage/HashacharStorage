@@ -11,6 +11,7 @@ const Product = ({
   black,
   product_id,
   handleEditCurrOrder,
+  viewOnly = false,
 }) => {
   const [counter, setCounter] = useState(0);
 
@@ -37,19 +38,23 @@ const Product = ({
   return (
     <div className="product-container">
       <div className="product-counter-container">
-        <FiPlusCircle
-          onClick={() => {
-            handleCounter(1);
-          }}
-          className="plus-button"
-        />
+        {!viewOnly && (
+          <FiPlusCircle
+            onClick={() => {
+              handleCounter(1);
+            }}
+            className="plus-button"
+          />
+        )}
         <span className="counter">{counter}</span>
-        <FiMinusCircle
-          onClick={() => {
-            handleCounter(-1);
-          }}
-          className="minus-button"
-        />
+        {!viewOnly && (
+          <FiMinusCircle
+            onClick={() => {
+              handleCounter(-1);
+            }}
+            className="minus-button"
+          />
+        )}
       </div>
       <span className="product-title">{title}</span>
     </div>

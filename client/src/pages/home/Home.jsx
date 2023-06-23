@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./home.css";
-
 import Navbar from "../../components/navbar/Navbar";
-import Product from "../../components/product/Product";
 import { BiSearchAlt } from "react-icons/bi";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import ProductsList from "../../components/productsList/ProductsList";
+
 const Home = () => {
+  const navigate = useNavigate();
   const [productsData, setProductsData] = useState([{}]);
-  const [currOrder, setCurrOrder] = useState({});
   const [isBlack, setIsBlack] = useState(true);
   const [filterData, setFilterData] = useState(
     productsData.filter((item) => {
@@ -18,15 +19,21 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (
+        Cookies.get("token") === undefined ||
+        Cookies.get("company") === undefined
+      )
+        navigate("/login");
+
+      const token = "Bearer " + Cookies.get("token");
       const company = Cookies.get("company");
-      const toekn = "Bearer " +  Cookies.get("token");
       try {
         const response = await axios.get("http://localhost:5000/api/products", {
           params: {
             companies: company,
           },
           headers: {
-            token: toekn,
+            token: token,
           },
         });
         setProductsData(response.data);
@@ -44,10 +51,6 @@ const Home = () => {
     setFilterData(updatedFilterData);
   }, [isBlack, productsData]);
 
-  const handleEditCurrOrder = (productId, productCounter) => {
-    let copyCurrOrder = { ...currOrder, [productId]: productCounter };
-    setCurrOrder(copyCurrOrder);
-  };
   const handleIsBlack = () => {
     setIsBlack(!isBlack);
   };
@@ -65,24 +68,7 @@ const Home = () => {
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}
           </div>
         </div>
-        <div className="products-list">
-          {filterData.map((product, index) => {
-            return (
-              <Product
-                title={product.title}
-                serial={product.serial}
-                desc={product.desc}
-                companies={product.companies}
-                minQuantity={product.minQuantity}
-                image={product.image}
-                black={product.black}
-                key={index}
-                product_id={product.product_id}
-                handleEditCurrOrder={handleEditCurrOrder}
-              />
-            );
-          })}
-        </div>
+        <ProductsList products={filterData}/>
       </div>
     </div>
   );
