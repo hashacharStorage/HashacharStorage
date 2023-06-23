@@ -2,7 +2,7 @@ import React from "react";
 import "./radiobuttons.css";
 import { ImRadioUnchecked, ImRadioChecked } from "react-icons/im";
 
-const RadioButtons = ({ title, options, checkedValue, onChange }) => {
+const RadioButtons = ({ title, options, checkedisBlack, onChange }) => {
   const handleRadioChange = (value) => {
     onChange(value);
   };
@@ -16,12 +16,12 @@ const RadioButtons = ({ title, options, checkedValue, onChange }) => {
             <input
               type="radio"
               value={option.value}
-              checked={checkedValue === option.value}
+              checked={checkedisBlack === option.isBlack}
               onChange={() => handleRadioChange(option.value)}
               className="custom-radio-input"
             />
             <span className="custom-radio-icon">
-              {checkedValue === option.value ? (
+              {checkedisBlack === option.value ? (
                 <ImRadioChecked  />
               ) : (
                 <ImRadioUnchecked />

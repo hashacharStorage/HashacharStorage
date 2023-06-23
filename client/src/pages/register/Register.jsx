@@ -67,7 +67,7 @@ const Register = () => {
       )
       .then(() => {
         alert("משתמש נרשם בהצלחה!");
-        navigate("/home");
+        window.location.reload();
       })
       .catch((err) => alert(err.response.data.message));
   };

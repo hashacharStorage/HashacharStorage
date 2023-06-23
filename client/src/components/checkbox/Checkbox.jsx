@@ -2,12 +2,13 @@ import React from "react";
 import "./checkbox.css";
 import { FiCheckSquare, FiSquare } from "react-icons/fi";
 
-const Checkbox = ({ title, options, checkedValues, onChange }) => {
+const Checkbox = ({ title, options, checkedCompanies, onChange }) => {
+
   const handleCheckboxChange = (value) => {
-    const isChecked = checkedValues.includes(value);
+    const isChecked = checkedCompanies.includes(value);
     const updatedValues = isChecked
-      ? checkedValues.filter((val) => val !== value)
-      : [...checkedValues, value];
+      ? checkedCompanies.filter((val) => val !== value)
+      : [...checkedCompanies, value];
     onChange(updatedValues);
   };
 
@@ -16,22 +17,22 @@ const Checkbox = ({ title, options, checkedValues, onChange }) => {
       {title && <h3 className="checkbox-title">{title}</h3>}
       <div className="custom-checkbox">
         {options.map((option) => (
-          <label key={option.value} className="custom-checkbox-label">
+          <label key={option.id} className="custom-checkbox-label">
             <input
               type="checkbox"
-              value={option.value}
-              checked={checkedValues.includes(option.value)}
-              onChange={() => handleCheckboxChange(option.value)}
+              value={option.id}
+              checked={checkedCompanies.includes(option.id)}
+              onChange={() => handleCheckboxChange(option.id)}
               className="custom-checkbox-input"
             />
             <span className="custom-checkbox-icon">
-              {checkedValues.includes(option.value) ? (
+              {checkedCompanies.includes(option.id) ? (
                 <FiCheckSquare />
               ) : (
                 <FiSquare />
               )}
             </span>
-            {option.label}
+            {option.name}
           </label>
         ))}
       </div>
