@@ -23,7 +23,7 @@ const {
   router.delete("/:id", verifyTokenAndAdmin, deleteOrder);
   
   //get user Orders
-  router.get("/find/:userId", verifyTokenAndAuthorization, getOrder);
+  router.get("/find/:id", verifyTokenAndAuthorization, getOrder);
   
   //get all users Orders
   router.get("/", verifyTokenAndAdmin, getOrders);

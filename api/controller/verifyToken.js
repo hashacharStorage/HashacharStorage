@@ -16,7 +16,7 @@ const verifyToken = async (req, res, next) => {
 
 const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user._id === req.params.id || req.user.company === 0) {
+    if (req.user.id === req.params.id || req.user.company === 0) {
       next();
     } else {
       res.status(403).json("You are not allowed to do that!");

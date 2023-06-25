@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
   {
-    UserID: {
+    userId: {
       type: String,
       required: true,
     },
     products: [
       {
         productId: {
-          type: String,
+          type: Number,
         },
         quantity: {
           type: Number,
@@ -17,10 +17,10 @@ const OrderSchema = new mongoose.Schema(
         },
       },
     ],
-    status:{
-        type:String,
-        default: "ההזמנה הגיעה למחסן"
-    }
+    status: {
+      type: String,
+      default: "ההזמנה הגיעה למחסן",
+    },
   },
   { timestamps: true }
 );

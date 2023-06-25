@@ -1,3 +1,4 @@
+const Product = require("../models/Product");
 const Order = require("../models/Order");
 
 const createOrder = async (req, res) => {
@@ -37,11 +38,26 @@ const deleteOrder = async (req, res) => {
 //get Order
 const getOrder = async (req, res) => {
   try {
-    const order = await Order.find({ userId: req.params.userID });
+    // hereeee
+    const order = await Order.findOne({ userId: req.params.id });
+    const productIds = order.products.map((item) => item.productId);
+    console.log(productIds);
+    const products = await Product.find({ product_id: { $in: productIds } });
 
-    res.status(200).json(order);
+    const productsWithQuantity = products.map((product) => {
+      const orderProduct = order.products.find(
+        (item) => item.productId === product.productid
+      );
+      console.log(orderProduct)
+      return {
+        ...product.toObject(),
+        quantity: orderProduct.quantity
+      };
+    });
+
+    res.status(200).json(productsWithQuantity);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ message: error });
   }
 };
 
@@ -54,7 +70,6 @@ const getOrders = async (req, res) => {
     res.status(500).json({ message: "Error retrieving Orders.", error });
   }
 };
-
 
 module.exports = {
   createOrder,
