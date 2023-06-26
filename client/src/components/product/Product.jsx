@@ -12,14 +12,19 @@ const Product = ({
   product_id,
   handleEditCurrOrder,
   viewOnly = false,
+  quantity,
 }) => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    const savedProductCounter = localStorage.getItem(`product-${product_id}`);
-    if (savedProductCounter) {
-      setCounter(Number(savedProductCounter));
-    } else setCounter(0);
+    if (quantity === -1) {
+      const savedProductCounter = localStorage.getItem(`product-${product_id}`);
+      if (savedProductCounter) {
+        setCounter(Number(savedProductCounter));
+      } else setCounter(0);
+    } else {
+      setCounter(quantity);
+    }
   });
 
   const handleCounter = (multiplier) => {

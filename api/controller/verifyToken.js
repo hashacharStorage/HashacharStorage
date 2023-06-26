@@ -29,8 +29,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
     if (req.user.company === 0) {
       next();
     } else {
-      console.log("hereee")
-      res.status(403).json({message:"You are not allowed to do that!"});
+      res.status(403).json({ message: "You are not allowed to do that!" });
     }
   });
 };

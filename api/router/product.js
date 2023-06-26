@@ -25,6 +25,6 @@ router.delete("/:id", verifyTokenAndAdmin, deleteProduct);
 router.get("/find/:id", getProduct);
 
 //get all users
-router.get("/", verifyTokenAndAuthorization, getProducts);
+router.get("/:company/:id", verifyTokenAndAuthorization, getProducts);
 
 module.exports = router;

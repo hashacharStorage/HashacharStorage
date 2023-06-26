@@ -11,21 +11,20 @@ const LastOrder = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-    console.log("first")
     axios
       .get(`http://localhost:5000/api/orders/find/${userId}`, {
         headers: {
           token: "Bearer "+Cookies.get("token"),
         },
       })
-      .then((response) => console.log(response))
+      .then((response) => setOrderList(response.data))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <>
       <Navbar />
-      {/* <ProductsList /> */}
+      <ProductsList products={orderList} viewOnly={true}/>
     </>
   );
 };

@@ -4,7 +4,7 @@ import Product from "../product/Product";
 
 const ProductsList = ({ products, viewOnly = false }) => {
   const [currOrder, setCurrOrder] = useState({});
-
+  console.log(products)
   const handleEditCurrOrder = (productId, productCounter) => {
     let copyCurrOrder = { ...currOrder, [productId]: productCounter };
     setCurrOrder(copyCurrOrder);
@@ -26,6 +26,7 @@ const ProductsList = ({ products, viewOnly = false }) => {
               product_id={product.product_id}
               handleEditCurrOrder={handleEditCurrOrder}
               viewOnly={viewOnly}
+              quantity={viewOnly?product.quantity:-1}
             />
           );
         })}

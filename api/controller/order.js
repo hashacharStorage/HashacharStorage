@@ -3,7 +3,8 @@ const Order = require("../models/Order");
 
 const createOrder = async (req, res) => {
   const newOrder = new Order(req.body);
-
+  console.log("123456456")
+  console.log(req)
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);
@@ -39,15 +40,12 @@ const deleteOrder = async (req, res) => {
 //get Order
 const getOrder = async (req, res) => {
   try {
-    // hereeee
     const order = await Order.findOne({ userId: req.params.id });
     const productIds = order.products.map((item) => item.productId);
-    console.log(productIds);
-    const products = await Product.find({ product_id: { $in: productIds } });
-
+    const products = await Product.find({ product_id: { $in: productIds } }, ["title", "product_id", "_id"]);
     const productsWithQuantity = products.map((product) => {
       const orderProduct = order.products.find(
-        (item) => item.productId === product.productid
+        (item) => item.productId === product.product_id
       );
       console.log(orderProduct)
       return {

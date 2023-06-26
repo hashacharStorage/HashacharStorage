@@ -17,7 +17,7 @@ const {
   router.put("/find/:id", verifyToken, updateOrder);
   
   //create
-  router.post("/", verifyTokenAndAuthorization, createOrder);
+  router.post("/", verifyToken, createOrder);
   
   //delete
   router.delete("/:id", verifyTokenAndAdmin, deleteOrder);
