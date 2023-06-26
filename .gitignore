@@ -6,6 +6,10 @@
 /node_modules
 /.pnp
 .pnp.js
+/yarn
+/client/node_modules
+/api/node_modules
+
 
 # testing
 /coverage

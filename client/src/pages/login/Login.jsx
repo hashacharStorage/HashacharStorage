@@ -39,6 +39,7 @@ const Login = () => {
           Cookies.set("token", token);
           Cookies.set("company", user.company);
           Cookies.set("firstName", user.firstname);
+          Cookies.set("id", user._id);
           navigate("/home");
         })
         .catch((err) => alert(err.response.data.msg));

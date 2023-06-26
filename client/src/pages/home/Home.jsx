@@ -55,8 +55,9 @@ const Home = () => {
     setIsBlack(!isBlack);
   };
 
-  const handlefinishOrder = () => {
-    const allItems = {};
+  const handlefinishOrder = async () => {
+    const allItems = [];
+    let item = {};
     const keysToRemove = [];
     console.log(localStorage.length);
     for (let i = 0; i < localStorage.length; i++) {
@@ -65,15 +66,41 @@ const Home = () => {
         continue;
       } else {
         const value = localStorage.getItem(key);
-        allItems[key.split("-")[1]] = value;
+        item.productId = Number(key.split("-")[1]);
+        item.quantity = value;
+        // allItems[key.split("-")[1]] = value;
+        allItems.push(item);
+        item = {};
         keysToRemove.push(key);
       }
     }
     keysToRemove.forEach((key) => {
       localStorage.removeItem(key);
     });
-    console.log(allItems);
-    alert("הזמנתך נשלחה למחסן בהצלחה")
+    const order = {};
+    order.products = allItems;
+    order.userId = Cookies.get("id");
+    const token = "Bearer " + Cookies.get("token");
+    try {
+      axios
+        .post(
+          "http://localhost:5000/api/orders/",
+          {
+            ...order,
+          },
+          {
+            headers: {
+              token: token,
+            },
+          }
+        )
+        .then(() => {
+          alert("הזמנתך נשלחה למחסן בהצלחה");
+          window.location.reload();
+        });
+    } catch (error) {
+      alert(err.response.data.message);
+    }
   };
 
   return (
