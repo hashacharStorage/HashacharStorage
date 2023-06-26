@@ -19,13 +19,15 @@ const LastOrder = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.createdAt)
+        console.log(response.data.createdAt);
         setOrderList(response.data.products);
-        setDate(response.data.createdAt.split("T")[0]);
-//         const date = new Date(dateString);
-// const formattedDate = date.toLocaleDateString("en-GB");
+        const date = new Date(response.data.createdAt);
+        const formattedDate = date.toLocaleDateString("en-GB");
+        setDate(formattedDate);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
   }, []);
 
   return (

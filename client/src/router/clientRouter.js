@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import AddProduct from "../pages/add_product/AddProduct";
 import ExcelTableGenerator from "../utils/xslxMaker/GenerateExcel";
 import LastOrder from "../pages/last_order/LastOrder";
+import AdminHome from "../pages/home_admin/HomeAdmin";
 
 const ClientRouter = () => {
   return (
@@ -12,6 +13,7 @@ const ClientRouter = () => {
       <Routes>
         <Route path="/" element={<ExcelTableGenerator />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/admin/home" element={<AdminHome />} />
         <Route path="add/user" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add/product" element={<AddProduct />} />

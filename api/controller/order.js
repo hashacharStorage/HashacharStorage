@@ -3,19 +3,15 @@ const Order = require("../models/Order");
 
 const createOrder = async (req, res) => {
   try {
-    // Check if there is an existing order for the user
     const existingOrder = await Order.findOne({ userId: req.body.userId });
 
     if (existingOrder) {
-      // If an existing order is found, update its properties with the new data
-      console.log("updating")
       existingOrder.products = req.body.products;
-      existingOrder.updatedAt = Date.now(); // Update the timestamp
+      existingOrder.updatedAt = Date.now(); 
 
       const updatedOrder = await existingOrder.save();
       res.status(200).json(updatedOrder);
     } else {
-      // If no existing order is found, create a new order
       const newOrder = new Order(req.body);
       const savedOrder = await newOrder.save();
       res.status(200).json(savedOrder);
@@ -52,10 +48,17 @@ const deleteOrder = async (req, res) => {
 //get Order
 const getOrder = async (req, res) => {
   try {
-    console.log("first")
     const order = await Order.findOne({ userId: req.params.id });
+    if (order === null) {
+      res.status(404).json({ message: "לא נמצאה הזמנה במערכת." });
+      return;
+    }
     const productIds = order.products.map((item) => item.productId);
-    const products = await Product.find({ product_id: { $in: productIds } }, ["title", "product_id", "_id"]);
+    const products = await Product.find({ product_id: { $in: productIds } }, [
+      "title",
+      "product_id",
+      "_id",
+    ]);
     const productsWithQuantity = products.map((product) => {
       const orderProduct = order.products.find(
         (item) => item.productId === product.product_id
@@ -67,7 +70,9 @@ const getOrder = async (req, res) => {
     });
 
     const updatedAt = order.updatedAt;
-    res.status(200).json({ products: productsWithQuantity, createdAt: updatedAt });
+    res
+      .status(200)
+      .json({ products: productsWithQuantity, createdAt: updatedAt });
   } catch (error) {
     res.status(500).json({ message: error });
   }
