@@ -118,7 +118,7 @@ const Home = () => {
             <input className="input" type="text" placeholder="חיפוש" />
             <BiSearchAlt className="search-icon" />
           </div>
-          <div className={"switch-button"} onClick={handleIsBlack}>
+          <div className="switch-button" onClick={handleIsBlack}>
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}
           </div>
         </div>

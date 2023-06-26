@@ -1,0 +1,4 @@
+.home-container {
+    background-color: var(--primary-gray);
+    min-height: 100vh;
+}

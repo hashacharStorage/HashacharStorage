@@ -2,12 +2,24 @@ const Product = require("../models/Product");
 const Order = require("../models/Order");
 
 const createOrder = async (req, res) => {
-  const newOrder = new Order(req.body);
-  console.log("123456456")
-  console.log(req)
   try {
-    const savedOrder = await newOrder.save();
-    res.status(200).json(savedOrder);
+    // Check if there is an existing order for the user
+    const existingOrder = await Order.findOne({ userId: req.body.userId });
+
+    if (existingOrder) {
+      // If an existing order is found, update its properties with the new data
+      console.log("updating")
+      existingOrder.products = req.body.products;
+      existingOrder.updatedAt = Date.now(); // Update the timestamp
+
+      const updatedOrder = await existingOrder.save();
+      res.status(200).json(updatedOrder);
+    } else {
+      // If no existing order is found, create a new order
+      const newOrder = new Order(req.body);
+      const savedOrder = await newOrder.save();
+      res.status(200).json(savedOrder);
+    }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -40,6 +52,7 @@ const deleteOrder = async (req, res) => {
 //get Order
 const getOrder = async (req, res) => {
   try {
+    console.log("first")
     const order = await Order.findOne({ userId: req.params.id });
     const productIds = order.products.map((item) => item.productId);
     const products = await Product.find({ product_id: { $in: productIds } }, ["title", "product_id", "_id"]);
@@ -47,14 +60,14 @@ const getOrder = async (req, res) => {
       const orderProduct = order.products.find(
         (item) => item.productId === product.product_id
       );
-      console.log(orderProduct)
       return {
         ...product.toObject(),
-        quantity: orderProduct.quantity
+        quantity: orderProduct.quantity,
       };
     });
 
-    res.status(200).json(productsWithQuantity);
+    const updatedAt = order.updatedAt;
+    res.status(200).json({ products: productsWithQuantity, createdAt: updatedAt });
   } catch (error) {
     res.status(500).json({ message: error });
   }

@@ -8,26 +8,34 @@ const Navbar = () => {
   const name = Cookies.get("firstName");
   const pathName = window.location.pathname;
   const navigate = useNavigate();
-  const logout=()=>{
+  const logout = () => {
     Cookies.remove("token");
     Cookies.remove("company");
     Cookies.remove("firstName");
-    navigate("/login")
-  }
+    navigate("/login");
+  };
+
   return (
     <div className="navbar-container">
-      <img src={logo} onClick={()=>navigate("/home")} />
+      <img src={logo} onClick={() => navigate("/home")} />
       {pathName !== "/login" && (
         <ul>
           <p>שלום {name}</p>
           <li>
-            <p className="navbar-links">צפייה בהזמנה אחרונה</p>
+            <p
+              className="navbar-links"
+              onClick={() => navigate(`/find/order/${Cookies.get("id")}`)}
+            >
+              צפייה בהזמנה אחרונה
+            </p>
           </li>
           <li>
             <p className="navbar-links">עדכון פרטים</p>
           </li>
           <li>
-            <p className="navbar-links" onClick={()=>logout()}>התנתקות</p>
+            <p className="navbar-links" onClick={() => logout()}>
+              התנתקות
+            </p>
           </li>
         </ul>
       )}

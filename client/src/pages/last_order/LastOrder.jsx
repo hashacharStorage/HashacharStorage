@@ -8,24 +8,34 @@ import { useParams } from "react-router-dom";
 
 const LastOrder = () => {
   const [orderList, setOrderList] = useState([]);
+  const [date, setDate] = useState("");
   const { userId } = useParams();
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/orders/find/${userId}`, {
         headers: {
-          token: "Bearer "+Cookies.get("token"),
+          token: "Bearer " + Cookies.get("token"),
         },
       })
-      .then((response) => setOrderList(response.data))
+      .then((response) => {
+        console.log(response.data.createdAt)
+        setOrderList(response.data.products);
+        setDate(response.data.createdAt.split("T")[0]);
+//         const date = new Date(dateString);
+// const formattedDate = date.toLocaleDateString("en-GB");
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <>
+    <div className="home-container">
       <Navbar />
-      <ProductsList products={orderList} viewOnly={true}/>
-    </>
+      <div className="content-container">
+        <h1>הזמנה מתאריך: {date}</h1>
+        <ProductsList products={orderList} viewOnly={true} />
+      </div>
+    </div>
   );
 };
 

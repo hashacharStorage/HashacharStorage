@@ -3,7 +3,6 @@ import Home from "../pages/home/Home";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import AddProduct from "../pages/add_product/AddProduct";
-import UpdateUser from "../pages/update_user/UpdateUser";
 import ExcelTableGenerator from "../utils/xslxMaker/GenerateExcel";
 import LastOrder from "../pages/last_order/LastOrder";
 
@@ -16,7 +15,6 @@ const ClientRouter = () => {
         <Route path="add/user" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add/product" element={<AddProduct />} />
-        <Route path="/update/user/:id" element={<UpdateUser />} />
         <Route path="/find/order/:userId" element={<LastOrder />} />
       </Routes>
     </Router>
