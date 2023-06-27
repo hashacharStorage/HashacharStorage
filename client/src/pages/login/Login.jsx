@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -40,7 +39,8 @@ const Login = () => {
           Cookies.set("company", user.company);
           Cookies.set("firstName", user.firstname);
           Cookies.set("id", user._id);
-          navigate("/home");
+          if (user.company == 0) navigate("/admin/home");
+          else navigate("/home");
         })
         .catch((err) => alert(err.response.data.msg));
     } else {
