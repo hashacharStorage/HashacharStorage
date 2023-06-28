@@ -23,7 +23,7 @@ const Register = () => {
       Cookies.get("company") === undefined
     )
       navigate("/login");
-    else if (Cookies.get("company") !== 0) navigate("/home");
+    else if (Cookies.get("company") != 0) navigate("/home");
     const fetchData = async () => {
       try {
         const [companyResponse, teamResponse] = await Promise.all([

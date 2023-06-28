@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const name = Cookies.get("firstName");
+  const company=Cookies.get("company")
   const pathName = window.location.pathname;
   const navigate = useNavigate();
   const logout = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar-container">
-      <img src={logo} onClick={() => navigate("/home")} />
+      <img src={logo} onClick={() =>{ company==0?navigate("/admin/home"):navigate("/home")}} />
       {pathName !== "/login" && (
         <ul>
           <p>שלום {name}</p>

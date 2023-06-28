@@ -1,33 +1,55 @@
 import React from "react";
 import "./homeAdmin.css";
 import {
-FaUserEdit,
+  FaUserEdit,
   FaUserPlus,
-  FaEdit,
-  FaTrash,
-  FaEye,
   FaBoxOpen,
   FaPen,
-  FaBuilding,
-  FaUserSlash,
-  FaMinusCircle,
-  FaFile
+  FaFile,
 } from "react-icons/fa";
+import { BsFillBuildingFill, BsBuildingFillAdd } from "react-icons/bs";
 import Navbar from "../../components/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
+  const navigate = useNavigate();
+
   const icons = [
-    { icon: FaUserPlus, name: "הוספת משתמש" },
-    { icon: FaUserEdit, name: "ערוך משתמש" },
-    { icon: FaUserSlash, name: "מחק משתמש" },
-    { icon: FaEye, name: "צפייה במשתמשים" },
-    { icon: FaFile, name: "צפייה בהזמנות" },
-    { icon: FaBoxOpen, name: "הוספת מוצר" },
-    { icon: FaPen, name: "עריכת מוצר" },
-    { icon: FaMinusCircle, name: "מחיקת מוצר" },
-    { icon: FaBuilding, name: "יצירת חברה" },
-    { icon: FaEdit, name: "עריכת חברה" },
-    { icon: FaTrash, name: "מחיקת חברה" },
+    {
+      icon: FaUserPlus,
+      name: "הוספת משתמש",
+      function: () => navigate("/add/user"),
+    },
+    {
+      icon: FaUserEdit,
+      name: "פעולות על משתמשים קיימים",
+      function: () => navigate("/admin/users"),
+    },
+    {
+      icon: FaFile,
+      name: "צפייה בהזמנות",
+      function: () => navigate("/add/user"),
+    },
+    {
+      icon: FaBoxOpen,
+      name: "הוספת מוצר",
+      function: () => navigate("/add/product"),
+    },
+    {
+      icon: FaPen,
+      name: "פעולות על מוצרים קיימים",
+      function: () => navigate("/add/user"),
+    },
+    {
+      icon: BsBuildingFillAdd,
+      name: "יצירת חברה",
+      function: () => navigate("/add/user"),
+    },
+    {
+      icon: BsFillBuildingFill,
+      name: "פעולות על חברות קיימות",
+      function: () => navigate("/add/user"),
+    },
   ];
 
   return (
@@ -36,7 +58,7 @@ const AdminHome = () => {
       <div className="test">
         <div className="admin-content-container">
           {icons.map((item, index) => (
-            <div key={index} className="admin-box">
+            <div key={index} className="admin-box" onClick={item.function}>
               <item.icon className="admin-icon" />
               <span className="admin-name">{item.name}</span>
             </div>
