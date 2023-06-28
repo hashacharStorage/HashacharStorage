@@ -10,7 +10,7 @@ router.put("/:id", verifyToken.verifyTokenAndAuthorization, updateUserInfo);
 router.delete("/:id", verifyToken.verifyTokenAndAdmin, deleteUser);
 
 //get user
-router.get("/find/:id", verifyToken.verifyTokenAndAdmin, getUser);
+router.get("/find/:id", verifyToken.verifyTokenAndAuthorization, getUser);
 
 //get all users
 router.get("/", verifyToken.verifyTokenAndAdmin, getUsers);

@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import UserList from "../../components/userList/UserList";
 
 const UsersPage = () => {
+  const navigate = useNavigate();
   const [allusers, setAlluser] = useState([{}]);
   const [isLoading, setIsloading] = useState(true);
 
@@ -80,7 +81,7 @@ const UsersPage = () => {
   };
 
   const handleEditUser = (userId) => {
-    console.log("Editing user with ID:", userId);
+    navigate(`/edit/user/${userId}`);
   };
 
   return (

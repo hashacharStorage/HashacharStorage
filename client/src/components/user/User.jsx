@@ -15,8 +15,7 @@ const User = ({
   handleRemoveUser,
 }) => {
   const handleEdit = () => {
-    // Handle edit functionality
-    handleEditUser(id);
+    handleEditUser(_id);
   };
 
   const handleRemove = () => {
