@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Order = require("../models/Order");
 
 const updateUserInfo = async (req, res) => {
   if (req.body.password) {
@@ -25,12 +26,19 @@ const updateUserInfo = async (req, res) => {
 //delete user
 const deleteUser = async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(200).json("User Has Been deleted");
+    const userId = req.params.id;
+
+    // Delete the user's orders
+    await Order.deleteMany({ userId: userId });
+    await User.findOneAndDelete({ user_id: userId });
+
+    res.status(200).json("User has been deleted");
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
+
 
 //get user
 const getUser = async (req, res) => {

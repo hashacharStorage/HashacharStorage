@@ -7,6 +7,7 @@ import {
 
 const User = ({
   firstName,
+  id,
   lastName,
   _id,
   warehouse,
@@ -15,12 +16,12 @@ const User = ({
 }) => {
   const handleEdit = () => {
     // Handle edit functionality
-    handleEditUser(_id);
+    handleEditUser(id);
   };
 
   const handleRemove = () => {
     // Handle remove functionality
-    handleRemoveUser(_id);
+    handleRemoveUser(id);
   };
 
   return (
