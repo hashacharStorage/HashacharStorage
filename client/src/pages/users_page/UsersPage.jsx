@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import UserList from "../../components/userList/UserList";
+import AdminList from "../../components/adminList/AdminList";
 
 const UsersPage = () => {
   const navigate = useNavigate();
@@ -64,20 +64,25 @@ const UsersPage = () => {
 
   const handleRemoveUser = async (id) => {
     const token = "Bearer " + Cookies.get("token");
-    axios
-      .delete(`http://localhost:5000/api/users/${id}`, {
-        headers: {
-          token: token,
-        },
-        params: {
-          id: id,
-        },
-      })
-      .then((res) => {
-        alert("המשתמש נמחק בהצלחה");
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+    const confirmed = window.confirm(
+      "Are you sure you want to remove the user?"
+    );
+    if (confirmed) {
+      axios
+        .delete(`http://localhost:5000/api/users/${id}`, {
+          headers: {
+            token: token,
+          },
+          params: {
+            id: id,
+          },
+        })
+        .then((res) => {
+          alert("המשתמש נמחק בהצלחה");
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleEditUser = (userId) => {
@@ -95,10 +100,11 @@ const UsersPage = () => {
           allusers.map((companyData, index) => (
             <div className="companies-users" key={index}>
               <h2>{companyData.company}</h2>
-              <UserList
-                users={companyData.users}
+              <AdminList
+                items={companyData.users}
                 handleRemoveUser={handleRemoveUser}
                 handleEditUser={handleEditUser}
+                type="users"
               />
             </div>
           ))}

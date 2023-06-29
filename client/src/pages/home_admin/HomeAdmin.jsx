@@ -38,7 +38,7 @@ const AdminHome = () => {
     {
       icon: FaPen,
       name: "פעולות על מוצרים קיימים",
-      function: () => navigate("/add/user"),
+      function: () => navigate("/admin/products"),
     },
     {
       icon: BsBuildingFillAdd,

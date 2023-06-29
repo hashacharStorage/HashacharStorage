@@ -8,6 +8,7 @@ const {
 const {
   verifyTokenAndAdmin,
   verifyTokenAndAuthorization,
+  verifyToken
 } = require("../controller/verifyToken");
 
 const router = require("express").Router();
@@ -25,6 +26,6 @@ router.delete("/:id", verifyTokenAndAdmin, deleteProduct);
 router.get("/find/:id", getProduct);
 
 //get all users
-router.get("/:company/:id", verifyTokenAndAuthorization, getProducts);
+router.get("/:company", verifyToken, getProducts);
 
 module.exports = router;

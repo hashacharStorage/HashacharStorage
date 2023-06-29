@@ -27,21 +27,19 @@ const Home = () => {
 
       const token = "Bearer " + Cookies.get("token");
       const company = Cookies.get("company");
-      const id = Cookies.get("id");
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${company}/${id}`,
+          `http://localhost:5000/api/products/${company}`,
           {
             params: {
               company: company,
-              id: id,
             },
             headers: {
               token: token,
             },
           }
         );
-
+        console.log(response.data)
         setProductsData(response.data);
       } catch (error) {
         console.error(error);
