@@ -10,6 +10,7 @@ const EditUser = () => {
   const [companies, setCompanies] = useState([]);
   const [teams, setTeams] = useState([]);
   const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
   const { register, handleSubmit } = useForm();
@@ -56,7 +57,7 @@ const EditUser = () => {
         setTeams(teamFields);
 
         setUser(userResponse.data);
-        console.log(userResponse.data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -67,10 +68,10 @@ const EditUser = () => {
 
   const onSubmit = async (data) => {
     const copydata = { ...data };
-    console.log(copydata);
-    data.company = Number(data.company);
-    data.team = Number(data.team);
-    data.warehouse = Number(data.warehouse);
+    console.log(copydata.team);
+    copydata.team = Number(copydata.team);
+    copydata.warehouse = Number(copydata.warehouse);
+    copydata.villa == 0 ? (copydata.villa = false) : (copydata.villa = true);
 
     for (const key in copydata) {
       console.log(key);
@@ -80,28 +81,27 @@ const EditUser = () => {
         delete copydata[key];
     }
 
-    console.log(copydata);
-
-    // if (data.password === "") delete data.password;
-    copydata.villa == 0 ? (copydata.villa = false) : (copydata.villa = true);
     const token = "Bearer " + Cookies.get("token");
-    axios
-      .put(
-        `localhost:5000/api/users/${id}`,
-        {
-          ...copydata,
-        },
-        {
-          headers: {
-            token: token,
+    if (JSON.stringify(copydata) !== "{}") {
+      console.log("first");
+      axios
+        .put(
+          `http://localhost:5000/api/users/${id}`,
+          {
+            ...copydata,
           },
-        }
-      )
-      .then(() => {
-        alert("פרטי המשתמש עודכנו בהצלחה");
-        window.location.reload();
-      })
-      .catch((err) => alert(err.response.data.message));
+          {
+            headers: {
+              token: token,
+            },
+          }
+        )
+        .then(() => {
+          alert("פרטי המשתמש עודכנו בהצלחה");
+          window.location.reload();
+        })
+        .catch((err) => console.log(err.response));
+    } else alert("לא בוצע שינוי בפרטים");
   };
 
   return (
@@ -155,22 +155,27 @@ const EditUser = () => {
                     className="read-only-input"
                     {...register("warehouse")}
                   />
-                  <select {...register("team")}>
-                    {teams.map((team) => (
-                      <option key={team.id} value={team.id}>
-                        {team.name}
-                      </option>
-                    ))}
-                  </select>
-                  <select {...register("villa")}>
-                    <option value="0">צוות רגיל</option>
-                    <option value="1">צוות וילה</option>
-                  </select>
-                  <select
-                    {...register("company")}
-                    value={user.company}
-                    disabled
-                  >
+                  {!isLoading && (
+                    <select {...register("team")} defaultValue={user.team}>
+                      {teams.map((team) => (
+                        <option key={team.id} value={team.id}>
+                          {team.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+
+                  {!isLoading && (
+                    <select
+                      {...register("villa")}
+                      defaultValue={user.villa === true ? 1 : 0}
+                    >
+                      <option value="0">צוות רגיל</option>
+                      <option value="1">צוות וילה</option>
+                    </select>
+                  )}
+
+                  <select value={user.company} disabled>
                     {companies.map((company) => (
                       <option key={company.id} value={company.id}>
                         {company.name}
@@ -178,7 +183,7 @@ const EditUser = () => {
                     ))}
                   </select>
                   <button className="submit-button" type="submit">
-                    הרשמה
+                    עריכת פרטים
                   </button>
                 </>
               )}

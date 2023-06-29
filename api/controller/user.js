@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const Order = require("../models/Order");
-
+const CryptoJS = require("crypto-js")
 const updateUserInfo = async (req, res) => {
+  console.log(req.body)
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
