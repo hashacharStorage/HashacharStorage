@@ -2,10 +2,12 @@
 
 .navbar-container {
   display: flex;
+  width: 100%;
   background-color: white;
   padding: 20px;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 30px;
   box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
 }
 

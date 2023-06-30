@@ -10,15 +10,15 @@ const ProductAdmin = ({
   title,
   _id,
   serial,
-  handleEditUser,
-  handleRemoveUser,
+  handleEditItem,
+  handleRemoveItem,
 }) => {
   const handleEdit = () => {
-    handleEditUser(_id);
+    handleEditItem(_id);
   };
 
   const handleRemove = () => {
-    handleRemoveUser(id);
+    handleRemoveItem(_id);
   };
 
   return (
@@ -32,10 +32,7 @@ const ProductAdmin = ({
       </div>
       <div className="user-details">
         <div className="user-name-warehouse">
-          <span className="user-name">
-            {" "}
-           {title}{" "}
-          </span>
+          <span className="user-name"> {title} </span>
           <span className="warehouse"> | {serial} |</span>
         </div>
       </div>

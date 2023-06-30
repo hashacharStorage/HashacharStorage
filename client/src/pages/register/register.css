@@ -34,14 +34,23 @@
 
 .submit-button {
   flex:1;
-  /* min-width: 30%; */
   margin-top: 20px;
   user-select: none;
   cursor: pointer;
-  border: solid;
   font-size: 26px;
   font-weight: 700;
   text-align: center;
+  background-color: var(--primary-dark-blue) ;
+  margin-bottom: 20px;
+  color: transparent;
+}
+.submit-button:hover{
+  opacity: 0.7;
+  transition: all 350ms ease-in-out;
+}
+
+.submit-button span{
+  color: white;
 }
 
 .register-form {
@@ -49,8 +58,4 @@
   flex-wrap: wrap;
   gap: 10px;
 flex-direction: row-reverse;
-}
-
-.input-error {
-  color: red;
 }

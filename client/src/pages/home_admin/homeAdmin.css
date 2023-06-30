@@ -19,7 +19,6 @@
   box-shadow: 0px 0px 10px rgba(30, 88, 136, 0.3);
   padding: 15px;
   grid-template-columns: repeat(3, 1fr);
-  margin: 20px;
 }
 
 .admin-box {
@@ -39,6 +38,7 @@
 .admin-icon {
   font-size: 30px;
   margin-bottom: 10px;
+  color: var(--primary-dark-blue);
 }
 
 .admin-name {

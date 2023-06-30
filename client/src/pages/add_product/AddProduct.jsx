@@ -94,9 +94,9 @@ const AddProduct = () => {
   const handleFormSubmit = handleSubmit(onSubmit);
 
   return (
-    <>
-      <Navbar />
+    
       <div className="body-container">
+      <Navbar />
         <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="whiteboard-container">
             <h1>הוספת פריט חדש</h1>
@@ -153,7 +153,6 @@ const AddProduct = () => {
           </div>
         </form>
       </div>
-    </>
   );
 };
 

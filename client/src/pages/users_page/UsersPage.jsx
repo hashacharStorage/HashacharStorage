@@ -62,10 +62,10 @@ const UsersPage = () => {
     fetchData();
   }, []);
 
-  const handleRemoveUser = async (id) => {
+  const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
     const confirmed = window.confirm(
-      "Are you sure you want to remove the user?"
+      "האם אתה בטוח שאתה רוצה למחוק את המשתמש?"
     );
     if (confirmed) {
       axios
@@ -85,12 +85,12 @@ const UsersPage = () => {
     }
   };
 
-  const handleEditUser = (userId) => {
+  const handleEditItem = (userId) => {
     navigate(`/edit/user/${userId}`);
   };
 
   return (
-    <div className="users-page-container">
+    <div className="body-container">
       <Navbar />
       <div className="users-page-content-container">
         <div className="top-list-container">
@@ -102,8 +102,8 @@ const UsersPage = () => {
               <h2>{companyData.company}</h2>
               <AdminList
                 items={companyData.users}
-                handleRemoveUser={handleRemoveUser}
-                handleEditUser={handleEditUser}
+                handleRemoveItem={handleRemoveItem}
+                handleEditItem={handleEditItem}
                 type="users"
               />
             </div>

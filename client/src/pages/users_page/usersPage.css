@@ -1,15 +1,9 @@
 @import url("../../core.css");
 
-.users-page-container {
-    background-color: var(--primary-gray);
-    min-height: 100vh;
-}
-
 .users-page-content-container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 10px;
 }
 
 .top-list-container {

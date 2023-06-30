@@ -74,84 +74,86 @@ const Register = () => {
         alert("משתמש נרשם בהצלחה!");
         window.location.reload();
       })
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => {
+        if (err.response) alert(err.response.data.message);
+        else alert("אין חיבור לשרת");
+      });
   };
 
   return (
-    <>
+    <div className="body-container">
       <Navbar />
-      <div className="body-container">
-        <div className="whiteboard-container">
-          <div className="register-content-container">
-            <h1>רישום טכנאי חדש</h1>
-            <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-              <input
-                type="text"
-                placeholder="שם פרטי"
-                {...register("firstname", {
-                  required: true,
-                })}
-              />
-              <input
-                type="text"
-                placeholder="שם משפחה"
-                {...register("lastname", { required: true })}
-              />
-              <input
-                type="text"
-                placeholder="סיסמא"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-              <input
-                type="text"
-                placeholder="אימייל"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-              />
-              <input
-                type="text"
-                placeholder="מידת חולצה"
-                {...register("shirtSize", {})}
-              />
-              <input
-                type="number"
-                placeholder="מספר מחסן"
-                min="0"
-                pattern="/^\d+$/"
-                {...register("warehouse", {
-                  required: true,
-                })}
-              />
-              <select {...register("team")}>
-                {teams.map((team) => (
-                  <option key={team.id} value={team.id}>
-                    {team.name}
-                  </option>
-                ))}
-              </select>
-              <select {...register("villa")}>
-                <option value="0">צוות רגיל</option>
-                <option value="1">צוות וילה</option>
-              </select>
-              <select {...register("company")}>
-                {companies.map((company) => (
-                  <option key={company.id} value={company.id}>
-                    {company.name}
-                  </option>
-                ))}
-              </select>
-              <button className="submit-button" type="submit">
-                הרשמה
-              </button>
-            </form>
-          </div>
+      <div className="whiteboard-container">
+        <div className="register-content-container">
+          <h1>רישום טכנאי חדש</h1>
+          <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="text"
+              placeholder="שם פרטי"
+              {...register("firstname", {
+                required: true,
+              })}
+            />
+            <input
+              type="text"
+              placeholder="שם משפחה"
+              {...register("lastname", { required: true })}
+            />
+            <input
+              type="text"
+              placeholder="סיסמא"
+              {...register("password", {
+                required: true,
+              })}
+            />
+            <input
+              type="text"
+              placeholder="אימייל"
+              {...register("email", {
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              })}
+            />
+            <input
+              type="text"
+              placeholder="מידת חולצה"
+              {...register("shirtSize", {})}
+            />
+            <input
+              type="number"
+              placeholder="מספר מחסן"
+              min="0"
+              pattern="/^\d+$/"
+              {...register("warehouse", {
+                required: true,
+              })}
+            />
+            <select {...register("team")}>
+              {teams.map((team) => (
+                <option key={team.id} value={team.id}>
+                  {team.name}
+                </option>
+              ))}
+            </select>
+            <select {...register("villa")}>
+              <option value="0">צוות רגיל</option>
+              <option value="1">צוות וילה</option>
+            </select>
+            <select {...register("company")}>
+              {companies.map((company) => (
+                <option key={company.id} value={company.id}>
+                  {company.name}
+                </option>
+              ))}
+            </select>
+
+            <button className="submit-button" type="submit">
+              <span>הרשמה</span>
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -10,7 +10,9 @@ const ProductsPage = () => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState(1);
+  const [blackProducts, setBlackProducts] = useState([]);
+  const [serializedProducts, setSerializedProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +55,6 @@ const ProductsPage = () => {
         }
         setAllProducts(productByCompany);
         setIsLoading(false);
-        console.log(productByCompany);
       } catch (error) {
         console.log(error);
       }
@@ -62,10 +63,25 @@ const ProductsPage = () => {
     fetchData();
   }, []);
 
-  const handleRemoveProduct = async (id) => {
+  useEffect(() => {
+    if (!isLoading) {
+      const products = allProducts.find((product) => {
+        if (product.company_id == selectedCompany) return product;
+      });
+      if (products) {
+        setBlackProducts(products.blackProducts);
+        setSerializedProducts(products.serializedProducts);
+      } else {
+        setBlackProducts([]);
+        setSerializedProducts([]);
+      }
+    }
+  }, [selectedCompany, isLoading]);
+
+  const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
     const confirmed = window.confirm(
-      "Are you sure you want to remove the product?"
+      "?האם ברצונך למחוק את הפריט"
     );
     if (confirmed) {
       axios
@@ -78,65 +94,54 @@ const ProductsPage = () => {
           },
         })
         .then((res) => {
-          alert("The product has been successfully removed");
+          alert("המוצר נמחק בהצלחה");
           window.location.reload();
         })
         .catch((err) => console.log(err));
     }
   };
 
-  const handleEditProduct = (productId) => {
-    navigate(`/edit/product/${productId}`);
+  const handleEditItem = (productId) => {
+    // navigate(`/edit/product/${productId}`);
   };
 
   const handleCompanyChange = (e) => {
-    setSelectedCompany(e.target.value);
-  };
-
-  const findCorrect = (isBlack) => {
-    const product = allProducts.find(
-      (product) => product.company_id == selectedCompany
-    );
-
-    if (product) {
-      return isBlack ? product.blackProducts : product.serializedProducts;
-    }
+    const company_id = e.target.value;
+    setSelectedCompany(company_id);
   };
 
   return (
-    <div className="products-page-container">
+    <div className="body-container">
       <Navbar />
       <div className="products-page-content-container">
-        <div className="top-list-container">
-          <h1>רשימת מוצרים לפי חברות</h1>
-          <select value={selectedCompany} onChange={handleCompanyChange}>
-            {!isLoading &&
-              allProducts.map((product) => (
-                <option key={product.company_id} value={product.company_id}>
-                  {product.company_name}
-                </option>
-              ))}
-          </select>
-        </div>
-        <h2>ציוד שחור</h2>
-        {!isLoading && (
+        <h1>רשימת מוצרים לפי חברות</h1>
+        <select value={selectedCompany} onChange={handleCompanyChange}>
+          {!isLoading &&
+            allProducts.map((product) => (
+              <option key={product.company_id} value={product.company_id}>
+                {product.company_name}
+              </option>
+            ))}
+        </select>
+        {/* <h2>ציוד שחור</h2> */}
+        {!isLoading && blackProducts && (
           <AdminList
-            items={findCorrect(true)}
-            handleRemoveItem={handleRemoveProduct}
-            handleEditItem={handleEditProduct}
+            title={"ציוד שחור"}
+            items={blackProducts}
+            handleRemoveItem={handleRemoveItem}
+            handleEditItem={handleEditItem}
             type="products"
           />
         )}
-
-        <h2>ציוד סיריאלי</h2>
-        {/* {!isLoading && (
+        {!isLoading && (
           <AdminList
-            items={findCorrect(false)}
-            handleRemoveItem={handleRemoveProduct}
-            handleEditItem={handleEditProduct}
+            title={"ציוד סיראלי"}
+            items={serializedProducts}
+            handleRemoveItem={handleRemoveItem}
+            handleEditItem={handleEditItem}
             type="products"
           />
-        )} */}
+        )}
       </div>
     </div>
   );

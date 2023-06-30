@@ -11,16 +11,16 @@ const User = ({
   lastName,
   _id,
   warehouse,
-  handleEditUser,
-  handleRemoveUser,
+  handleEditItem,
+  handleRemoveItem,
 }) => {
   const handleEdit = () => {
-    handleEditUser(_id);
+    handleEditItem(_id);
   };
 
   const handleRemove = () => {
     // Handle remove functionality
-    handleRemoveUser(id);
+    handleRemoveItem(id);
   };
 
   return (
