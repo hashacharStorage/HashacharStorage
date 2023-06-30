@@ -97,7 +97,8 @@ const ProductsPage = () => {
           alert("המוצר נמחק בהצלחה");
           window.location.reload();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {if(err.response)alert(err.response.data)
+        else alert("אין חיבור לשרת")});
     }
   };
 
