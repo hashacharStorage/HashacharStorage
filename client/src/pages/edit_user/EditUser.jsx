@@ -74,7 +74,6 @@ const EditUser = () => {
     copydata.villa == 0 ? (copydata.villa = false) : (copydata.villa = true);
 
     for (const key in copydata) {
-      console.log(key);
       if (copydata[key] == NaN) delete copydata[key];
       else if (copydata[key] == "") delete copydata[key];
       else if (copydata[key] == 0 && copydata[key] == user[key])
@@ -83,7 +82,6 @@ const EditUser = () => {
 
     const token = "Bearer " + Cookies.get("token");
     if (JSON.stringify(copydata) !== "{}") {
-      console.log("first");
       axios
         .put(
           `http://localhost:5000/api/users/${id}`,

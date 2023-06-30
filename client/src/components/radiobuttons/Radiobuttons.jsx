@@ -2,7 +2,7 @@ import React from "react";
 import "./radiobuttons.css";
 import { ImRadioUnchecked, ImRadioChecked } from "react-icons/im";
 
-const RadioButtons = ({ title, options, checkedisBlack, onChange }) => {
+const RadioButtons = ({ title, options, checkedisBlack, onChange,chosenOption }) => {
   const handleRadioChange = (value) => {
     onChange(value);
   };

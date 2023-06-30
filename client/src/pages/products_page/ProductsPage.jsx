@@ -103,7 +103,7 @@ const ProductsPage = () => {
   };
 
   const handleEditItem = (productId) => {
-    // navigate(`/edit/product/${productId}`);
+    navigate(`/edit/product/${productId}`);
   };
 
   const handleCompanyChange = (e) => {
@@ -124,7 +124,6 @@ const ProductsPage = () => {
               </option>
             ))}
         </select>
-        {/* <h2>ציוד שחור</h2> */}
         {!isLoading && blackProducts && (
           <AdminList
             title={"ציוד שחור"}

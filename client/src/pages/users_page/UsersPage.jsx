@@ -64,9 +64,7 @@ const UsersPage = () => {
 
   const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
-    const confirmed = window.confirm(
-      "האם אתה בטוח שאתה רוצה למחוק את המשתמש?"
-    );
+    const confirmed = window.confirm("האם אתה בטוח שאתה רוצה למחוק את המשתמש?");
     if (confirmed) {
       axios
         .delete(`http://localhost:5000/api/users/${id}`, {
@@ -99,8 +97,8 @@ const UsersPage = () => {
         {!isLoading &&
           allusers.map((companyData, index) => (
             <div className="companies-users" key={index}>
-              <h2>{companyData.company}</h2>
               <AdminList
+                title={companyData.company}
                 items={companyData.users}
                 handleRemoveItem={handleRemoveItem}
                 handleEditItem={handleEditItem}

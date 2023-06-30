@@ -9,6 +9,7 @@ import AdminHome from "../pages/home_admin/HomeAdmin";
 import UsersPage from "../pages/users_page/UsersPage";
 import EditUser from "../pages/edit_user/EditUser";
 import ProductsPage from "../pages/products_page/ProductsPage";
+import EditProduct from "../pages/edit_product/EditProduct";
 
 const ClientRouter = () => {
   return (
@@ -24,6 +25,7 @@ const ClientRouter = () => {
         <Route path="/admin/users" element={<UsersPage />} />
         <Route path="/edit/user/:id" element={<EditUser />} />
         <Route path="/admin/products" element={<ProductsPage />} />
+        <Route path="/edit/product/:id" element={<EditProduct/>}/>
       </Routes>
     </Router>
   );
