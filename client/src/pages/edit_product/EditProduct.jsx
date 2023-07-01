@@ -6,7 +6,8 @@ import RadioButtons from "../../components/radiobuttons/Radiobuttons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
+import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const EditProduct = () => {
   const [product, setProduct] = useState({});
@@ -134,15 +135,13 @@ const EditProduct = () => {
           />
 
           <RadioButtons
-            // chosenOption={product.isBlack}
             title=":סוג ציוד"
             options={isBlack}
             checkedisBlack={selectedisBlack}
             onChange={handleisBlackChange}
           />
-          <div className="add-product-submit-button" onClick={handleFormSubmit}>
-            הוספת פריט
-          </div>
+          <SubmitButton title="הוספת פריט" oncllickhandle={handleFormSubmit}/>
+
         </div>
       </form>
     </div>

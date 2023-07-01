@@ -16,19 +16,6 @@
     margin-top: 5px !important;
 }
 
-
-.add-product-submit-button {
-    flex: 1;
-    margin-top: 20px;
-    user-select: none;
-    cursor: pointer;
-    border: 2px solid var(--primary-dark-blue);
-    font-size: 26px;
-    font-weight: 700;
-    text-align: center;
-    border-radius: 9px;
-}
-
 .add-product-form {
     display: flex;
     flex-wrap: wrap;

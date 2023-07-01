@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
+import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const EditUser = () => {
   const [companies, setCompanies] = useState([]);
@@ -68,18 +69,16 @@ const EditUser = () => {
 
   const onSubmit = async (data) => {
     const copydata = { ...data };
-    console.log(copydata.team);
+
     copydata.team = Number(copydata.team);
     copydata.warehouse = Number(copydata.warehouse);
     copydata.villa == 0 ? (copydata.villa = false) : (copydata.villa = true);
 
     for (const key in copydata) {
-      if (copydata[key] == NaN) delete copydata[key];
-      else if (copydata[key] == "") delete copydata[key];
-      else if (copydata[key] == 0 && copydata[key] == user[key])
-        delete copydata[key];
+      if (copydata[key] === NaN) delete copydata[key];
+      else if (copydata[key] === "") delete copydata[key];
+      else if (copydata[key] == user[key]) delete copydata[key];
     }
-
     const token = "Bearer " + Cookies.get("token");
     if (JSON.stringify(copydata) !== "{}") {
       axios
@@ -101,6 +100,7 @@ const EditUser = () => {
         .catch((err) => console.log(err.response));
     } else alert("לא בוצע שינוי בפרטים");
   };
+  const handleFormSubmit = handleSubmit(onSubmit);
 
   return (
     <div className="body-container">
@@ -179,9 +179,10 @@ const EditUser = () => {
                     </option>
                   ))}
                 </select>
-                <button className="submit-button" type="submit">
-                  <span>עריכת פרטים</span>
-                </button>
+                <SubmitButton
+                  title="עריכת פרטים"
+                  oncllickhandle={handleFormSubmit}
+                />
               </>
             )}
           </form>

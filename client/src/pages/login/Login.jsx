@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -67,9 +68,8 @@ const Login = () => {
               value={password}
               onChange={handlePassword}
             />
-            <div onClick={handleClick} className="submit-button">
-              <span> התחברות</span>
-            </div>
+            <SubmitButton title="התחברות" oncllickhandle={handleClick}/>
+            
           </div>
         </div>
       </div>

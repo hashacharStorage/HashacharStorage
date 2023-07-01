@@ -10,15 +10,7 @@
     border: 2px solid var(--primary-dark-blue);
 }
 
-.add-product-desc {
-    background-color: white;
-    min-width: 100%;
-    margin-top: 5px !important;
-}
-
-
-
-.add-product-form {
+.edit-company-form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row-reverse;

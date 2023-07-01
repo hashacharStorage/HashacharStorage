@@ -36,7 +36,6 @@ const ProductsPage = () => {
         const productByCompany = [];
 
         for (let i = 1; i < companies.length; i++) {
-          console.log(companies[i].id);
           const blackProducts = [];
           const serializedProducts = [];
           products.forEach((product) => {

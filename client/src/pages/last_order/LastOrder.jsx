@@ -19,7 +19,6 @@ const LastOrder = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.createdAt);
         setOrderList(response.data.products);
         const date = new Date(response.data.createdAt);
         const formattedDate = date.toLocaleDateString("en-GB");

@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
+import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const Register = () => {
   const [companies, setCompanies] = useState([]);
@@ -79,6 +80,7 @@ const Register = () => {
         else alert("אין חיבור לשרת");
       });
   };
+  const handleFormSubmit = handleSubmit(onSubmit);
 
   return (
     <div className="body-container">
@@ -146,10 +148,7 @@ const Register = () => {
                 </option>
               ))}
             </select>
-
-            <button className="submit-button" type="submit">
-              <span>הרשמה</span>
-            </button>
+            <SubmitButton title="הרשמה" oncllickhandle={handleFormSubmit}/>
           </form>
         </div>
       </div>

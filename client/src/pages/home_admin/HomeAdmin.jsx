@@ -43,12 +43,12 @@ const AdminHome = () => {
     {
       icon: BsBuildingFillAdd,
       name: "יצירת חברה",
-      function: () => navigate("/add/user"),
+      function: () => navigate("/add/company"),
     },
     {
       icon: BsFillBuildingFill,
       name: "פעולות על חברות קיימות",
-      function: () => navigate("/add/user"),
+      function: () => navigate("/admin/companies"),
     },
   ];
 

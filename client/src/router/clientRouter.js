@@ -10,6 +10,9 @@ import UsersPage from "../pages/users_page/UsersPage";
 import EditUser from "../pages/edit_user/EditUser";
 import ProductsPage from "../pages/products_page/ProductsPage";
 import EditProduct from "../pages/edit_product/EditProduct";
+import AddCompany from "../pages/add_company/AddCompany";
+import CompaniesPage from "../pages/companies_page/CompaniesPage";
+import EditCompany from "../pages/edit_company/EditCompny";
 
 const ClientRouter = () => {
   return (
@@ -25,7 +28,10 @@ const ClientRouter = () => {
         <Route path="/admin/users" element={<UsersPage />} />
         <Route path="/edit/user/:id" element={<EditUser />} />
         <Route path="/admin/products" element={<ProductsPage />} />
-        <Route path="/edit/product/:id" element={<EditProduct/>}/>
+        <Route path="/edit/product/:id" element={<EditProduct />} />
+        <Route path="/add/company" element={<AddCompany />} />
+        <Route path="/admin/companies" element={<CompaniesPage />} />
+        <Route path="/edit/company/:id" element={<EditCompany />} />
       </Routes>
     </Router>
   );

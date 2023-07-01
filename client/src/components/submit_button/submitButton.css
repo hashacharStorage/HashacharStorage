@@ -1,0 +1,21 @@
+.submit-button {
+  flex: 1;
+  margin-top: 20px;
+  user-select: none;
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  background-color: var(--primary-dark-blue);
+  margin-bottom: 20px;
+  color: transparent;
+  border-radius: 9px;
+}
+.submit-button:hover {
+  opacity: 0.7;
+  transition: all 350ms ease-in-out;
+}
+
+.submit-button span {
+  color: white;
+}

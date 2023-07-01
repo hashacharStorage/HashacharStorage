@@ -53,7 +53,6 @@ const UsersPage = () => {
 
         setAlluser(transformedUsers);
         setIsloading(false);
-        console.log(transformedUsers);
       } catch (error) {
         console.log(error);
       }

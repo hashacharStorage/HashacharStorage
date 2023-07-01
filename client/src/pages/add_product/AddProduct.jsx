@@ -6,6 +6,7 @@ import RadioButtons from "../../components/radiobuttons/Radiobuttons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
+import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const AddProduct = () => {
   const [checkedCompanies, setCheckedCompanies] = useState([]);
@@ -71,7 +72,6 @@ const AddProduct = () => {
     data.companies = [0, ...checkedCompanies];
     data.isBlack = selectedisBlack;
     data.minQuantity = Number(data.minQuantity);
-    console.log(data);
     const token = "Bearer " + Cookies.get("token");
     axios
       .post(
@@ -144,12 +144,7 @@ const AddProduct = () => {
               checkedisBlack={selectedisBlack}
               onChange={handleisBlackChange}
             />
-            <div
-              className="add-product-submit-button"
-              onClick={handleFormSubmit}
-            >
-              הוספת פריט
-            </div>
+            <SubmitButton title={"הוספת פריט"} oncllickhandle={handleFormSubmit}/>
           </div>
         </form>
       </div>
