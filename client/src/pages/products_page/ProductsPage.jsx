@@ -76,6 +76,7 @@ const ProductsPage = () => {
       }
     }
   }, [selectedCompany, isLoading]);
+  
 
   const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
