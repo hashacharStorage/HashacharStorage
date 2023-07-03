@@ -18,7 +18,7 @@ const generateExcelTable = (user, data) => {
     ["Name", "Serial", "Quantity", "isBlack"],
     ...data.map((item) => [
       item.title || "",
-      item.product_id || "",
+      item.serial || "",
       item.quantity || "",
       "", // isBlack (not provided in the data structure)
     ]),

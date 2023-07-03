@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
 const Order = require("../models/Order");
+const createExcelForm = require("../utils/createExcelForm");
+
 
 const createOrder = async (req, res) => {
   try {
@@ -7,7 +9,7 @@ const createOrder = async (req, res) => {
 
     if (existingOrder) {
       existingOrder.products = req.body.products;
-      existingOrder.updatedAt = Date.now(); 
+      existingOrder.updatedAt = Date.now();
 
       const updatedOrder = await existingOrder.save();
       res.status(200).json(updatedOrder);
@@ -16,10 +18,37 @@ const createOrder = async (req, res) => {
       const savedOrder = await newOrder.save();
       res.status(200).json(savedOrder);
     }
+
+    // Generate and save the Excel form
+    const user = {
+      firstname: 'John',
+      lastname: 'Doe',
+      warehouse: 'Warehouse A',
+      team: 2,
+      company: 'ABC Company',
+    };
+
+    const orders = [
+      {
+        product_id: 'P1',
+        serial: 'S001',
+        quantity: 10,
+        isBlack: true,
+      },
+      {
+        product_id: 'P2',
+        serial: 'S002',
+        quantity: 5,
+        isBlack: false,
+      },
+    ];
+
+    createExcelForm(user, orders);
   } catch (error) {
     res.status(500).json(error);
   }
 };
+
 
 const updateOrder = async (req, res) => {
   try {
