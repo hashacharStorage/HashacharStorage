@@ -1,7 +1,6 @@
 const Product = require("../models/Product");
 const Order = require("../models/Order");
-const generateOrderPDF = require("../utils/createOrderForm");
-
+const generateOrderPDF = require("../utils/createOrderForm/createOrderForm");
 
 
 const createOrder = async (req, res) => {
@@ -26,10 +25,12 @@ const createOrder = async (req, res) => {
       lastname: 'ניסיון',
       warehouse: 999,
       team: 2,
+      villa:true,
+      shirtSize:"xl",
       company: 'סלקום',
-    };
+      };
 
-    const orders = [
+    const order = [
       {
         product_id: 'P1',
         title:"סםלייסים נקבה נקבה",
@@ -46,7 +47,7 @@ const createOrder = async (req, res) => {
       },
     ];
 
-    generateOrderPDF(orders,user);
+    generateOrderPDF(order,user);
   } catch (error) {
     res.status(500).json(error);
   }
