@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Order = require("../models/Order");
-const createExcelForm = require("../utils/createExcelForm");
+const generateOrderPDF = require("../utils/createOrderForm");
+
 
 
 const createOrder = async (req, res) => {
@@ -21,29 +22,31 @@ const createOrder = async (req, res) => {
 
     // Generate and save the Excel form
     const user = {
-      firstname: 'John',
-      lastname: 'Doe',
-      warehouse: 'Warehouse A',
+      firstname: 'לירם',
+      lastname: 'ניסיון',
+      warehouse: 999,
       team: 2,
-      company: 'ABC Company',
+      company: 'סלקום',
     };
 
     const orders = [
       {
         product_id: 'P1',
+        title:"סםלייסים נקבה נקבה",
         serial: 'S001',
-        quantity: 10,
+        quantity: 20,
         isBlack: true,
       },
       {
         product_id: 'P2',
+        title:"מרחיב wifi ביתי meshfast266v",
         serial: 'S002',
         quantity: 5,
         isBlack: false,
       },
     ];
 
-    createExcelForm(user, orders);
+    generateOrderPDF(orders,user);
   } catch (error) {
     res.status(500).json(error);
   }
