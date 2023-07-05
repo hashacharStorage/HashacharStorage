@@ -39,6 +39,7 @@ const Home = () => {
             },
           }
         );
+        console.log(response.data)
         setProductsData(response.data);
       } catch (error) {
         console.error(error);
