@@ -5,11 +5,11 @@ const path = require("path");
 async function generatePDF(order, user) {
   const blackProducts = order.filter((product) => product.isBlack);
   const serializedProducts = order.filter((product) => !product.isBlack);
-
+  
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const imagePath = "./logo.png";
-  const absolutePath = path.resolve(imagePath);
+  const imagePath = path.join(__dirname, "logo.png");
+    const imageData = fs.readFileSync(imagePath, 'base64'); // Read image file as base64 data
 
   // Generate the black products table
   const blackProductsTableHtml = await page.evaluate((products) => {
@@ -58,27 +58,29 @@ async function generatePDF(order, user) {
   // Set the content to the tables
   await page.setContent(`
     <div class="header">
-        <img src="file://${absolutePath}" alt="Header Image" />
+        <img src="data:image/png;base64,${imageData}" alt="Header Image" />
     </div>
     <div class="body"> 
       <div class="user-details">
-        <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${user.firstname} ${
-    user.lastname
-  }</div>
-        <span>${user.company} </span>
-        <span> מחסן:  ${user.warehouse} </span>
-       <span>${user.villa ? "צוות וילות" : null} </span>
+        <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${user.firstname} ${user.lastname}</div>
         <span>${new Date().toLocaleDateString("en-US")}</span>
+        <span>  מחסן:  ${user.warehouse} </span>
+        <span>     </span>
+        <span>${user.villa ? "צוות וילות   ": "צוות רגיל   "} </span>
+        <span>${user.company}</span>
       </div>
     <div class="products">
       <div>
-        <h2>Black Products</h2>
+        <h2>ציוד שחור</h2>
         ${blackProductsTableHtml}
       </div>
       <div>
-        <h2>Serialized Products</h2>
+        <h2>ציוד סיראלי</h2>
         ${serializedProductsTableHtml}
       </div>
+      </div>
+      ${user.team === 1 ? '<div class="additional-section">להדפיס פעמיים</div>' : ''}
+    </div>
     </div>
   </div>
   `);

@@ -1,54 +1,52 @@
 const Product = require("../models/Product");
 const Order = require("../models/Order");
+const User = require('../models/User')
+const Company = require("../models/Company")
 const generateOrderPDF = require("../utils/createOrderForm/createOrderForm");
 
 
 const createOrder = async (req, res) => {
+  const generateorder = async (user) => {
+    let order = []
+    for (const product of req.body.products) {
+      const foundProduct = await Product.findOne({ product_id: product.productId });
+      if (foundProduct) {
+        const orderItem = {
+          product_id: foundProduct.product_id,
+          title: foundProduct.title,
+          serial: foundProduct.serial,
+          quantity: product.quantity,
+          isBlack: foundProduct.isBlack
+        };
+        order.push(orderItem);
+      }
+    }
+    generateOrderPDF(order, user);
+  }
+
   try {
     const existingOrder = await Order.findOne({ userId: req.body.userId });
-
+    const userResponse = await User.findById(req.body.userId)
+    const company = await Company.findOne({ id: userResponse.company })
+    const user = { ...userResponse._doc, company: company.name }
+    console.log(existingOrder)
     if (existingOrder) {
       existingOrder.products = req.body.products;
       existingOrder.updatedAt = Date.now();
-
       const updatedOrder = await existingOrder.save();
+      generateorder(user)
       res.status(200).json(updatedOrder);
     } else {
       const newOrder = new Order(req.body);
       const savedOrder = await newOrder.save();
+      generateorder(user)
       res.status(200).json(savedOrder);
     }
 
-    // Generate and save the Excel form
-    const user = {
-      firstname: 'לירם',
-      lastname: 'ניסיון',
-      warehouse: 999,
-      team: 2,
-      villa:true,
-      shirtSize:"xl",
-      company: 'סלקום',
-      };
 
-    const order = [
-      {
-        product_id: 'P1',
-        title:"סםלייסים נקבה נקבה",
-        serial: 'S001',
-        quantity: 20,
-        isBlack: true,
-      },
-      {
-        product_id: 'P2',
-        title:"מרחיב wifi ביתי meshfast266v",
-        serial: 'S002',
-        quantity: 5,
-        isBlack: false,
-      },
-    ];
 
-    generateOrderPDF(order,user);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
