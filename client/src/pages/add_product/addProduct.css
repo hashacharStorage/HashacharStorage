@@ -25,28 +25,3 @@
     align-items: center;
     gap: 10px;
 }
-
-
-
-/* Mobile : MAX WIDTH 748px
-   Tablets & laptops : MAX WIDTH 1330px
-   
-
-*/
-
-@media (max-width:640px) {  
-    .add-product-secondery-container{
-        background-color: red !important;
-        padding: 0px 20px;
-    }
-
-    .whiteboard-container{
-        width: 100%;
-    }
-
-    .custom-checkbox{
-        grid-template-columns: 1fr !important;
-        justify-items: start !important;
-    }
-  
-}

@@ -6,14 +6,6 @@
     flex-direction: column;
 }
 
-.top-list-container {
-    display: flex;
-    width: 740px;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-}
-
 .companies-users {
     text-align: center;
 }

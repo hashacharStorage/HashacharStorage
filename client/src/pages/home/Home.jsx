@@ -108,14 +108,10 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
+    <div className="body-container">
       <Navbar />
       <div className="content-container">
         <div className="top-list-container">
-          <div className="search">
-            <input className="input" type="text" placeholder="חיפוש" />
-            <BiSearchAlt className="search-icon" />
-          </div>
           <div className="switch-button" onClick={handleIsBlack}>
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}
           </div>
