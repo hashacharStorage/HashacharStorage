@@ -53,10 +53,10 @@ const AdminHome = () => {
   ];
 
   return (
-    <div className="admin-home-container">
+    <div className="body-container">
       <Navbar />
-      <div className="test">
-        <div className="admin-content-container">
+      <div className="content-container">
+        <div className="admin-panel">
           {icons.map((item, index) => (
             <div key={index} className="admin-box" onClick={item.function}>
               <item.icon className="admin-icon" />

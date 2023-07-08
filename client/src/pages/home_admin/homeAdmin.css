@@ -1,16 +1,7 @@
 @import url("../../core.css");
 
-.admin-home-container {
-  background-color: var(--primary-gray);
-  min-height: 100vh;
-}
-.test {
-  display: flex;
 
-  justify-content: center;
-}
-
-.admin-content-container {
+.admin-panel {
   display: grid;
   grid-gap: 20px;
   width: 740px;
@@ -43,4 +34,11 @@
 
 .admin-name {
   font-size: 14px;
+}
+
+@media (max-width:740px){
+  .admin-panel{
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
 }

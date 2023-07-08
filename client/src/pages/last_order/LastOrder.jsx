@@ -5,8 +5,6 @@ import Navbar from "../../components/navbar/Navbar";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import SubmitButton from "../../components/submit_button/SubmitButton";
-import generateExcelTable from "../../utils/xslxMaker/GenerateExcel";
 const LastOrder = () => {
   const [orderList, setOrderList] = useState([]);
   const [user, setUser] = useState({});
@@ -57,17 +55,11 @@ const LastOrder = () => {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className="body-container">
       <Navbar />
       <div className="content-container">
         <h1>הזמנה מתאריך: {date}</h1>
         <ProductsList products={orderList} viewOnly={true} />
-        {!isLoading && (
-          <SubmitButton
-            title={"  הדפס באקסל  "}
-            oncllickhandle={() => generateExcelTable(user, orderList)}
-          />
-        )}
       </div>
     </div>
   );

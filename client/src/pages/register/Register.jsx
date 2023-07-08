@@ -85,71 +85,75 @@ const Register = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="whiteboard-container">
-        <div className="register-content-container">
-          <h1>רישום טכנאי חדש</h1>
-          <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="text"
-              placeholder="שם פרטי"
-              {...register("firstname", {
-                required: true,
-              })}
-            />
-            <input
-              type="text"
-              placeholder="שם משפחה"
-              {...register("lastname", { required: true })}
-            />
-            <input
-              type="text"
-              placeholder="סיסמא"
-              {...register("password", {
-                required: true,
-              })}
-            />
-            <input
-              type="text"
-              placeholder="אימייל"
-              {...register("email", {
-                required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              })}
-            />
-            <input
-              type="text"
-              placeholder="מידת חולצה"
-              {...register("shirtSize", {})}
-            />
-            <input
-              type="number"
-              placeholder="מספר מחסן"
-              min="0"
-              pattern="/^\d+$/"
-              {...register("warehouse", {
-                required: true,
-              })}
-            />
-            <select {...register("team")}>
-              {teams.map((team) => (
-                <option key={team.id} value={team.id}>
-                  {team.name}
-                </option>
-              ))}
-            </select>
-            <select {...register("villa")}>
-              <option value="0">צוות רגיל</option>
-              <option value="1">צוות וילה</option>
-            </select>
-            <select {...register("company")}>
-              {companies.map((company) => (
-                <option key={company.id} value={company.id}>
-                  {company.name}
-                </option>
-              ))}
-            </select>
-            <SubmitButton title="הרשמה" oncllickhandle={handleFormSubmit}/>
-          </form>
+      <div className="content-container">
+        <div className="whiteboard-container">
+          <div className="register-content-container">
+            <h1>רישום טכנאי חדש</h1>
+            <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="text"
+                placeholder="שם פרטי"
+                {...register("firstname", {
+                  required: true,
+                })}
+              />
+              <input
+                type="text"
+                placeholder="שם משפחה"
+                {...register("lastname", { required: true })}
+              />
+              <input
+                type="text"
+                placeholder="סיסמא"
+                {...register("password", {
+                  required: true,
+                })}
+              />
+              <input
+                type="text"
+                placeholder="אימייל"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              <input
+                type="text"
+                placeholder="מידת חולצה"
+                {...register("shirtSize", {})}
+              />
+              <input
+                type="number"
+                placeholder="מספר מחסן"
+                min="0"
+                pattern="/^\d+$/"
+                {...register("warehouse", {
+                  required: true,
+                })}
+              />
+              <div className="selects-container">
+                <select {...register("team")}>
+                  {teams.map((team) => (
+                    <option key={team.id} value={team.id}>
+                      {team.name}
+                    </option>
+                  ))}
+                </select>
+                <select {...register("villa")}>
+                  <option value="0">צוות רגיל</option>
+                  <option value="1">צוות וילה</option>
+                </select>
+                <select {...register("company")}>
+                  {companies.map((company) => (
+                    <option key={company.id} value={company.id}>
+                      {company.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <SubmitButton title="הרשמה" oncllickhandle={handleFormSubmit} />
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -1,12 +1,3 @@
-.whiteboard-container input {
-    flex: 1;
-    min-width: 30%;
-    margin: 20px 0px 0px 0px; 
-    border-radius: 6px;
-    text-align: right;
-    padding: 8px;
-    border: 2px solid var(--primary-dark-blue);
-}
 
 .add-company-form {
     display: flex;
