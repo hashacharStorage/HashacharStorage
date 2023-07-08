@@ -1,17 +1,7 @@
 @import url("../../core.css");
 
-
-
 .add-product-desc {
     background-color: white;
     min-width: 100%;
     margin-top: 5px !important;
-}
-
-.add-product-form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 10px;
 }

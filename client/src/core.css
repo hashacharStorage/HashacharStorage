@@ -54,15 +54,16 @@ h1 {
   color: var(--primary-dark-blue);
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .whiteboard-container {
 
   }
-}
+} */
 
 @media (max-width: 740px) {
   .whiteboard-container {
     width: 100% !important;
+    padding: 20px 30px;
   }
 
   .login-container, .content-container {

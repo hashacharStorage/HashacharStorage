@@ -94,13 +94,12 @@ const AddProduct = () => {
   const handleFormSubmit = handleSubmit(onSubmit);
 
   return (
-    
-      <div className="body-container">
+    <div className="body-container">
       <Navbar />
-        <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="whiteboard-container">
-            <h1>הוספת פריט חדש</h1>
-            <div className="add-product-form">
+      <div className="content-container">
+        <div className="whiteboard-container">
+          <h1>הוספת פריט חדש</h1>
+          <form className="add-product-form" onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="text"
                 placeholder="קוד הפריט"
@@ -120,18 +119,16 @@ const AddProduct = () => {
                 placeholder="כמות מינימאלית"
                 min="1"
                 pattern="/^\d+$/"
-                defaultValue="1"
                 {...register("minQuantity", {
                   required: true,
                 })}
               />
-              <input
-                className="add-product-desc"
-                type="text"
-                placeholder="תיאור הפריט"
-                {...register("desc", {})}
-              />
-            </div>
+            <input
+              className="add-product-desc"
+              type="text"
+              placeholder="תיאור הפריט"
+              {...register("desc", {})}
+            />
             <Checkbox
               title={"חברה"}
               options={companies}
@@ -144,10 +141,14 @@ const AddProduct = () => {
               checkedisBlack={selectedisBlack}
               onChange={handleisBlackChange}
             />
-            <SubmitButton title={"הוספת פריט"} oncllickhandle={handleFormSubmit}/>
-          </div>
-        </form>
+            <SubmitButton
+              title={"הוספת פריט"}
+              oncllickhandle={handleFormSubmit}
+            />
+          </form>
+        </div>
       </div>
+    </div>
   );
 };
 

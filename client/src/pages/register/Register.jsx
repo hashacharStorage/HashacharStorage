@@ -87,7 +87,6 @@ const Register = () => {
       <Navbar />
       <div className="content-container">
         <div className="whiteboard-container">
-          <div className="register-content-container">
             <h1>רישום טכנאי חדש</h1>
             <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
               <input
@@ -155,7 +154,6 @@ const Register = () => {
             </form>
           </div>
         </div>
-      </div>
     </div>
   );
 };
