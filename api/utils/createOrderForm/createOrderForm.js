@@ -96,13 +96,12 @@ async function generatePDF(order, user) {
 
   // Generate the PDF
   const pdf = await page.pdf();
-
   // Create a nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
-      pass: procces.env.EMAIL_PASS,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
