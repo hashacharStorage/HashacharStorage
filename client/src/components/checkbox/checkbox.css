@@ -6,6 +6,9 @@
   border-radius: 9px;
   user-select: none;
   padding: 10px 0px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-top: 10px;
 }
 .custom-checkbox-container h3 {
   margin-bottom: 5px;

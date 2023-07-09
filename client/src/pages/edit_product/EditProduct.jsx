@@ -6,7 +6,7 @@ import RadioButtons from "../../components/radiobuttons/Radiobuttons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 
 const EditProduct = () => {
@@ -85,7 +85,7 @@ const EditProduct = () => {
         })
         .catch((err) => {
           if (err.response) alert(err.response.data.message);
-          else alert("המערכת לא הצליחה להתחבר לשרת")
+          else alert("המערכת לא הצליחה להתחבר לשרת");
         });
     }
   };
@@ -94,56 +94,63 @@ const EditProduct = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="content-container">
         <div className="whiteboard-container">
-          <h1>הוספת פריט חדש</h1>
-          <div className="add-product-form">
-            <input
-              type="text"
-              placeholder="קוד הפריט"
-              defaultValue={product.serial}
-              {...register("serial")}
-            />
-            <input
-              type="text"
-              placeholder="שם הפריט"
-              defaultValue={product.title}
-              {...register("title")}
-            />
-            <input
-              type="number"
-              placeholder="כמות מינימאלית"
-              min="1"
-              pattern="/^\d+$/"
-              defaultValue={product.minQuantity}
-              {...register("minQuantity")}
-            />
-            <input
-              className="add-product-desc"
-              type="text"
-              placeholder="תיאור הפריט"
-              defaultValue={product.desc}
-              {...register("desc", {})}
-            />
-          </div>
+          <form
+            className="update-product-form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <h1>עדכון פריט</h1>
+            <div className="add-product-form">
+              <input
+                type="text"
+                placeholder="קוד הפריט"
+                defaultValue={product.serial}
+                {...register("serial")}
+              />
+              <input
+                type="text"
+                placeholder="שם הפריט"
+                defaultValue={product.title}
+                {...register("title")}
+              />
+              <input
+                type="number"
+                placeholder="כמות מינימאלית"
+                min="1"
+                pattern="/^\d+$/"
+                defaultValue={product.minQuantity}
+                {...register("minQuantity")}
+              />
+              <input
+                className="add-product-desc"
+                type="text"
+                placeholder="תיאור הפריט"
+                defaultValue={product.desc}
+                {...register("desc", {})}
+              />
+            </div>
 
-          <Checkbox
-            title={"חברה"}
-            options={companies}
-            checkedCompanies={checkedCompanies}
-            onChange={handleCheckboxChange}
-          />
+            <Checkbox
+              title={"חברה"}
+              options={companies}
+              checkedCompanies={checkedCompanies}
+              onChange={handleCheckboxChange}
+            />
 
-          <RadioButtons
-            title=":סוג ציוד"
-            options={isBlack}
-            checkedisBlack={selectedisBlack}
-            onChange={handleisBlackChange}
-          />
-          <SubmitButton title="הוספת פריט" oncllickhandle={handleFormSubmit}/>
-
+            <RadioButtons
+              title=":סוג ציוד"
+              options={isBlack}
+              checkedisBlack={selectedisBlack}
+              onChange={handleisBlackChange}
+            />
+            <SubmitButton
+              title="הוספת פריט"
+              oncllickhandle={handleFormSubmit}
+            />
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

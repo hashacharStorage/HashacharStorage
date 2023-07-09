@@ -71,7 +71,7 @@ const CompaniesPage = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="products-page-content-container">
+      <div className="content-container">
         <h1>רשימת חברות</h1>
         {!isLoading && (
           <AdminList

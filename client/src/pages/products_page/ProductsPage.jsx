@@ -114,7 +114,7 @@ const ProductsPage = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="products-page-content-container">
+      <div className="content-container">
         <h1>רשימת מוצרים לפי חברות</h1>
         <select value={selectedCompany} onChange={handleCompanyChange}>
           {!isLoading &&

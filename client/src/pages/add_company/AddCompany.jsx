@@ -43,18 +43,20 @@ const AddCompany = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="whiteboard-container">
-        <h1>הוספת חברה חדשה</h1>
-        <div className="add-company-form">
-          <input
-            type="text"
-            placeholder="שם החברה"
-            required
-            value={name}
-            onChange={handlename}
-          />
+      <div className="content-container">
+        <div className="whiteboard-container">
+          <h1>הוספת חברה חדשה</h1>
+          <div className="add-company-form">
+            <input
+              type="text"
+              placeholder="שם החברה"
+              required
+              value={name}
+              onChange={handlename}
+            />
+          </div>
+          <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />
         </div>
-        <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />
       </div>
     </div>
   );

@@ -38,6 +38,7 @@
 }
 .whiteboard-container input {
   border-radius: 6px;
+  width: 100%;
   text-align: right;
   padding: 8px;
   border: 2px solid var(--primary-dark-blue);

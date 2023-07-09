@@ -69,20 +69,22 @@ const EditCompany = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="whiteboard-container">
-        <h1>הוספת חברה חדשה</h1>
-        <div className="edit-company-form">
-          {!isLoading && (
-            <input
-              type="text"
-              placeholder="שם החברה"
-              required
-              defaultValue={name}
-              onChange={handlename}
-            />
-          )}
+      <div className="content-container">
+        <div className="whiteboard-container">
+          <h1>עדכון פרטי חברה</h1>
+          <div className="edit-company-form">
+            {!isLoading && (
+              <input
+                type="text"
+                placeholder="שם החברה"
+                required
+                defaultValue={name}
+                onChange={handlename}
+              />
+            )}
+          </div>
+          <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />
         </div>
-        <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />
       </div>
     </div>
   );
