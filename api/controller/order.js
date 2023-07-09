@@ -29,7 +29,6 @@ const createOrder = async (req, res) => {
     const userResponse = await User.findById(req.body.userId)
     const company = await Company.findOne({ id: userResponse.company })
     const user = { ...userResponse._doc, company: company.name }
-    console.log(existingOrder)
     if (existingOrder) {
       existingOrder.products = req.body.products;
       existingOrder.updatedAt = Date.now();

@@ -11,8 +11,8 @@ const AdminList = ({
   type,
 }) => {
   return (
-    <div className="admin-list-container">
-      <h2>{title}</h2>
+<>
+    <h2>{title}</h2>
       <div className="admin-list">
         {type === "users" &&
           items.map((user, index) => {
@@ -26,20 +26,20 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
-              />
+                />
             );
           })}
         {type === "products" &&
           items.map((product, index) => {
             return (
               <ProductAdmin
-                id={product.product_id}
-                title={product.title}
-                _id={product._id}
-                serial={product.serial}
-                key={index}
-                handleEditItem={handleEditItem}
-                handleRemoveItem={handleRemoveItem}
+              id={product.product_id}
+              title={product.title}
+              _id={product._id}
+              serial={product.serial}
+              key={index}
+              handleEditItem={handleEditItem}
+              handleRemoveItem={handleRemoveItem}
               />
             );
           })}
@@ -53,11 +53,11 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
-              />
-            );
-          })}
+                />
+                );
+              })}
       </div>
-    </div>
+      </>
   );
 };
 

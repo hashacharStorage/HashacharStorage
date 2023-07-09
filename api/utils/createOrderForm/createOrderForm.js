@@ -102,7 +102,7 @@ async function generatePDF(order, user) {
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
-      pass: "wdnaprkcwehohjts",
+      pass: procces.env.EMAIL_PASS,
     },
   });
 

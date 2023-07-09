@@ -89,7 +89,7 @@ const UsersPage = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="users-page-content-container">
+      <div className="content-container">
         <div className="top-list-container">
           <h1>רשימת משתמשים לפי חברות</h1>
         </div>

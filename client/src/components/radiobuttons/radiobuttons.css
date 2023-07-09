@@ -18,18 +18,14 @@
   width: fit-content;
   justify-content: start;
   padding: 10px 0px;
-  /* background-color: red; */
 }
 
 .custom-radio-label {
-  /* width: fit-content; */
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  /* justify-content: center; */
   margin: 0px 5px;
   width: 100%;
-  /* background-color: plum; */
 }
 
 .custom-radio-input {

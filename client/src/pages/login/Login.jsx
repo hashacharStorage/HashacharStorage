@@ -35,7 +35,6 @@ const Login = () => {
         .then((res) => {
           user = res.data.others;
           token = res.data.accessToken;
-          console.log(user);
           Cookies.set("token", token);
           Cookies.set("company", user.company);
           Cookies.set("firstName", user.firstname);

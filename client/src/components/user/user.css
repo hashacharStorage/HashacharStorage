@@ -1,6 +1,6 @@
 .user-container {
     display: flex;
-    border-bottom: 6px solid var(--primary-gray);
+    border-bottom: 3px solid var(--primary-gray);
     padding-bottom: 10px;
     justify-content: space-between;
     align-items: center;

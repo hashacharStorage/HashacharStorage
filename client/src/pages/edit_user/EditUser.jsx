@@ -105,87 +105,91 @@ const EditUser = () => {
   return (
     <div className="body-container">
       <Navbar />
-      <div className="whiteboard-container">
-        <div className="update-content-container">
-          <h1>עריכת פרטי משתמש</h1>
-          <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-            {user && (
-              <>
-                <input
-                  type="text"
-                  placeholder="שם פרטי"
-                  defaultValue={user.firstname}
-                  {...register("firstname")}
-                />
-                <input
-                  type="text"
-                  placeholder="שם משפחה"
-                  defaultValue={user.lastname}
-                  {...register("lastname")}
-                />
-                <input
-                  type="text"
-                  placeholder="סיסמא"
-                  {...register("password")}
-                />
-                <input
-                  type="text"
-                  placeholder="אימייל"
-                  defaultValue={user.email}
-                  {...register("email", {
-                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  })}
-                />
-                <input
-                  type="text"
-                  placeholder="מידת חולצה"
-                  defaultValue={user.shirtSize}
-                  {...register("shirtSize")}
-                />
-                <input
-                  type="number"
-                  placeholder="מספר מחסן"
-                  min="0"
-                  pattern="^\d+$"
-                  defaultValue={user.warehouse}
-                  readOnly={true}
-                  className="read-only-input"
-                  {...register("warehouse")}
-                />
-                {!isLoading && (
-                  <select {...register("team")} defaultValue={user.team}>
-                    {teams.map((team) => (
-                      <option key={team.id} value={team.id}>
-                        {team.name}
-                      </option>
-                    ))}
-                  </select>
-                )}
+      <div className="content-container">
+        <div className="whiteboard-container">
+          <div className="update-content-container">
+            <h1>עריכת פרטי משתמש</h1>
+            <form className="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
+              {user && (
+                <>
+                  <input
+                    type="text"
+                    placeholder="שם פרטי"
+                    defaultValue={user.firstname}
+                    {...register("firstname")}
+                  />
+                  <input
+                    type="text"
+                    placeholder="שם משפחה"
+                    defaultValue={user.lastname}
+                    {...register("lastname")}
+                  />
+                  <input
+                    type="text"
+                    placeholder="סיסמא"
+                    {...register("password")}
+                  />
+                  <input
+                    type="text"
+                    placeholder="אימייל"
+                    defaultValue={user.email}
+                    {...register("email", {
+                      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    })}
+                  />
+                  <input
+                    type="text"
+                    placeholder="מידת חולצה"
+                    defaultValue={user.shirtSize}
+                    {...register("shirtSize")}
+                  />
+                  <input
+                    type="number"
+                    placeholder="מספר מחסן"
+                    min="0"
+                    pattern="^\d+$"
+                    defaultValue={user.warehouse}
+                    readOnly={true}
+                    className="read-only-input"
+                    {...register("warehouse")}
+                  />
+                  <div className="selects-container">
+                    {!isLoading && (
+                      <select {...register("team")} defaultValue={user.team}>
+                        {teams.map((team) => (
+                          <option key={team.id} value={team.id}>
+                            {team.name}
+                          </option>
+                        ))}
+                      </select>
+                    )}
 
-                {!isLoading && (
-                  <select
-                    {...register("villa")}
-                    defaultValue={user.villa === true ? 1 : 0}
-                  >
-                    <option value="0">צוות רגיל</option>
-                    <option value="1">צוות וילה</option>
-                  </select>
-                )}
+                    {!isLoading && (
+                      <select
+                        {...register("villa")}
+                        defaultValue={user.villa === true ? 1 : 0}
+                      >
+                        <option value="0">צוות רגיל</option>
+                        <option value="1">צוות וילה</option>
+                      </select>
+                    )}
 
-                <select value={user.company} disabled>
-                  {companies.map((company) => (
-                    <option key={company.id} value={company.id}>
-                      {company.name}
-                    </option>
-                  ))}
-                </select>
-                <SubmitButton
-                  title="עריכת פרטים"
-                  oncllickhandle={handleFormSubmit}
-                />
-              </>
-            )}
-          </form>
+                    <select value={user.company} disabled>
+                      {companies.map((company) => (
+                        <option key={company.id} value={company.id}>
+                          {company.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <SubmitButton
+                    title="עריכת פרטים"
+                    oncllickhandle={handleFormSubmit}
+                  />
+                </>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>
