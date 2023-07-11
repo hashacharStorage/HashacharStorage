@@ -100,29 +100,29 @@ const AddProduct = () => {
         <div className="whiteboard-container">
           <h1>הוספת פריט חדש</h1>
           <form className="add-product-form" onSubmit={handleSubmit(onSubmit)}>
-              <input
-                type="text"
-                placeholder="קוד הפריט"
-                {...register("serial", {
-                  required: true,
-                })}
-              />
-              <input
-                type="text"
-                placeholder="שם הפריט"
-                {...register("title", {
-                  required: true,
-                })}
-              />
-              <input
-                type="number"
-                placeholder="כמות מינימאלית"
-                min="1"
-                pattern="/^\d+$/"
-                {...register("minQuantity", {
-                  required: true,
-                })}
-              />
+            <input
+              type="text"
+              placeholder="שם הפריט"
+              {...register("title", {
+                required: true,
+              })}
+            />
+            <input
+              type="text"
+              placeholder="קוד הפריט"
+              {...register("serial", {
+                required: true,
+              })}
+            />
+            <input
+              type="number"
+              placeholder="כמות מינימאלית"
+              min="1"
+              pattern="/^\d+$/"
+              {...register("minQuantity", {
+                required: true,
+              })}
+            />
             <input
               className="add-product-desc"
               type="text"
