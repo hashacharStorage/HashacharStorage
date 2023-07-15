@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
-import { BiSearchAlt } from "react-icons/bi";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
