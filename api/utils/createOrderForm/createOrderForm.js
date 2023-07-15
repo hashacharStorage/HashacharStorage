@@ -107,8 +107,9 @@ async function generatePDF(order, user) {
 
   // Define email options
   const mailOptions = {
-    from: "liram100@gmail.com",
-    to: "machsan@hashahart.co.il",
+    from: process.env.EMAIL,
+    to: "liram100@gmail.com",
+    // to: "machsan@hashahart.co.il",
     subject: `הזמנה ${user.firstname} ${user.lastname}`,
     text: "Attached is the order PDF",
     attachments: [

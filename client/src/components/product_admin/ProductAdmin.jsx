@@ -22,20 +22,18 @@ const ProductAdmin = ({
   };
 
   return (
-    <div className="user-container">
-      <div className="user-actions">
+    <div className="product-container">
+      <div className="product-actions">
         <BsFillWrenchAdjustableCircleFill
           className="edit-icon"
           onClick={handleEdit}
         />
         <BsFillXCircleFill className="remove-icon" onClick={handleRemove} />
       </div>
-      <div className="user-details">
-        <div className="user-name-warehouse">
-          <span className="user-name"> {title} </span>
-          <span className="warehouse"> | {serial} |</span>
+      <div className="product-details">
+          <span className="product-name"> {title} </span>
+          <span className="serial"> | {serial} |</span>
         </div>
-      </div>
     </div>
   );
 };
