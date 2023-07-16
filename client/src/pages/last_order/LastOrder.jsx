@@ -5,6 +5,9 @@ import Navbar from "../../components/navbar/Navbar";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { isUserLoggedIn } from "../../utils/userVerification";
+import { useNavigate } from "react-router-dom";
+
 const LastOrder = () => {
   const [orderList, setOrderList] = useState([]);
   const [user, setUser] = useState({});
@@ -51,7 +54,9 @@ const LastOrder = () => {
       }
     };
 
-    fetchData();
+    if (!isUserLoggedIn()) {
+      navigate("/login");
+    } else fetchData();
   }, []);
 
   return (

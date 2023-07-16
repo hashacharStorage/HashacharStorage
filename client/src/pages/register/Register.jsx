@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
-
+import { isUserAdmin } from "../../utils/userVerification";
 const Register = () => {
   const [companies, setCompanies] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -19,12 +19,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      Cookies.get("token") === undefined ||
-      Cookies.get("company") === undefined
-    )
-      navigate("/login");
-    else if (Cookies.get("company") != 0) navigate("/home");
+   
     const fetchData = async () => {
       try {
         const [companyResponse, teamResponse] = await Promise.all([

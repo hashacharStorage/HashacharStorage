@@ -8,6 +8,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../components/submit_button/SubmitButton";
+import { useNavigate } from "react-router-dom";
+import { isUserAdmin } from "../../utils/userVerification";
 
 const EditProduct = () => {
   const [product, setProduct] = useState({});
@@ -16,6 +18,7 @@ const EditProduct = () => {
   const [companies, setCompanies] = useState([]);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (values) => {
     setCheckedCompanies(values);
@@ -47,7 +50,9 @@ const EditProduct = () => {
       }
     };
 
-    fetchData();
+    if (!isUserAdmin()) {
+      navigate("/home");
+    } else fetchData();
   }, []);
 
   const isBlack = [

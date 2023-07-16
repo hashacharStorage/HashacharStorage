@@ -22,20 +22,18 @@ const Company = ({
   };
 
   return (
-    <div className="user-container">
-      <div className="user-actions">
+    <div className="company-container">
+      <div className="company-actions">
         <BsFillWrenchAdjustableCircleFill
           className="edit-icon"
           onClick={handleEdit}
         />
         <BsFillXCircleFill className="remove-icon" onClick={handleRemove} />
       </div>
-      <div className="user-details">
-        <div className="user-name-warehouse">
-          <span className="user-name"> {name} </span>
-          <span className="warehouse"> | {id+1} |</span>
+      <div className="company-details">
+          <span className="company-name"> {name} </span>
+          <span className="id"> | {id+1} |</span>
         </div>
-      </div>
     </div>
   );
 };

@@ -1,25 +1,35 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../pages/home/Home";
-import Register from "../pages/register/Register";
-import Login from "../pages/login/Login";
-import AddProduct from "../pages/add_product/AddProduct";
-import LastOrder from "../pages/last_order/LastOrder";
-import AdminHome from "../pages/home_admin/HomeAdmin";
-import UsersPage from "../pages/users_page/UsersPage";
-import EditUser from "../pages/edit_user/EditUser";
-import ProductsPage from "../pages/products_page/ProductsPage";
-import EditProduct from "../pages/edit_product/EditProduct";
-import AddCompany from "../pages/add_company/AddCompany";
-import CompaniesPage from "../pages/companies_page/CompaniesPage";
-import EditCompany from "../pages/edit_company/EditCompny";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { handleUserRedirect } from '../utils/userVerification';
+import Home from '../pages/home/Home';
+import Register from '../pages/register/Register';
+import Login from '../pages/login/Login';
+import AddProduct from '../pages/add_product/AddProduct';
+import LastOrder from '../pages/last_order/LastOrder';
+import AdminHome from '../pages/home_admin/HomeAdmin';
+import UsersPage from '../pages/users_page/UsersPage';
+import EditUser from '../pages/edit_user/EditUser';
+import ProductsPage from '../pages/products_page/ProductsPage';
+import EditProduct from '../pages/edit_product/EditProduct';
+import AddCompany from '../pages/add_company/AddCompany';
+import CompaniesPage from '../pages/companies_page/CompaniesPage';
+import EditCompany from '../pages/edit_company/EditCompny'
 
 const ClientRouter = () => {
+
+  useEffect(() => {
+    const redirectPath = handleUserRedirect();
+    if (window.location.pathname !== redirectPath) {
+      window.location.pathname = redirectPath;
+    }
+  }, []);
+
   return (
     <Router>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/admin/home" element={<AdminHome />} />
-        <Route path="add/user" element={<Register />} />
+        <Route path="/add/user" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add/product" element={<AddProduct />} />
         <Route path="/find/order/:userId" element={<LastOrder />} />

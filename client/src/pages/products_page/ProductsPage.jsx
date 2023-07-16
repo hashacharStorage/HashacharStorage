@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminList from "../../components/adminList/AdminList";
+import { isUserAdmin } from "../../utils/userVerification";
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const ProductsPage = () => {
   const [selectedCompany, setSelectedCompany] = useState(1);
   const [blackProducts, setBlackProducts] = useState([]);
   const [serializedProducts, setSerializedProducts] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +61,9 @@ const ProductsPage = () => {
       }
     };
 
-    fetchData();
+    if (!isUserAdmin()) {
+      navigate("/home");
+    } else fetchData();
   }, []);
 
   useEffect(() => {

@@ -33,13 +33,10 @@ const User = ({
         <BsFillXCircleFill className="remove-icon" onClick={handleRemove} />
       </div>
       <div className="user-details">
-        <div className="user-name-warehouse">
           <span className="user-name">
-            {" "}
             {firstName} {lastName}{" "}
           </span>
           <span className="warehouse"> | {warehouse} |</span>
-        </div>
       </div>
     </div>
   );

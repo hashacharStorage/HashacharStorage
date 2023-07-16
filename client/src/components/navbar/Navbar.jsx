@@ -13,6 +13,7 @@ const Navbar = () => {
     Cookies.remove("token");
     Cookies.remove("company");
     Cookies.remove("firstName");
+    Cookies.remove("id")
     navigate("/login");
   };
 

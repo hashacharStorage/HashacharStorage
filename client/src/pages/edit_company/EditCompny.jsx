@@ -5,9 +5,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { isUserAdmin } from "../../utils/userVerification";
 
 const EditCompany = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [originalName, setOriginalName] = useState("");
@@ -28,8 +31,9 @@ const EditCompany = () => {
         console.log(error);
       }
     };
-
-    fetchData();
+    if (!isUserAdmin()) {
+      navigate("/home");
+    } else fetchData();
   }, []);
 
   const handlename = (event) => {

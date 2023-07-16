@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./homeAdmin.css";
 import {
   FaUserEdit,
@@ -10,10 +10,17 @@ import {
 import { BsFillBuildingFill, BsBuildingFillAdd } from "react-icons/bs";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import {isUserAdmin} from "../../utils/userVerification"
 
 const AdminHome = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!isUserAdmin()) {
+      navigate("/home");
+    }
+  }, [navigate]);
+  
   const icons = [
     {
       icon: FaUserPlus,

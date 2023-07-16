@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import ProductsList from "../../components/productsList/ProductsList";
+import { isUserLoggedIn } from "../../utils/userVerification";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,12 +19,6 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (
-        Cookies.get("token") === undefined ||
-        Cookies.get("company") === undefined
-      )
-        navigate("/login");
-
       const token = "Bearer " + Cookies.get("token");
       const company = Cookies.get("company");
       try {
@@ -43,7 +38,9 @@ const Home = () => {
         console.error(error);
       }
     };
-    fetchData();
+    if(isUserLoggedIn()){
+      fetchData()
+    }else navigate("/login");
   }, []);
 
   useEffect(() => {

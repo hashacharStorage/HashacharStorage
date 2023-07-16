@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
+import { isUserLoggedIn } from "../../utils/userVerification";
 
 const EditUser = () => {
   const [companies, setCompanies] = useState([]);
@@ -18,15 +19,6 @@ const EditUser = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      Cookies.get("token") === undefined ||
-      Cookies.get("company") === undefined
-    ) {
-      navigate("/login");
-    } else if (Cookies.get("company") != 0) {
-      navigate("/home");
-    }
-
     const fetchData = async () => {
       const token = "Bearer " + Cookies.get("token");
       try {
@@ -64,7 +56,9 @@ const EditUser = () => {
       }
     };
 
-    fetchData();
+    if (!isUserLoggedIn()) {
+      navigate("/login");
+    } else fetchData();
   }, []);
 
   const onSubmit = async (data) => {

@@ -5,10 +5,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminList from "../../components/adminList/AdminList";
+import { isUserAdmin } from "../../utils/userVerification";
 
 const CompaniesPage = () => {
   const navigate = useNavigate();
-  const [companies,setCompanies]=useState([])
+  const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -33,10 +34,10 @@ const CompaniesPage = () => {
       }
     };
 
-    fetchData();
+    if (!isUserAdmin()) {
+      navigate("/home");
+    } else fetchData();
   }, []);
-
-
 
   const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
@@ -57,16 +58,16 @@ const CompaniesPage = () => {
           alert("החברה ועובדיה נמחקו בהצלחה");
           window.location.reload();
         })
-        .catch((err) => {if(err.response)alert(err.response.data)
-        else alert("אין חיבור לשרת")});
+        .catch((err) => {
+          if (err.response) alert(err.response.data);
+          else alert("אין חיבור לשרת");
+        });
     }
   };
 
   const handleEditItem = (productId) => {
     navigate(`/edit/company/${productId}`);
   };
-
-
 
   return (
     <div className="body-container">

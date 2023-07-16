@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminList from "../../components/adminList/AdminList";
+import { isUserAdmin } from "../../utils/userVerification";
 
 const UsersPage = () => {
   const navigate = useNavigate();

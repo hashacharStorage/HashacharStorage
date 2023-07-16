@@ -4,9 +4,17 @@ import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
-
+import { useNavigate } from "react-router-dom";
+import {isUserAdmin} from "../../utils/userVerification"
 const AddCompany = () => {
   const [name, setName] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isUserAdmin()) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handlename = (event) => {
     setName(event.target.value);
