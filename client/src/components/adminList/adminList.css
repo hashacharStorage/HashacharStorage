@@ -71,7 +71,7 @@
 }
 
 .product-details {
-  background-color: red;
+  /* background-color: red; */
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-color: transparent transparent;

@@ -36,6 +36,7 @@
   flex: 1;
   white-space: nowrap;
   overflow-x: scroll;
+  direction: rtl;
 }
 
 .product-title::-webkit-scrollbar {

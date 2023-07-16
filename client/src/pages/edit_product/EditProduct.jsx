@@ -104,15 +104,15 @@ const EditProduct = () => {
             <div className="add-product-form">
               <input
                 type="text"
-                placeholder="קוד הפריט"
-                defaultValue={product.serial}
-                {...register("serial")}
-              />
-              <input
-                type="text"
                 placeholder="שם הפריט"
                 defaultValue={product.title}
                 {...register("title")}
+              />
+              <input
+                type="text"
+                placeholder="קוד הפריט"
+                defaultValue={product.serial}
+                {...register("serial")}
               />
               <input
                 type="number"
