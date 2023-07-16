@@ -2,7 +2,6 @@ import Cookies from "js-cookie";
 
 export function isUserLoggedIn() {
   const userId = Cookies.get("id");
-  console.log(userId)
   return userId !== undefined;
 }
 
