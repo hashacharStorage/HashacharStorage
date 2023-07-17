@@ -38,9 +38,7 @@ const Home = () => {
         console.error(error);
       }
     };
-    if(isUserLoggedIn()){
-      fetchData()
-    }else navigate("/login");
+    fetchData()
   }, []);
 
   useEffect(() => {
