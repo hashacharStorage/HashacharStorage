@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { isUserLoggedIn } from "../../utils/userVerification";
-import { useNavigate } from "react-router-dom";
+import { clientConfig } from "../../utils/clientConfig";
 
 const LastOrder = () => {
   const [orderList, setOrderList] = useState([]);
@@ -19,7 +19,7 @@ const LastOrder = () => {
     const fetchData = async () => {
       try {
         const promises = [
-          axios.get(`http://localhost:5000/api/users/find/${userId}`, {
+          axios.get(`${clientConfig.API_PATH}users/find/${userId}`, {
             headers: {
               token: "Bearer " + Cookies.get("token"),
             },
@@ -27,8 +27,8 @@ const LastOrder = () => {
               id: userId,
             },
           }),
-          axios.get("http://localhost:5000/api/company/all"),
-          axios.get(`http://localhost:5000/api/orders/find/${userId}`, {
+          axios.get(clientConfig.API_PATH + "company/all"),
+          axios.get(`${clientConfig.API_PATH}orders/find/${userId}`, {
             headers: {
               token: "Bearer " + Cookies.get("token"),
             },

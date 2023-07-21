@@ -20,7 +20,7 @@ const EditCompany = () => {
     const fetchData = async () => {
       try {
         const [companyResponse] = await Promise.all([
-          axios.get(`http://localhost:5000/api/company/find/${id}`),
+          axios.get(`${clientConfig.API_PATH}company/find/${id}`),
         ]);
 
         setName(companyResponse.data.name);
@@ -46,7 +46,7 @@ const EditCompany = () => {
       try {
         axios
           .put(
-            `http://localhost:5000/api/company/find/${id}`,
+            `${clientConfig.API_PATH}company/find/${id}`,
             {
               name: name,
             },

@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { isUserAdmin } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 
 const EditProduct = () => {
   const [product, setProduct] = useState({});
@@ -31,8 +32,8 @@ const EditProduct = () => {
     const fetchData = async () => {
       try {
         const [companyResponse, productsResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/company/all"),
-          axios.get(`http://localhost:5000/api/products/find/${id}`),
+          axios.get(clientConfig.API_PATH + "company/all"),
+          axios.get(`${clientConfig.API_PATH}/products/find/${id}`),
         ]);
 
         const companyFields = companyResponse.data
@@ -74,7 +75,7 @@ const EditProduct = () => {
       const token = "Bearer " + Cookies.get("token");
       axios
         .put(
-          `http://localhost:5000/api/products/find/${id}`,
+          `${clientConfig.API_PATH}products/find/${id}`,
           {
             ...data,
           },

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
-import { isUserAdmin } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 const Register = () => {
   const [companies, setCompanies] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -23,8 +23,8 @@ const Register = () => {
     const fetchData = async () => {
       try {
         const [companyResponse, teamResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/company/all"),
-          axios.get("http://localhost:5000/api/team/all"),
+          axios.get(clientConfig.API_PATH + "company/all"),
+          axios.get(clientConfig.API_PATH + "team/all"),
         ]);
 
         const companyFields = companyResponse.data.map((item) => ({
@@ -56,7 +56,7 @@ const Register = () => {
     const token = "Bearer " + Cookies.get("token");
     axios
       .post(
-        "http://localhost:5000/api/auth/register",
+        clientConfig.API_PATH + "auth/register",
         {
           ...data,
         },

@@ -33,3 +33,50 @@
 .navbar-links:hover {
   text-decoration: underline;
 }
+
+.navbar-icon {
+  display: none;
+}
+
+@media (max-width: 764px) {
+  .navbar-container {
+    width: 250px;
+    position: relative;
+    background-color: red;
+    flex-direction: column;
+    height: 100vh;
+    z-index: 10;
+    right: 0;
+    transition: 300ms all ease-in-out;
+  }
+  .navbar-container-closed{
+    width: 10px;
+    transition: 300ms all ease-in-out;
+    height: 100vh;
+    position: relative;
+  }
+  .navbar-container-closed img, .navbar-container-closed ul {
+    display: none;
+  }
+
+  .navbar {
+    position: absolute;
+    background-color: blue;
+    right: 0;
+  }
+  .navbar-container ul {
+    flex-direction: column;
+    background-color: green;
+  }
+  .navbar-icon-left,.navbar-icon-right {
+    display: inline-block;
+    position: absolute;
+    font-size: 30px;
+    top: 20px;
+    left:-20px
+  }
+  .navbar-icon-right{
+    left:10px;
+    z-index: 50;
+  }
+}

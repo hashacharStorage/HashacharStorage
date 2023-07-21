@@ -1,0 +1,28 @@
+{
+  "name": "storage_hashahar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server-dev": "set NODE_ENV=development&& npm start --prefix api",
+    "server-prod": "set NODE_ENV=production&& npm start --prefix api",
+    "client-dev": "set NODE_ENV=development&& npm start --prefix client",
+    "client-prod": "set NODE_ENV=production&& npm start --prefix client",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+    "prod": "concurrently \"npm run server-prod\" \"npm run client-prod\"" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiramGoli/storage_administration_hashahar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiramGoli/storage_administration_hashahar/issues"
+  },
+  "homepage": "https://github.com/LiramGoli/storage_administration_hashahar#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

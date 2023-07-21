@@ -7,6 +7,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { isUserLoggedIn } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 
 const EditUser = () => {
   const [companies, setCompanies] = useState([]);
@@ -24,9 +25,9 @@ const EditUser = () => {
       try {
         const [companyResponse, teamResponse, userResponse] = await Promise.all(
           [
-            axios.get("http://localhost:5000/api/company/all"),
-            axios.get("http://localhost:5000/api/team/all"),
-            axios.get(`http://localhost:5000/api/users/find/${id}`, {
+            axios.get(clientConfig.API_PATH + "company/all"),
+            axios.get(clientConfig.API_PATH + "team/all"),
+            axios.get(`${clientConfig.API_PATH}users/find/${id}`, {
               headers: {
                 token: token,
               },
@@ -77,7 +78,7 @@ const EditUser = () => {
     if (JSON.stringify(copydata) !== "{}") {
       axios
         .put(
-          `http://localhost:5000/api/users/${id}`,
+          `${clientConfig.API_PATH}users/${id}`,
           {
             ...copydata,
           },

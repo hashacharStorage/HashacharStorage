@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminList from "../../components/adminList/AdminList";
 import { isUserAdmin } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 
 const CompaniesPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const CompaniesPage = () => {
       const token = "Bearer " + Cookies.get("token");
       try {
         const [companiesResponse, productsResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/company/all", {
+          axios.get(clientConfig.API_PATH + "company/all", {
             headers: {
               token: token,
             },
@@ -46,7 +47,7 @@ const CompaniesPage = () => {
     );
     if (confirmed) {
       axios
-        .delete(`http://localhost:5000/api/company/find/${id}`, {
+        .delete(`${clientConfig.API_PATH}company/find/${id}`, {
           headers: {
             token: token,
           },

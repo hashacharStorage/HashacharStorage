@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon functions/index.js",
+    "start": "netlify dev",
     "build": "netlify deploy --prod"
   },
   "keywords": [],

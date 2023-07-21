@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import {isUserAdmin} from "../../utils/userVerification"
+import { clientConfig } from "../../utils/clientConfig";
 const AddCompany = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const AddCompany = () => {
     try {
       axios
         .post(
-          "http://localhost:5000/api/company/register",
+          clientConfig.API_PATH + "company/register",
           {
             name: name,
           },

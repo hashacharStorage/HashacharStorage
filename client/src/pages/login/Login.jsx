@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../components/submit_button/SubmitButton";
+import { clientConfig } from "../../utils/clientConfig";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ const Login = () => {
   const handleClick = async () => {
     if (isValidEmail()) {
       await axios
-        .post("http://localhost:5000/api/auth/login", {
+        .post(clientConfig.API_PATH + "auth/login", {
           email: email,
           password: password,
         })

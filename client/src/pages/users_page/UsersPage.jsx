@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminList from "../../components/adminList/AdminList";
-import { isUserAdmin } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 
 const UsersPage = () => {
   const navigate = useNavigate();
@@ -18,12 +18,12 @@ const UsersPage = () => {
       const usersByComp = [];
       try {
         const [companyResponse, usersResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/company/all", {
+          axios.get(clientConfig.API_PATH + "company/all", {
             headers: {
               token: token,
             },
           }),
-          axios.get("http://localhost:5000/api/users", {
+          axios.get(clientConfig.API_PATH + "users", {
             headers: {
               token: token,
             },
@@ -67,7 +67,7 @@ const UsersPage = () => {
     const confirmed = window.confirm("האם אתה בטוח שאתה רוצה למחוק את המשתמש?");
     if (confirmed) {
       axios
-        .delete(`http://localhost:5000/api/users/${id}`, {
+        .delete(`${clientConfig.API_PATH}users/${id}`, {
           headers: {
             token: token,
           },

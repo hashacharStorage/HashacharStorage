@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import {isUserAdmin} from "../../utils/userVerification"
+import { clientConfig } from "../../utils/clientConfig";
 
 const AddProduct = () => {
   const [checkedCompanies, setCheckedCompanies] = useState([]);
@@ -29,7 +30,7 @@ const AddProduct = () => {
     const fetchData = async () => {
       try {
         const [companyResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/company/all"),
+          axios.get(clientConfig.API_PATH + "company/all"),
         ]);
 
         const companyFields = companyResponse.data
@@ -80,7 +81,7 @@ const AddProduct = () => {
     const token = "Bearer " + Cookies.get("token");
     axios
       .post(
-        "http://localhost:5000/api/products/",
+        clientConfig.API_PATH + "products/",
         {
           ...data,
         },

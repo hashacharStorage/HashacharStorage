@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import ProductsList from "../../components/productsList/ProductsList";
-import { isUserLoggedIn } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Home = () => {
       const company = Cookies.get("company");
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${company}`,
+          `${clientConfig.API_PATH}products/${company}`,
           {
             params: {
               company: company,
@@ -80,7 +80,7 @@ const Home = () => {
       try {
         axios
           .post(
-            "http://localhost:5000/api/orders/",
+            clientConfig.API_PATH + "orders/",
             {
               ...order,
             },

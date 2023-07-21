@@ -3,7 +3,6 @@
 .login-form input {
   flex: 1;
   min-width: 100%;
-  margin: 20px 10px 0px 0px;
   border-radius: 6px;
   text-align: right;
   padding: 8px;
