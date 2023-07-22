@@ -77,7 +77,6 @@ const CompaniesPage = () => {
         <h1>רשימת חברות</h1>
         {!isLoading && (
           <AdminList
-            title={"רשימת חברות"}
             items={companies}
             handleRemoveItem={handleRemoveItem}
             handleEditItem={handleEditItem}

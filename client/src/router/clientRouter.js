@@ -14,19 +14,14 @@ import EditProduct from '../pages/edit_product/EditProduct';
 import AddCompany from '../pages/add_company/AddCompany';
 import CompaniesPage from '../pages/companies_page/CompaniesPage';
 import EditCompany from '../pages/edit_company/EditCompny'
+import Default from '../pages/default/Default';
 
 const ClientRouter = () => {
-
-  useEffect(() => {
-    const redirectPath = handleUserRedirect();
-    if (window.location.pathname !== redirectPath) {
-      window.location.pathname = redirectPath;
-    }
-  }, []);
 
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Default />} />
         <Route path="/home" element={<Home />} />
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/add/user" element={<Register />} />

@@ -30,7 +30,7 @@ const Login = () => {
     if (isValidEmail()) {
       await axios
         .post(clientConfig.API_PATH + "auth/login", {
-          email: email,
+          email: email.toLowerCase(),
           password: password,
         })
         .then((res) => {

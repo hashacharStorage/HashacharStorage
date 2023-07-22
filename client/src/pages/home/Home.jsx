@@ -105,6 +105,7 @@ const Home = () => {
       <Navbar />
       <div className="content-container">
         <div className="top-list-container">
+          {/* TODO: create a switch */}
           <div className="switch-button" onClick={handleIsBlack}>
             {isBlack ? "ציוד שחור" : "ציוד סיריאלי"}
           </div>

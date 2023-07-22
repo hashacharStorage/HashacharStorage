@@ -18,7 +18,7 @@ const app = express();
 
 // Enable CORS for all routes
 var corsOptions = {
-  origin: ["https://hashacharstorage.netlify.app","https://64bc3718c252e02581126f0d--hashacharstorage.netlify.app"],
+  origin: ["https://hashacharstorage.netlify.app","https://64bc3718c252e02581126f0d--hashacharstorage.netlify.app","http://localhost:3000"],
   credentials: true,
 };
 app.use(cors(corsOptions));

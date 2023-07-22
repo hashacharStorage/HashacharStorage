@@ -37,14 +37,14 @@ const registerCompany = async (req, res) => {
 
 const updateCompany = async (req, res) => {
   try {
-    const updatedCopany = await Company.findByIdAndUpdate(
+    const updatedCompany = await Company.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
       },
       { new: true }
     );
-    res.status(200).json(updatedCopany);
+    res.status(200).json(updatedCompany);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -64,7 +64,7 @@ const deleteCompany = async (req, res) => {
         product.companies.length === 2 &&
         product.companies.includes(specificCompany.id)
       ) {
-        // compnies lisk is only built from admin and deletec comapny
+        // compnies lisk is only built from admin and delete comapny
         await product.remove();
       } else {
         // Remove company ID from the array

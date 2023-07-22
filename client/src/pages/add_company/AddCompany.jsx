@@ -5,10 +5,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useNavigate } from "react-router-dom";
-import {isUserAdmin} from "../../utils/userVerification"
+import { isUserAdmin } from "../../utils/userVerification";
 import { clientConfig } from "../../utils/clientConfig";
 const AddCompany = () => {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,32 +22,43 @@ const AddCompany = () => {
   const handlename = (event) => {
     setName(event.target.value);
   };
-
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const isValidEmail = () => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
   const onSubmit = () => {
-    const token = "Bearer " + Cookies.get("token");
-    try {
-      axios
-        .post(
-          clientConfig.API_PATH + "company/register",
-          {
-            name: name,
-          },
-          {
-            headers: {
-              token: token,
+    if (isValidEmail()) {
+      const token = "Bearer " + Cookies.get("token");
+      try {
+        axios
+          .post(
+            clientConfig.API_PATH + "company/register",
+            {
+              name: name,
+              email: email.toLowerCase(),
             },
-          }
-        )
-        .then(() => {
-          alert("החברה התווספה בהצלחה");
-          window.location.reload();
-        })
-        .catch((err) => {
-          if (err.response) alert(err.response.data.message);
-          else alert("אין חיבור לשרת");
-        });
-    } catch (error) {
-      console.log(error);
+            {
+              headers: {
+                token: token,
+              },
+            }
+          )
+          .then(() => {
+            alert("החברה התווספה בהצלחה");
+            window.location.reload();
+          })
+          .catch((err) => {
+            if (err.response) alert(err.response.data.message);
+            else alert("אין חיבור לשרת");
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("invalid email");
     }
   };
 
@@ -62,6 +75,13 @@ const AddCompany = () => {
               required
               value={name}
               onChange={handlename}
+            />
+            <input
+              type="text"
+              placeholder="אימייל לקבלת הזמנה"
+              required
+              defaultValue={email}
+              onChange={handleEmail}
             />
           </div>
           <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />

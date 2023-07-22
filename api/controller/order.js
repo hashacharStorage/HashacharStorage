@@ -1,55 +1,56 @@
 const Product = require("../models/Product");
 const Order = require("../models/Order");
-const User = require('../models/User')
-const Company = require("../models/Company")
+const User = require("../models/User");
+const Company = require("../models/Company");
 const generateOrderPDF = require("../utils/createOrderForm/createOrderForm");
-
 
 const createOrder = async (req, res) => {
   const generateorder = async (user) => {
-    let order = []
+    let order = [];
     for (const product of req.body.products) {
-      const foundProduct = await Product.findOne({ product_id: product.productId });
+      const foundProduct = await Product.findOne({
+        product_id: product.productId,
+      });
       if (foundProduct) {
         const orderItem = {
           product_id: foundProduct.product_id,
           title: foundProduct.title,
           serial: foundProduct.serial,
           quantity: product.quantity,
-          isBlack: foundProduct.isBlack
+          isBlack: foundProduct.isBlack,
         };
         order.push(orderItem);
       }
     }
     generateOrderPDF(order, user);
-  }
+  };
 
   try {
     const existingOrder = await Order.findOne({ userId: req.body.userId });
-    const userResponse = await User.findById(req.body.userId)
-    const company = await Company.findOne({ id: userResponse.company })
-    const user = { ...userResponse._doc, company: company.name }
+    const userResponse = await User.findById(req.body.userId);
+    const company = await Company.findOne({ id: userResponse.company });
+    const user = {
+      ...userResponse._doc,
+      company: company.name,
+      company_email: company.email,
+    };
     if (existingOrder) {
       existingOrder.products = req.body.products;
       existingOrder.updatedAt = Date.now();
       const updatedOrder = await existingOrder.save();
-      generateorder(user)
+      generateorder(user);
       res.status(200).json(updatedOrder);
     } else {
       const newOrder = new Order(req.body);
       const savedOrder = await newOrder.save();
-      generateorder(user)
+      generateorder(user);
       res.status(200).json(savedOrder);
     }
-
-
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json(error);
   }
 };
-
 
 const updateOrder = async (req, res) => {
   try {
