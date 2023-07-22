@@ -123,7 +123,7 @@ async function generatePDF(order, user) {
     if (error) {
       console.log("Error occurred while sending email:", error.message);
     } else {
-      console.log("Email sent successfully!");
+      console.log("Email sent successfully to: " +user.company_email);
     }
   });
 
