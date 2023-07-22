@@ -33,11 +33,6 @@ const AdminHome = () => {
       function: () => navigate("/admin/users"),
     },
     {
-      icon: FaFile,
-      name: "צפייה בהזמנות",
-      function: () => navigate("/add/user"),
-    },
-    {
       icon: FaBoxOpen,
       name: "הוספת מוצר",
       function: () => navigate("/add/product"),

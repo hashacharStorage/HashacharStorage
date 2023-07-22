@@ -15,6 +15,7 @@ const EditUser = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const isAdmin= parseInt(Cookies.get("company"), 10) ===0;
 
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -111,12 +112,16 @@ const EditUser = () => {
                     type="text"
                     placeholder="שם פרטי"
                     defaultValue={user.firstname}
+                    readOnly={!isAdmin}
+                    className={!isAdmin? "read-only-input":""}
                     {...register("firstname")}
                   />
                   <input
                     type="text"
                     placeholder="שם משפחה"
                     defaultValue={user.lastname}
+                    readOnly={!isAdmin}
+                    className={!isAdmin? "read-only-input":""}
                     {...register("lastname")}
                   />
                   <input
@@ -163,6 +168,7 @@ const EditUser = () => {
                       <select
                         {...register("villa")}
                         defaultValue={user.villa === true ? 1 : 0}
+                        disabled={!isAdmin}
                       >
                         <option value="0">צוות רגיל</option>
                         <option value="1">צוות וילה</option>

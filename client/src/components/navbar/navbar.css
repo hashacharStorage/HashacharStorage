@@ -1,6 +1,5 @@
-/* @import url("../../core.css"); */
-
-.navbar-container {
+.navbar-container,
+.navbar {
   display: flex;
   width: 100%;
   background-color: white;
@@ -10,7 +9,9 @@
   margin-bottom: 30px;
   box-shadow: 0px 0px 10px rgb(30, 88, 136, 0.3);
 }
-
+.navbar-container a{
+  text-decoration: none;
+}
 .navbar-container img {
   width: 150px;
   cursor: pointer;
@@ -25,7 +26,6 @@
 
 .navbar-links {
   font-family: var(--font-varela);
-  font-size: 16px;
   cursor: pointer;
   color: var(--primary-blue);
 }
@@ -34,12 +34,29 @@
   text-decoration: underline;
 }
 
-.navbar-icon {
+.navbar-icon-left,
+.navbar-icon-right {
   display: none;
+}
+
+.navbar {
+  width: 100%;
 }
 
 @media (max-width: 764px) {
   .navbar-container {
+    flex-direction: column;
+  }
+  .navbar-container ul {
+    text-align: right;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+}
+
+/* @media (max-width: 764px) { */
+/* .navbar-container {
     width: 250px;
     position: relative;
     background-color: red;
@@ -48,14 +65,14 @@
     z-index: 10;
     right: 0;
     transition: 300ms all ease-in-out;
-  }
-  .navbar-container-closed{
+  } */
+/* .navbar-container-closed{
     width: 10px;
     transition: 300ms all ease-in-out;
     height: 100vh;
     position: relative;
-  }
-  .navbar-container-closed img, .navbar-container-closed ul {
+  } */
+/* .navbar-container-closed img, .navbar-container-closed ul {
     display: none;
   }
 
@@ -63,6 +80,7 @@
     position: absolute;
     background-color: blue;
     right: 0;
+    width: fit-content;
   }
   .navbar-container ul {
     flex-direction: column;
@@ -79,4 +97,4 @@
     left:10px;
     z-index: 50;
   }
-}
+} */

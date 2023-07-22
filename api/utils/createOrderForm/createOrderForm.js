@@ -83,7 +83,7 @@ async function generatePDF(order, user) {
         ${serializedProductsTableHtml}
       </div>
       </div>
-      ${user.team === 2 ? '<div class="additional-section">להדפיס פעמיים</div>' : ''}
+      ${user.team === 1 ? '<div class="additional-section">להדפיס פעמיים</div>' : ''}
     </div>
     </div>
   </div>

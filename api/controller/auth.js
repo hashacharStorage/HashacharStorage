@@ -8,7 +8,7 @@ dotenv.config();
 const registerUser = async (req, res) => {
   try {
     //check if email is already exist
-    const existingUser = await User.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ email: req.body.email.toLowerCase() });
     if (existingUser) {
       return res.status(400).send({ message: "אימייל כבר קיים במערכת" });
     }
@@ -42,7 +42,7 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email.toLowerCase() });
     if (user === null) {
       res.status(401).json({ msg: "המשתמש אינו קיים" });
       return;

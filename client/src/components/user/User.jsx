@@ -9,7 +9,7 @@ const User = ({
   firstName,
   id,
   lastName,
-  _id,
+  _id,//mongo id
   warehouse,
   handleEditItem,
   handleRemoveItem,
@@ -19,7 +19,6 @@ const User = ({
   };
 
   const handleRemove = () => {
-    // Handle remove functionality
     handleRemoveItem(id);
   };
 

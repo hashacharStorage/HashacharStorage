@@ -3,6 +3,10 @@ import "./adminList.css";
 import User from "../user/User";
 import ProductAdmin from "../product_admin/ProductAdmin";
 import Company from "../company/Company";
+
+const USERS="users"
+const PRODUCTS= "products"
+const COMPANIES="companies"
 const AdminList = ({
   title,
   items,
@@ -10,11 +14,12 @@ const AdminList = ({
   handleEditItem,
   type,
 }) => {
+
   return (
 <>
     <h2>{title}</h2>
       <div className="admin-list">
-        {type === "users" &&
+        {type === USERS &&
           items.map((user, index) => {
             return (
               <User
@@ -29,7 +34,7 @@ const AdminList = ({
                 />
             );
           })}
-        {type === "products" &&
+        {type === PRODUCTS &&
           items.map((product, index) => {
             return (
               <ProductAdmin
@@ -43,7 +48,7 @@ const AdminList = ({
               />
             );
           })}
-        {type === "companies" &&
+        {type === COMPANIES &&
           items.map((company, index) => {
             return (
               <Company
