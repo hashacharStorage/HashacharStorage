@@ -22,7 +22,7 @@ const createOrder = async (req, res) => {
         order.push(orderItem);
       }
     }
-    generateOrderPDF(order, user);
+    await generateOrderPDF(order, user);
   };
 
   try {
@@ -48,7 +48,7 @@ const createOrder = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ ...error, "msg": "the error is here" });
   }
 };
 

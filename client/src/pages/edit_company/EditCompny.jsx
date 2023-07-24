@@ -117,7 +117,7 @@ const EditCompany = () => {
               </>
             )}
           </div>
-          <SubmitButton title={"הוספת חברה"} oncllickhandle={onSubmit} />
+          <SubmitButton title={"עדכון חברה"} oncllickhandle={onSubmit} />
         </div>
       </div>
     </div>

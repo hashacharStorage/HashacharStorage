@@ -92,7 +92,7 @@ const Home = () => {
           )
           .then(() => {
             alert("הזמנתך נשלחה למחסן בהצלחה");
-            window.location.reload();
+            navigate("/home");
           });
       } catch (error) {
         alert(err.response.data.message);
