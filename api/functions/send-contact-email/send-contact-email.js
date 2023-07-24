@@ -5,7 +5,7 @@ require('dotenv').config()
 const handler = async (event) => {
   console.log("first im here")
   try {
-    console.log("second im here")
+    console.log(event)
     const subject ='World'
     const transporter = nodemailer.createTransport({
           service: "Gmail",
@@ -16,8 +16,8 @@ const handler = async (event) => {
         });
         const mailOptions = {
               from: process.env.EMAIL,
-              to: 'liram100@gmail.com',
-              subject: subject,
+              to: event.emailto,
+              subject: event.subject,
               text: "Attached is the order PDF",
               // attachments: [
               //   {

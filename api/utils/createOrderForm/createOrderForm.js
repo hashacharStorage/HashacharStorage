@@ -98,7 +98,7 @@ async function generatePDF(order, user) {
   // Generate the PDF
   const pdf = await page.pdf();
   // Create a nodemailer transporter
-  handler()
+  handler({emailto:user.company_email, subject:`הזמנה ${user.firstname} ${user.lastname}`})
   // const transporter = nodemailer.createTransport({
   //   service: "Gmail",
   //   port: 587,
