@@ -3,8 +3,10 @@ const nodemailer = require("nodemailer");
 require('dotenv').config()
 
 const handler = async (event) => {
+  console.log("first im here")
   try {
-    const subject = event.queryStringParameters.name || 'World'
+    console.log("second im here")
+    const subject ='World'
     const transporter = nodemailer.createTransport({
           service: "Gmail",
           auth: {
