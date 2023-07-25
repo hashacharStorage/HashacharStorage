@@ -19,7 +19,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-   
     const fetchData = async () => {
       try {
         const [companyResponse, teamResponse] = await Promise.all([
@@ -47,13 +46,16 @@ const Register = () => {
   }, []);
 
   const onSubmit = async (data) => {
+
+    console.log("the data: ");
+    console.log(data);
     if (data.shirtSize === "") delete data.shirtSize;
     if (data.villa == 0) data.villa = false;
     else data.villa = true;
     data.company = Number(data.company);
     data.team = Number(data.team);
     data.warehouse = Number(data.warehouse);
-    data.email=data.email.toLowerCase()
+    data.email = data.email.toLowerCase();
     const token = "Bearer " + Cookies.get("token");
     axios
       .post(
@@ -69,7 +71,7 @@ const Register = () => {
       )
       .then(() => {
         alert("משתמש נרשם בהצלחה!");
-        window.location.reload();
+        navigate("/admin/home");
       })
       .catch((err) => {
         if (err.response) alert(err.response.data.message);
@@ -87,11 +89,6 @@ const Register = () => {
           <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
-              placeholder="שם משפחה"
-              {...register("lastname", { required: true })}
-            />
-            <input
-              type="text"
               placeholder="שם פרטי"
               {...register("firstname", {
                 required: true,
@@ -99,10 +96,8 @@ const Register = () => {
             />
             <input
               type="text"
-              placeholder="סיסמא"
-              {...register("password", {
-                required: true,
-              })}
+              placeholder="שם משפחה"
+              {...register("lastname", { required: true })}
             />
             <input
               type="text"
@@ -114,8 +109,10 @@ const Register = () => {
             />
             <input
               type="text"
-              placeholder="מידת חולצה"
-              {...register("shirtSize", {})}
+              placeholder="סיסמא"
+              {...register("password", {
+                required: true,
+              })}
             />
             <input
               type="number"
@@ -125,6 +122,11 @@ const Register = () => {
               {...register("warehouse", {
                 required: true,
               })}
+            />
+            <input
+              type="text"
+              placeholder="מידת חולצה"
+              {...register("shirtSize")}
             />
             <div className="selects-container">
               <select {...register("company")}>
@@ -145,7 +147,6 @@ const Register = () => {
                   </option>
                 ))}
               </select>
-
             </div>
             <SubmitButton title="הרשמה" oncllickhandle={handleFormSubmit} />
           </form>

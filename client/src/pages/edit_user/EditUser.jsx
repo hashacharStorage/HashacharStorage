@@ -52,6 +52,7 @@ const EditUser = () => {
         setTeams(teamFields);
 
         setUser(userResponse.data);
+        console.log(userResponse.data)
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -67,7 +68,6 @@ const EditUser = () => {
     const copydata = { ...data };
 
     copydata.team = Number(copydata.team);
-    copydata.warehouse = Number(copydata.warehouse);
     copydata.villa == 0 ? (copydata.villa = false) : (copydata.villa = true);
 
     for (const key in copydata) {

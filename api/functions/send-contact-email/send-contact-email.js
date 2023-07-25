@@ -3,10 +3,7 @@ const nodemailer = require("nodemailer");
 require('dotenv').config()
 
 const handler = async (event) => {
-  console.log("first im here")
   try {
-    console.log(event)
-    const subject ='World'
     const transporter = nodemailer.createTransport({
           service: "Gmail",
           auth: {
@@ -17,14 +14,14 @@ const handler = async (event) => {
         const mailOptions = {
               from: process.env.EMAIL,
               to: event.emailto,
-              subject: event.subject,
+              subject: `הזמנה ${event.user.firstname} ${event.user.lastname}`,
               text: "Attached is the order PDF",
-              // attachments: [
-              //   {
-              //     filename: `${user.firstname}_${user.lastname}.pdf`,
-              //     content: pdf,
-              //   },
-              // ],
+              attachments: [
+                {
+                  filename: `${event.user.firstname}_${event.user.lastname}.pdf`,
+                  content: event.attachment,
+                },
+              ],
             };
     // Send the email
           transporter.sendMail(mailOptions, (error, info) => {
@@ -37,7 +34,7 @@ const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
+      body: JSON.stringify({ message: `email sent from ${event.user.firstname} ${event.user.lastname}` }),
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
@@ -45,40 +42,3 @@ const handler = async (event) => {
 }
 
 module.exports = { handler }
-
-// const generateEmail ()=>{
-
-//   const transporter = nodemailer.createTransport({
-//     service: "Gmail",
-//     port: 587,
-//     secure: false,
-//     auth: {
-//       user: process.env.EMAIL,
-//       pass: process.env.EMAIL_PASS,
-//     },
-//   });
-//   // Define email options
-//   const mailOptions = {
-//     from: process.env.EMAIL,
-//     to: user.company_email,
-//     subject: `הזמנה ${user.firstname} ${user.lastname}`,
-//     text: "Attached is the order PDF",
-//     attachments: [
-//       {
-//         filename: `${user.firstname}_${user.lastname}.pdf`,
-//         content: pdf,
-//       },
-//     ],
-//   };
-  
-//   // Send the email
-//   transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//       console.log("Error occurred while sending email:", error.message);
-//     } else {
-//       console.log("Email sent successfully to: " + user.company_email);
-//     }
-//   });
-  
-//   await browser.close();
-// }
