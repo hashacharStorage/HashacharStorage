@@ -26,13 +26,6 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-// Add the following code to handle preflight requests
-app.options('*', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.send();
-});
 
 //routes
 app.use("/.netlify/functions/index", sanityRouter)

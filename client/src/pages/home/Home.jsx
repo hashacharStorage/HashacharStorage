@@ -99,6 +99,7 @@ const Home = () => {
             console.log(order)
             axios
               .post('http://localhost:8888/.netlify/functions/send-contact-email', {
+                withCredentials: true ,
                 body: {
                   user: user,
                   order: order,
