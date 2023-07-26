@@ -1,44 +1,36 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
-const nodemailer = require("nodemailer");
+const client = require('@sendgrid/mail');
 require('dotenv').config()
 
-const handler = async (event) => {
-  try {
-    const transporter = nodemailer.createTransport({
-          service: "Gmail",
-          auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASS,
-          },
-        });
-        const mailOptions = {
-              from: process.env.EMAIL,
-              to: event.emailto,
-              subject: `הזמנה ${event.user.firstname} ${event.user.lastname}`,
-              text: "Attached is the order PDF",
-              attachments: [
-                {
-                  filename: `${event.user.firstname}_${event.user.lastname}.pdf`,
-                  content: event.attachment,
-                },
-              ],
-            };
-    // Send the email
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              console.log("Error occurred while sending email:", error.message);
-            } else {
-              console.log("Email sent successfully to: " + user.company_email);
-            }
-          });
+exports.handler = async function (event, context, callback) {
+  // console.log(event)
+  client.setApiKey(process.env.SENDGRID_API_KEY);
+  const data = {
+    to: 'machsan@hashahart.co.il',
+    from: 'niv@hashahart.co.il',
+    subject: 'process.env.EMAIL',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    // attachments: [
+    //   {
+    //     content: attachment,
+    //     filename: "attachment.pdf",
+    //     type: "application/pdf",
+    //     disposition: "attachment"
+    //   }
+    // ] 
+    // https://www.twilio.com/blog/sending-email-attachments-with-sendgrid
+  };
 
+  try {
+    await client.send(data);
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `email sent from ${event.user.firstname} ${event.user.lastname}` }),
-    }
-  } catch (error) {
-    return { statusCode: 500, body: error.toString() }
+      body: 'Message sent',
+    };
+  } catch (err) {
+    return {
+      statusCode: err.code,
+      body: JSON.stringify({ msg: err.message }),
+    };
   }
-}
-
-module.exports = { handler }
+};

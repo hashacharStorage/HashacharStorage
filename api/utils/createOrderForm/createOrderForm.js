@@ -1,11 +1,11 @@
 const puppeteer = require("puppeteer");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
 dotenv.config();
-
-const {handler}= require("../../functions/send-contact-email/send-contact-email")
+const sgMail = require('@sendgrid/mail')
+const { handler } = require("../../functions/send-contact-email/send-contact-email")
 
 async function generatePDF(order, user) {
   const blackProducts = order.filter((product) => product.isBlack);
@@ -97,39 +97,23 @@ async function generatePDF(order, user) {
 
   // Generate the PDF
   const pdf = await page.pdf();
-  // Create a nodemailer transporter
-  handler({emailto:user.company_email, user:user,attachment:pdf})
-  // const transporter = nodemailer.createTransport({
-  //   service: "Gmail",
-  //   port: 587,
-  //   secure: false,
-  //   auth: {
-  //     user: process.env.EMAIL,
-  //     pass: process.env.EMAIL_PASS,
-  //   },
-  // });
-  // // Define email options
-  // const mailOptions = {
-  //   from: process.env.EMAIL,
-  //   to: user.company_email,
-  //   subject: `הזמנה ${user.firstname} ${user.lastname}`,
-  //   text: "Attached is the order PDF",
-  //   attachments: [
-  //     {
-  //       filename: `${user.firstname}_${user.lastname}.pdf`,
-  //       content: pdf,
-  //     },
-  //   ],
-  // };
-
-  // // Send the email
-  // transporter.sendMail(mailOptions, (error, info) => {
-  //   if (error) {
-  //     console.log("Error occurred while sending email:", error.message);
-  //   } else {
-  //     console.log("Email sent successfully to: " + user.company_email);
-  //   }
-  // });
+  // handler({emailto:user.company_email, user:user,attachment:pdf})
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  const msg = {
+    to: 'liram100@gmail.com', 
+    from: 'machshanhashachar@gmail.com',
+    subject: 'Sending with SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  }
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 
   await browser.close();
 }
