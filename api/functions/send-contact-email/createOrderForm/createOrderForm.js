@@ -1,11 +1,8 @@
 const puppeteer = require("puppeteer");
-// const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
 dotenv.config();
-const sgMail = require('@sendgrid/mail')
-const { handler } = require("../../functions/send-contact-email/send-contact-email")
 
 async function generatePDF(order, user) {
   const blackProducts = order.filter((product) => product.isBlack);
@@ -97,25 +94,8 @@ async function generatePDF(order, user) {
 
   // Generate the PDF
   const pdf = await page.pdf();
-  // handler({emailto:user.company_email, user:user,attachment:pdf})
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-  const msg = {
-    to: 'liram100@gmail.com', 
-    from: 'machshanhashachar@gmail.com',
-    subject: 'Sending with SendGrid is Fun',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  }
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-
   await browser.close();
+  return pdf;
 }
 
 module.exports = generatePDF;

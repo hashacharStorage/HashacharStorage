@@ -11,7 +11,8 @@ const authRouter = require("../router/auth");
 const teamRouter = require("../router/team");
 const productRouter = require("../router/product");
 const orderRouter = require("../router/order");
-const sanityRouter = require("../router/sanity")
+const sanityRouter = require("../router/sanity");
+const { handler } = require("./send-contact-email/send-contact-email");
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,14 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+// Add the following code to handle preflight requests
+app.options('*', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.send();
+});
+
 //routes
 app.use("/.netlify/functions/index", sanityRouter)
 app.use("/.netlify/functions/index/auth", authRouter);
@@ -33,6 +42,7 @@ app.use("/.netlify/functions/index/company", companyRouter);
 app.use("/.netlify/functions/index/products", productRouter);
 app.use("/.netlify/functions/index/orders", orderRouter);
 app.use("/.netlify/functions/index/team", teamRouter);
+app.post("/.netlify/functions/send-contact-email", handler);
 
 module.exports.handler = serverless(app);
 
