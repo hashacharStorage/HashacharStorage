@@ -2,9 +2,8 @@ const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
 const Company = require("../models/Company");
-const generateOrderPDF = require("../utils/createOrderForm/createOrderForm");
 
-const createOrder = async (req, res) => {
+const createOrder = async (req, res,next) => {
   const generateorder = async (user) => {
     let order = [];
     for (const product of req.body.products) {
@@ -22,7 +21,7 @@ const createOrder = async (req, res) => {
         order.push(orderItem);
       }
     }
-    await generateOrderPDF(order, user);
+    return order;
   };
 
   try {
@@ -37,15 +36,17 @@ const createOrder = async (req, res) => {
     if (existingOrder) {
       existingOrder.products = req.body.products;
       existingOrder.updatedAt = Date.now();
-      const updatedOrder = await existingOrder.save();
-      generateorder(user);
-      res.status(200).json(updatedOrder);
+      await existingOrder.save();
     } else {
       const newOrder = new Order(req.body);
-      const savedOrder = await newOrder.save();
-      generateorder(user);
-      res.status(200).json(savedOrder);
+      await newOrder.save();
     }
+    const order = await generateorder(user);
+    req.userPDF=user
+    req.orderPDF=order;
+    next()
+    // res.status(200).json({user:user,order:order});
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ ...error, "msg": "the error is here" });
