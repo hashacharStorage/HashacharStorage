@@ -5,7 +5,6 @@ const client = require('@sendgrid/mail');
 require('dotenv').config();
 
 exports.handler = async function (event, context, callback) {
-  console.log(event)
   const { user, order } = JSON.parse(event.body);
   client.setApiKey(process.env.SENDGRID_API_KEY);
   return generatePDF(order, user);
