@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import ProductsList from "../../components/productsList/ProductsList";
 import { clientConfig } from "../../utils/clientConfig";
-import { isUserLoggedIn } from "../../utils/userVerification";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -39,9 +38,7 @@ const Home = () => {
         console.error(error);
       }
     };
-    if (isUserLoggedIn()) {
-      fetchData();
-    } else navigate("/login");
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -55,7 +52,7 @@ const Home = () => {
     setIsBlack(!isBlack);
   };
 
-  const handleFinishOrder = async () => {
+  const handlefinishOrder = async () => {
     if (localStorage.length !== 0) {
       const allItems = [];
       let item = {};
@@ -93,30 +90,13 @@ const Home = () => {
               },
             }
           )
-          .then((res) => {
-            const { user, order } = res.data;
-            console.log(user)
-            console.log(order)
-            axios
-              .post('http://localhost:8888/.netlify/functions/send-contact-email', {
-                withCredentials: true ,
-                body: {
-                  user: user,
-                  order: order,
-                },
-                headers: {
-                  "Content-Type": "application/json",
-                  token: token,
-                },
-              })
-              .then((res) => {
-                alert("הזמנתך נשלחה למחסן בהצלחה");
-                navigate("/home");
-                window.scrollTo(0, 0);
-              });
+          .then(() => {
+            alert("הזמנתך נשלחה למחסן בהצלחה");
+            navigate("/home");
+            window.scrollTo(0, 0);
           });
       } catch (error) {
-        alert(error.response.data.message);
+        alert(err.response.data.message);
       }
     }
   };
@@ -141,7 +121,7 @@ const Home = () => {
         </div>
         <ProductsList products={filterData} />
         <button
-          onClick={() => handleFinishOrder()}
+          onClick={() => handlefinishOrder()}
           className="complete-order-button"
         >
           שליחת פריטים

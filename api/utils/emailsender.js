@@ -116,15 +116,17 @@ const generateform = async (req, res, next) => {
   const user = req.userPDF;
   const order = req.orderPDF;
   const data = await generatePDF(order, user);
-  res.status(200).json({ msg: 'Message sent' });
   client.setApiKey(process.env.SENDGRID_API_KEY);
   try {
     client.send(data).then(() => {
-      // res.status(200).json({ msg: 'Message sent' });
+      res.status(200).json({ msg: 'Message sent' });
+      return;
     });
   } catch (err) {
     console.error(err);
-    // res.status(500).json({ msg: err.message });
+    res.status(500).json({ msg: err.message });
+    return;
+
   }
 
 }
