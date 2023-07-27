@@ -21,6 +21,7 @@ router.put("/find/:id", verifyToken, updateOrder);
 //create
 router.post("/", verifyToken, createOrder, generateform);
 
+
 //delete
 router.delete("/:id", verifyTokenAndAdmin, deleteOrder);
 

@@ -3,6 +3,7 @@ const Order = require("../models/Order");
 const User = require("../models/User");
 const Company = require("../models/Company");
 
+
 const createOrder = async (req, res,next) => {
   const generateorder = async (user) => {
     let order = [];
@@ -45,7 +46,6 @@ const createOrder = async (req, res,next) => {
     req.userPDF=user
     req.orderPDF=order;
     next()
-    // res.status(200).json({user:user,order:order});
     
   } catch (error) {
     console.log(error);

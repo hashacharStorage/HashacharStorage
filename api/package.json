@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "netlify dev",
-    "build": "netlify deploy --prod"
+    "build": "netlify deploy --prod",
+    "postinstall": "netlify-lambda install"
+
   },
   "keywords": [],
   "author": "",
