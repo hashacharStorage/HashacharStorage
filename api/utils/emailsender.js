@@ -114,6 +114,7 @@ const generatePDF = async (order, user) => {
 }
 const generateform = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
+
   const user = req.userPDF;
   const order = req.orderPDF;
   const data = await generatePDF(order, user);
