@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "npm install",
-    "start-netlify": "netlify dev",
-    "build-netlify": "netlify deploy --prod",
-    "postinstall": "netlify-lambda install"
-
+    "build": "npm install"
   },
   "keywords": [],
   "author": "",
