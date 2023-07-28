@@ -2,9 +2,11 @@ const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
 const Company = require("../models/Company");
+const axios = require("axios")
+const emailSender = require("../utils/emailsender")
 
 
-const createOrder = async (req, res,next) => {
+const createOrder = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   const generateorder = async (user) => {
     let order = [];
@@ -44,11 +46,20 @@ const createOrder = async (req, res,next) => {
       await newOrder.save();
     }
     const order = await generateorder(user);
-    req.userPDF=user
-    req.orderPDF=order;
-    // next()
+
+    axios.post("http://localhost:5001/generateOrderpdf",
+      { user, order },
+      {
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then((response) => {
+        const pdf = response.data.pdf;
+        emailSender.sendEmail(pdf, user)
+      })
+
     res.status(200).send("ok")
-    
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ ...error, "msg": "the error is here" });

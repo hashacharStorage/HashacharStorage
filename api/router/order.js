@@ -10,7 +10,6 @@ const {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } = require("../controller/verifyToken");
-const { generateform } = require("../utils/emailsender");
 
 
 const router = require("express").Router();
@@ -19,7 +18,7 @@ const router = require("express").Router();
 router.put("/find/:id", verifyToken, updateOrder);
 
 //create
-router.post("/", verifyToken, createOrder, generateform);
+router.post("/", verifyToken, createOrder);
 
 
 //delete

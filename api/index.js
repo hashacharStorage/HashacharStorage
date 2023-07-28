@@ -34,14 +34,7 @@ app.use("/company", companyRouter);
 app.use("/products", productRouter);
 app.use("/orders", orderRouter);
 app.use("/team", teamRouter);
-app.get('/test', (req, res) => {
-  axios.post("http://localhost:5001/generateOrderpdf",
-    { "test": "hello" }, {
-    headers: {
-      'content-type': 'application/json'
-    }
-  }).then((res) => console.log(res.data))
-})
+ 
 
 mongoose
   .connect(process.env.MONGO, { dbName: "storage" })
