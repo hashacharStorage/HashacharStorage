@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "netlify dev",
+    "start": "nodemon index.js",
     "build": "netlify deploy --prod",
+    "start-netlify": "netlify dev",
+    "build-netlify": "netlify deploy --prod",
     "postinstall": "netlify-lambda install"
 
   },

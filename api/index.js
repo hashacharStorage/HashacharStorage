@@ -27,7 +27,7 @@ app.use(express.json());
 
 
 //routes
-app.use("/index", sanityRouter)
+app.use("/", sanityRouter)
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/company", companyRouter);
