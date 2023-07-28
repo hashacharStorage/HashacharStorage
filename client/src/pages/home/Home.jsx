@@ -90,7 +90,8 @@ const Home = () => {
               },
             }
           )
-          .then(() => {
+          .then((res) => {
+            console.log(res)
             alert("הזמנתך נשלחה למחסן בהצלחה");
             navigate("/home");
             window.scrollTo(0, 0);

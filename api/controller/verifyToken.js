@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = async (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const authHeader = req.headers.token;
   if (authHeader) {
     const token = authHeader.split(" ")[1];

@@ -5,6 +5,7 @@ const Company = require("../models/Company");
 
 
 const createOrder = async (req, res,next) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const generateorder = async (user) => {
     let order = [];
     for (const product of req.body.products) {
@@ -46,6 +47,7 @@ const createOrder = async (req, res,next) => {
     req.userPDF=user
     req.orderPDF=order;
     next()
+    // res.status(200).send("ok")
     
   } catch (error) {
     console.log(error);
