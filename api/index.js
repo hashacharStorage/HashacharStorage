@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 const dotenv = require("dotenv");
-const cors = require("cors"); // Import the cors package
+const cors = require("cors");
+const axios = require("axios")
 
 const userRouter = require("./router/user");
 const companyRouter = require("./router/company");
@@ -10,7 +11,6 @@ const authRouter = require("./router/auth");
 const teamRouter = require("./router/team");
 const productRouter = require("./router/product");
 const orderRouter = require("./router/order");
-const sanityRouter = require("./router/sanity");
 
 dotenv.config();
 const app = express();
@@ -34,6 +34,14 @@ app.use("/company", companyRouter);
 app.use("/products", productRouter);
 app.use("/orders", orderRouter);
 app.use("/team", teamRouter);
+app.get('/test', (req, res) => {
+  axios.post("http://localhost:5001/generateOrderpdf",
+    { "test": "hello" }, {
+    headers: {
+      'content-type': 'application/json'
+    }
+  }).then((res) => console.log(res.data))
+})
 
 mongoose
   .connect(process.env.MONGO, { dbName: "storage" })
