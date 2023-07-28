@@ -46,8 +46,8 @@ const createOrder = async (req, res,next) => {
     const order = await generateorder(user);
     req.userPDF=user
     req.orderPDF=order;
-    next()
-    // res.status(200).send("ok")
+    // next()
+    res.status(200).send("ok")
     
   } catch (error) {
     console.log(error);
