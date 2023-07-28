@@ -14,13 +14,13 @@ const sanityRouter = require("./router/sanity");
 
 dotenv.config();
 const app = express();
+app.use(cors());
 
 // Enable CORS for all routes
 var corsOptions = {
   origin: "*",
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
-app.use(cors(corsOptions));
 
 app.use(express.json());
 
