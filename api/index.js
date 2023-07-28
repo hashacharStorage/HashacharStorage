@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 //routes
-app.use("/", sanityRouter)
+app.get("/", (req, res) => res.send("server alive!"));
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/company", companyRouter);
@@ -35,7 +35,7 @@ app.use("/team", teamRouter);
 
 mongoose
   .connect(process.env.MONGO, { dbName: "storage" })
-  .then(() => app.listen(5000, () => { console.log("server is listening at port 3000") })
+  .then(() => app.listen(process.env.PORT, () => { console.log(`server is listening at port ${process.env.PORT}`) })
   )
   .catch((err) => {
     console.log(err);
