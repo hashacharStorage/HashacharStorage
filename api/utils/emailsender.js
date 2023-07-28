@@ -8,7 +8,7 @@ const generatePDF = async (order, user) => {
   const blackProducts = order.filter((product) => product.isBlack);
   const serializedProducts = order.filter((product) => !product.isBlack);
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({headless: "new"});
   const page = await browser.newPage();
   const imagePath = path.join(__dirname, "logo.png");
   const imageData = fs.readFileSync(imagePath, 'base64'); // Read image file as base64 data
