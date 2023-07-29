@@ -47,7 +47,7 @@ const createOrder = async (req, res, next) => {
     }
     const order = await generateorder(user);
 
-    axios.post("http://localhost:5001/generateOrderpdf",
+    axios.post("https://hashacharstoragepdf.onrender.com/generateOrderpdf",
       { user, order },
       {
         headers: {

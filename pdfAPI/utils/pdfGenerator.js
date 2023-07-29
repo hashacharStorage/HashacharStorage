@@ -3,10 +3,13 @@ const fs = require("fs");
 const path = require("path");
 
 const generatePDF = async (order, user) => {
+    console.log("first")
     const blackProducts = order.filter((product) => product.isBlack);
     const serializedProducts = order.filter((product) => !product.isBlack);
 
     const browser = await puppeteer.launch({ headless: "new" });
+    console.log("second")
+
     const page = await browser.newPage();
     const imagePath = path.join(__dirname, "logo.png");
     const imageData = fs.readFileSync(imagePath, 'base64'); // Read image file as base64 data
@@ -90,9 +93,11 @@ const generatePDF = async (order, user) => {
     const cssPath = path.join(__dirname, "createOrderForm.css");
     const css = fs.readFileSync(cssPath, "utf8");
     await page.addStyleTag({ content: css });
+    console.log("third")
 
     // Generate the PDF
     const pdf = await page.pdf();
+    console.log("fourth")
 
     await browser.close();
     return pdf;
