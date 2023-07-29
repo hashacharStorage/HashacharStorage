@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 const dotenv = require("dotenv");
 const cors = require("cors");
-const axios = require("axios")
+
 
 const userRouter = require("./router/user");
 const companyRouter = require("./router/company");

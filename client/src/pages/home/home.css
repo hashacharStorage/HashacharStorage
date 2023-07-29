@@ -88,7 +88,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-85%, -50%); /* Updated translateX value */
+  /* Updated translateX value */
 }
 
 @keyframes spin {
@@ -107,6 +108,9 @@
   .loading-animation {
     width: 60px;
     height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .loading-spinner {
@@ -114,5 +118,8 @@
     border-top: 5px solid #3498db;
     width: 40px;
     height: 40px;
+    margin: 0;
+    transform: translate(-85%, -50%); /* Updated translateX value */
+    /* Updated translateX value */
   }
 }

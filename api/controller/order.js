@@ -4,7 +4,8 @@ const User = require("../models/User");
 const Company = require("../models/Company");
 const axios = require("axios")
 const emailSender = require("../utils/emailsender")
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 const createOrder = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -47,7 +48,7 @@ const createOrder = async (req, res, next) => {
     }
     const order = await generateorder(user);
 
-    axios.post("https://hashacharstoragepdf.onrender.com/generateOrderpdf",
+    axios.post(process.env.PDF_API_PATH,
       { user, order },
       {
         headers: {
