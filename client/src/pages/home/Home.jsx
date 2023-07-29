@@ -5,9 +5,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import ProductsList from "../../components/productsList/ProductsList";
-import { clientConfig } from "../../utils/clientConfig";
 import Modal from "react-modal";
-
+import { isUserLoggedIn } from "../../utils/userVerification";
+import { clientConfig } from "../../utils/clientConfig";
 const Home = () => {
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([{}]);
@@ -16,7 +16,9 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchData();
+    if (!isUserLoggedIn()) {
+      navigate("/login");
+    } else fetchData();
   }, []);
 
   useEffect(() => {
@@ -135,7 +137,6 @@ const Home = () => {
           {isLoading ? "Loading..." : "שליחת פריטים"}
         </button>
 
-        {/* Loading Modal */}
         <Modal
           isOpen={isLoading}
           contentLabel="Loading Modal"
