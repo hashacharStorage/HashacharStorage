@@ -3,28 +3,29 @@ const fs = require("fs");
 const path = require("path");
 
 const generatePDF = async (order, user) => {
-    console.log("first")
-    const blackProducts = order.filter((product) => product.isBlack);
-    const serializedProducts = order.filter((product) => !product.isBlack);
+    try {
+        console.log("first")
+        const blackProducts = order.filter((product) => product.isBlack);
+        const serializedProducts = order.filter((product) => !product.isBlack);
 
-    const browser = await puppeteer.launch({ headless: "new" });
-    console.log("second")
+        const browser = await puppeteer.launch({ headless: "new" });
+        console.log("second")
 
-    const page = await browser.newPage();
-    const imagePath = path.join(__dirname, "logo.png");
-    const imageData = fs.readFileSync(imagePath, 'base64'); // Read image file as base64 data
+        const page = await browser.newPage();
+        const imagePath = path.join(__dirname, "logo.png");
+        const imageData = fs.readFileSync(imagePath, 'base64'); // Read image file as base64 data
 
-    // Generate the black products table
-    const blackProductsTableHtml = await page.evaluate((products) => {
-        const tableRows = products.map((product) => {
-            return `<tr>
+        // Generate the black products table
+        const blackProductsTableHtml = await page.evaluate((products) => {
+            const tableRows = products.map((product) => {
+                return `<tr>
           <td>${product.quantity}</td>
           <td>${product.title}</td>
           <td>${product.serial}</td>
         </tr>`;
-        });
+            });
 
-        return `<table class="product-table">
+            return `<table class="product-table">
       <thead>
       <tr>
         <th>כמות</th>
@@ -34,20 +35,20 @@ const generatePDF = async (order, user) => {
     </thead>
         <tbody>${tableRows.join("")}</tbody>
       </table>`;
-    }, blackProducts);
-    console.log("second")
+        }, blackProducts);
+        console.log("second")
 
-    // Generate the serialized products table
-    const serializedProductsTableHtml = await page.evaluate((products) => {
-        const tableRows = products.map((product) => {
-            return `<tr>
+        // Generate the serialized products table
+        const serializedProductsTableHtml = await page.evaluate((products) => {
+            const tableRows = products.map((product) => {
+                return `<tr>
           <td>${product.quantity}</td>
           <td>${product.title}</td>
           <td>${product.serial}</td>
         </tr>`;
-        });
+            });
 
-        return `<table class="product-table">
+            return `<table class="product-table">
         <thead>
           <tr>
             <th>כמות</th>
@@ -57,10 +58,10 @@ const generatePDF = async (order, user) => {
         </thead>
         <tbody>${tableRows.join("")}</tbody>
       </table>`;
-    }, serializedProducts);
+        }, serializedProducts);
 
-    // Set the content to the tables
-    await page.setContent(`
+        // Set the content to the tables
+        await page.setContent(`
       <div class="header">
           <img src="data:image/png;base64,${imageData}" alt="Header Image" />
           <div class="user-details">
@@ -89,18 +90,22 @@ const generatePDF = async (order, user) => {
     </div>
     `);
 
-    // Add CSS file to the page
-    const cssPath = path.join(__dirname, "createOrderForm.css");
-    const css = fs.readFileSync(cssPath, "utf8");
-    await page.addStyleTag({ content: css });
-    console.log("third")
+        // Add CSS file to the page
+        const cssPath = path.join(__dirname, "createOrderForm.css");
+        const css = fs.readFileSync(cssPath, "utf8");
+        await page.addStyleTag({ content: css });
+        console.log("third")
 
-    // Generate the PDF
-    const pdf = await page.pdf();
-    console.log("fourth")
+        // Generate the PDF
+        const pdf = await page.pdf();
+        console.log("fourth")
 
-    await browser.close();
-    return pdf;
+        await browser.close();
+        return pdf;
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 
 module.exports = { generatePDF }
