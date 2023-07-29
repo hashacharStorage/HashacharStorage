@@ -56,9 +56,8 @@ const createOrder = async (req, res, next) => {
       }).then((response) => {
         const pdf = response.data.pdf;
         emailSender.sendEmail(pdf, user)
+        res.status(200).send("ok")
       })
-
-    res.status(200).send("ok")
 
   } catch (error) {
     console.log(error);
