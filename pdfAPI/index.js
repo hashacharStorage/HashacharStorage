@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 //routes
+app.get("/", (req, res) => res.send("server alive!"));
 app.post("/generateOrderpdf", async (req, res) => {
     try {
         const user = req.body.user;

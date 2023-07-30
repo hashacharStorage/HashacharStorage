@@ -44,8 +44,8 @@ const UsersPage = () => {
               _id: user._id,
               id: user.user_id,
               warehouse: user.warehouse,
-            }));
-
+            }))
+            .sort((a, b) => (a.warehouse > b.warehouse ? 1 : -1));
           return {
             company: company.name,
             users: users,
