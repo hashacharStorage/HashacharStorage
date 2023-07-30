@@ -5,6 +5,7 @@ const Company = require("../models/Company");
 const axios = require("axios")
 const emailSender = require("../utils/emailsender")
 const dotenv = require("dotenv");
+const { generatePDF } = require("../utils/generatePDF/pdfGenerator");
 dotenv.config();
 
 const createOrder = async (req, res, next) => {
@@ -47,18 +48,20 @@ const createOrder = async (req, res, next) => {
       await newOrder.save();
     }
     const order = await generateorder(user);
-
-    axios.post(process.env.PDF_API_PATH,
-      { user, order },
-      {
-        headers: {
-          'content-type': 'application/json'
-        }
-      }).then((response) => {
-        const pdf = response.data.pdf;
-        emailSender.sendEmail(pdf, user)
-        res.status(200).send("ok")
-      })
+    const pdf = await generatePDF(order, user)
+    emailSender.sendEmail(pdf, user)
+    res.status(200).send("ok")
+    // axios.post(process.env.PDF_API_PATH,
+    //   { user, order },
+    //   {
+    //     headers: {
+    //       'content-type': 'application/json'
+    //     }
+    //   }).then((response) => {
+    //     const pdf = response.data.pdf;
+    //     emailSender.sendEmail(pdf, user)
+    //     res.status(200).send("ok")
+    //   })
 
   } catch (error) {
     console.log(error);
