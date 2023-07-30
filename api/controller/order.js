@@ -49,8 +49,10 @@ const createOrder = async (req, res, next) => {
     }
     const order = await generateorder(user);
     const pdf = await generatePDF(order, user)
-    emailSender.sendEmail(pdf, user)
-    res.status(200).send("ok")
+    emailSender.sendEmail(pdf, user).then(() => {
+      console.log("Email sent successfully!");
+      res.status(200).send("ok")
+    })
     // axios.post(process.env.PDF_API_PATH,
     //   { user, order },
     //   {

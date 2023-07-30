@@ -16,7 +16,7 @@ const sendEmail = async (pdf, user) => {
   // Define email options
   const mailOptions = {
     from: process.env.EMAIL,
-    to: "liram100@gmail.com",
+    to: user.company_email,
     subject: `הזמנה ${user.firstname} ${user.lastname}`,
     text: "Attached is the order PDF",
     attachments: [
