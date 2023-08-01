@@ -29,11 +29,12 @@ const EditProduct = () => {
   };
 
   useEffect(() => {
+    // TODO: fix this
     const fetchData = async () => {
       try {
         const [companyResponse, productsResponse] = await Promise.all([
           axios.get(clientConfig.API_PATH + "company/all"),
-          axios.get(`${clientConfig.API_PATH}/products/find/${id}`),
+          axios.get(`${clientConfig.API_PATH}products/find/${id}`),
         ]);
 
         const companyFields = companyResponse.data
