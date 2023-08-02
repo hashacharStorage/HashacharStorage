@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema(
     team: {
       type: Schema.Types.Number,
       ref: "Team",
-      default: 1,
+      default: 0,
     },
     villa: {
       type: Boolean,
