@@ -152,7 +152,7 @@ const EditProduct = () => {
               onChange={handleisBlackChange}
             />
             <SubmitButton
-              title="הוספת פריט"
+              title="עריכת פריט"
               oncllickhandle={handleFormSubmit}
             />
           </form>

@@ -64,14 +64,22 @@ const generatePDF = async (order, user) => {
           <div class="user-details">
             <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${user.firstname} ${user.lastname}</div>
             <span>${new Date().toLocaleDateString("en-GB")}</span>
-            <span>     </span>
-            <span>    מידת חולצה:  ${user.shirtSize}      </span>
-            <span>     </span>
-            <span>  מחסן:  ${user.warehouse} </span>
-            <span>     </span>
+
+            <span>   ${user.shirtSize}:</span>
+            <span>                    </span>
+
             <span>${user.villa ? "צוות וילות   " : "צוות רגיל   "} </span>
             <span>     </span>
+
+            <span>  מחסן:  ${user.warehouse} </span>
+            <span>     </span>
+
+            <span>    מידת חולצה            </span>
+
+            <span>     </span>
+
             <span>${user.company} </span>
+
             </div>
           </div>
           <div class="body"> 
