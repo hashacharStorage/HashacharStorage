@@ -1,7 +1,6 @@
 // const client = require('@sendgrid/mail');
 require('dotenv').config();
 const nodemailer = require("nodemailer");
-const fs = require("fs");
 
 const sendEmail = async (pdf, user) => {
   const  binaryPDF = Buffer.from(pdf, 'base64');
@@ -16,7 +15,7 @@ const sendEmail = async (pdf, user) => {
   // Define email options
   const mailOptions = {
     from: process.env.EMAIL,
-    to: user.company_email,
+    to: [user.company_email, user.email],
     subject: `הזמנה ${user.firstname} ${user.lastname}`,
     text: "Attached is the order PDF",
     attachments: [

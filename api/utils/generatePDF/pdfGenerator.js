@@ -4,12 +4,10 @@ const path = require("path");
 
 const generatePDF = async (order, user) => {
   try {
-    console.log("first")
     const blackProducts = order.filter((product) => product.isBlack);
     const serializedProducts = order.filter((product) => !product.isBlack);
 
     const browser = await puppeteer.launch({ headless: "new" });
-    console.log("second")
 
     const page = await browser.newPage();
     const imagePath = path.join(__dirname, "logo.png");
@@ -36,7 +34,6 @@ const generatePDF = async (order, user) => {
         <tbody>${tableRows.join("")}</tbody>
       </table>`;
     }, blackProducts);
-    console.log("second")
 
     // Generate the serialized products table
     const serializedProductsTableHtml = await page.evaluate((products) => {
@@ -66,12 +63,15 @@ const generatePDF = async (order, user) => {
           <img src="data:image/png;base64,${imageData}" alt="Header Image" />
           <div class="user-details">
             <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${user.firstname} ${user.lastname}</div>
-              <span>${new Date().toLocaleDateString("en-US")}</span>
-              <span>  מחסן:  ${user.warehouse} </span>
-              <span>     </span>
-              <span>${user.villa ? "צוות וילות   " : "צוות רגיל   "} </span>
-              <span>${user.company} </span>
-              <span>${user.shirtSize}</span>
+            <span>${new Date().toLocaleDateString("en-GB")}</span>
+            <span>     </span>
+            <span>    מידת חולצה:  ${user.shirtSize}      </span>
+            <span>     </span>
+            <span>  מחסן:  ${user.warehouse} </span>
+            <span>     </span>
+            <span>${user.villa ? "צוות וילות   " : "צוות רגיל   "} </span>
+            <span>     </span>
+            <span>${user.company} </span>
             </div>
           </div>
           <div class="body"> 
@@ -95,13 +95,12 @@ const generatePDF = async (order, user) => {
     const cssPath = path.join(__dirname, "createOrderForm.css");
     const css = fs.readFileSync(cssPath, "utf8");
     await page.addStyleTag({ content: css });
-    console.log("third")
 
     // Generate the PDF
     const pdf = await page.pdf();
-    console.log("fourth")
 
     await browser.close();
+    console.log("pdf generated")
     return pdf;
   } catch (error) {
     console.log(error)

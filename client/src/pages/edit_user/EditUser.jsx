@@ -15,7 +15,7 @@ const EditUser = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  const isAdmin= parseInt(Cookies.get("company"), 10) ===0;
+  const isAdmin = parseInt(Cookies.get("company"), 10) === 0;
 
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const EditUser = () => {
         setTeams(teamFields);
 
         setUser(userResponse.data);
-        console.log(userResponse.data)
+        console.log(userResponse.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -75,6 +75,7 @@ const EditUser = () => {
       else if (copydata[key] === "") delete copydata[key];
       else if (copydata[key] == user[key]) delete copydata[key];
     }
+    console.log(copydata);
     const token = "Bearer " + Cookies.get("token");
     if (JSON.stringify(copydata) !== "{}") {
       axios
@@ -93,7 +94,11 @@ const EditUser = () => {
           alert("פרטי המשתמש עודכנו בהצלחה");
           window.location.reload();
         })
-        .catch((err) => console.log(err.response));
+        .catch((err) => {
+          console.log(err.response);
+          if (err.response.data.codeName == "DuplicateKey")
+            alert("אימייל כבר בשימוש אצל משתמש אחר");
+        });
     } else alert("לא בוצע שינוי בפרטים");
   };
   const handleFormSubmit = handleSubmit(onSubmit);
@@ -113,7 +118,7 @@ const EditUser = () => {
                     placeholder="שם פרטי"
                     defaultValue={user.firstname}
                     readOnly={!isAdmin}
-                    className={!isAdmin? "read-only-input":""}
+                    className={!isAdmin ? "read-only-input" : ""}
                     {...register("firstname")}
                   />
                   <input
@@ -121,7 +126,7 @@ const EditUser = () => {
                     placeholder="שם משפחה"
                     defaultValue={user.lastname}
                     readOnly={!isAdmin}
-                    className={!isAdmin? "read-only-input":""}
+                    className={!isAdmin ? "read-only-input" : ""}
                     {...register("lastname")}
                   />
                   <input
