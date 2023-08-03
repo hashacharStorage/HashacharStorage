@@ -8,13 +8,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import SubmitButton from "../../components/submit_button/SubmitButton";
 import { useNavigate } from "react-router-dom";
-import {isUserAdmin} from "../../utils/userVerification"
+import { isUserAdmin } from "../../utils/userVerification";
 import { clientConfig } from "../../utils/clientConfig";
 
 const AddProduct = () => {
   const [checkedCompanies, setCheckedCompanies] = useState([]);
   const [selectedisBlack, setSelectedisBlack] = useState("");
   const [companies, setCompanies] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const AddProduct = () => {
   };
   const handleisBlackChange = (value) => {
     setSelectedisBlack(value);
+  };
+  const handleImageSelected = (e) => {
+    setSelectedImage(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -56,47 +60,81 @@ const AddProduct = () => {
     { label: "ציוד שחור", value: true },
   ];
 
+  const handleImageUpload = async () => {
+    const formData = new FormData();
+    formData.append("image", selectedImage);
+
+    try {
+      const response = await axios.post(
+        "https://api.imgur.com/3/image",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+          },
+        }
+      );
+      console.log(response.data)
+      const uploadedImageUrl = response.data.link;
+      console.log("Image uploaded:", uploadedImageUrl);
+      return uploadedImageUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
   const onSubmit = async (data) => {
     //validations
     if (data.minQuantity === "") return;
     else {
       data.minQuantity = Number(data.minQuantity);
       if (data.minQuantity <= 0) {
-        alert("כמות מינימאלית חייבת להיות 1 או יותר");
+        alert("Minimum quantity must be 1 or more.");
         return;
       }
     }
     if (checkedCompanies.length === 0) {
-      alert("חובה לבחור לפחות חברה אחת");
+      alert("Please select at least one company.");
       return;
     }
     if (selectedisBlack === "") {
-      alert("חובה לבחור האם הציוד שחור או סיראלי");
+      alert("Please select the type of equipment (black or serial).");
       return;
     }
 
-    data.companies = [0, ...checkedCompanies];
-    data.isBlack = selectedisBlack;
-    data.minQuantity = Number(data.minQuantity);
-    const token = "Bearer " + Cookies.get("token");
-    axios
-      .post(
+    try {
+      if (selectedImage !== null) {
+        const imageUrl = await handleImageUpload();
+        if(imageUrl===null){
+          alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
+          return;
+        }
+        data.image = imageUrl;
+      }
+
+      data.companies = [0, ...checkedCompanies];
+      data.isBlack = selectedisBlack;
+      data.minQuantity = Number(data.minQuantity);
+      const token = "Bearer " + Cookies.get("token");
+      await axios.post(
         clientConfig.API_PATH + "products/",
-        {
-          ...data,
-        },
+        { ...data },
         {
           headers: {
             token: token,
           },
         }
-      )
-      .then(() => {
-        alert("הפריט נוצר בהצלחה!");
-        window.location.reload();
-      })
-      .catch((err) => alert(err.response.data.message));
+      );
+
+      alert("הפריט נוצר בהצלחה");
+      window.location.reload();
+    } catch (err) {
+      console.error("Error creating product:", err);
+      alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
+    }
   };
+
   const handleFormSubmit = handleSubmit(onSubmit);
 
   return (
@@ -105,7 +143,14 @@ const AddProduct = () => {
       <div className="content-container">
         <div className="whiteboard-container">
           <h1>הוספת פריט חדש</h1>
-          <form className="add-product-form" onSubmit={handleSubmit(onSubmit)}>
+          <form className="add-product-form" onSubmit={handleFormSubmit}>
+            <input
+              type="text"
+              placeholder='מק"ט'
+              {...register("serial", {
+                required: true,
+              })}
+            />
             <input
               type="text"
               placeholder="שם הפריט"
@@ -114,11 +159,10 @@ const AddProduct = () => {
               })}
             />
             <input
-              type="text"
-              placeholder="קוד הפריט"
-              {...register("serial", {
-                required: true,
-              })}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handleImageSelected}
             />
             <input
               type="number"
@@ -130,11 +174,12 @@ const AddProduct = () => {
               })}
             />
             <input
-              className="add-product-desc"
+              className="product-desc"
               type="text"
-              placeholder="תיאור הפריט"
+              placeholder="תיאור"
               {...register("desc", {})}
             />
+
             <Checkbox
               title={"חברה"}
               options={companies}
@@ -142,7 +187,7 @@ const AddProduct = () => {
               onChange={handleCheckboxChange}
             />
             <RadioButtons
-              title=":סוג ציוד"
+              title="סוג הציוד"
               options={isBlack}
               checkedisBlack={selectedisBlack}
               onChange={handleisBlackChange}

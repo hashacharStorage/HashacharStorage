@@ -17,6 +17,7 @@ const EditProduct = () => {
   const [checkedCompanies, setCheckedCompanies] = useState([]);
   const [selectedisBlack, setSelectedisBlack] = useState("");
   const [companies, setCompanies] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -24,8 +25,13 @@ const EditProduct = () => {
   const handleCheckboxChange = (values) => {
     setCheckedCompanies(values);
   };
+
   const handleisBlackChange = (value) => {
     setSelectedisBlack(value);
+  };
+
+  const handleImageSelected = (e) => {
+    setSelectedImage(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -47,6 +53,7 @@ const EditProduct = () => {
         setCompanies(companyFields);
         setCheckedCompanies(productsResponse.data.companies);
         setSelectedisBlack(productsResponse.data.isBlack);
+        console.log(productsResponse.data);
       } catch (error) {
         console.log(error);
       }
@@ -61,8 +68,60 @@ const EditProduct = () => {
     { label: "ציוד סיראלי", value: false },
     { label: "ציוד שחור", value: true },
   ];
+  const handleImageUpload = async () => {
+    const formData = new FormData();
+    formData.append("image", selectedImage);
+
+    try {
+      const response = await axios.post(
+        "https://api.imgur.com/3/image",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+          },
+        }
+      );
+      const uploadedImageUrl = response.data.data.link;
+      console.log("Image uploaded:", uploadedImageUrl);
+      return uploadedImageUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
+  const deleteImage = async () => {
+
+    const regex = /\/([a-zA-Z0-9]+)\.(jpg|png|gif|jpeg)$/i;
+    const match = product.image.match(regex);
+    const imageID = match ? match[1] : null;
+    
+    console.log(imageID);
+    
+
+    await axios.delete(`https://api.imgur.com/3/image/${imageID}`, {
+      headers: {
+        Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+      },
+    });
+  };
 
   const onSubmit = async (data) => {
+    try {
+      if (selectedImage !== null) {
+        await deleteImage();
+        const imageUrl = await handleImageUpload();
+        if (imageUrl === null) {
+          alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
+          return;
+        }
+        data.image = imageUrl;
+      }
+    } catch (error) {
+      alert("שגיאה בהעלאת תמונה אנא נסה מואחר יותר");
+      return;
+    }
     data.minQuantity = Number(data.minQuantity);
     for (const key in data) {
       if (data[key] == NaN) delete data[key];
@@ -103,12 +162,18 @@ const EditProduct = () => {
       <Navbar />
       <div className="content-container">
         <div className="whiteboard-container">
+          <h1>עדכון פריט</h1>
           <form
             className="update-product-form"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1>עדכון פריט</h1>
             <div className="add-product-form">
+              <input
+                type="text"
+                placeholder="קוד הפריט"
+                defaultValue={product.serial}
+                {...register("serial")}
+              />
               <input
                 type="text"
                 placeholder="שם הפריט"
@@ -116,10 +181,10 @@ const EditProduct = () => {
                 {...register("title")}
               />
               <input
-                type="text"
-                placeholder="קוד הפריט"
-                defaultValue={product.serial}
-                {...register("serial")}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleImageSelected}
               />
               <input
                 type="number"
@@ -130,7 +195,7 @@ const EditProduct = () => {
                 {...register("minQuantity")}
               />
               <input
-                className="add-product-desc"
+                className="product-desc"
                 type="text"
                 placeholder="תיאור הפריט"
                 defaultValue={product.desc}

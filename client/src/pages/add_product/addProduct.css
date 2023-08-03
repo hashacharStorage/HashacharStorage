@@ -1,18 +1,20 @@
 @import url("../../core.css");
 
-/* .add-product-desc {
-    background-color: white;
-    min-width: 100%;
-} */
+
 
 .add-product-form{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 10px;
+    direction: rtl;
 }
 .add-product-form .submit-button{
     margin-top: 10px;
 }
+.add-product-form .product-desc {
+    grid-column: 1 / -1; /* This spans the entire row */
+  }
+  
 @media (max-width:740) {
 
     .add-product-form input{
