@@ -70,16 +70,16 @@ const AddProduct = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+            Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
           },
         }
       );
-      console.log(response.data)
-      const uploadedImageUrl = response.data.link;
+      console.log(response.data.data)
+      const uploadedImageUrl = response.data.data.link;
       console.log("Image uploaded:", uploadedImageUrl);
       return uploadedImageUrl;
     } catch (error) {
-      console.error("Error uploading image:", error);
+      console.log( error);
       return null;
     }
   };
@@ -110,6 +110,7 @@ const AddProduct = () => {
           alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
           return;
         }
+        console.log("here")
         data.image = imageUrl;
       }
 

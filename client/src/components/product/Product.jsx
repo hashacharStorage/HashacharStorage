@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./product.css";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import defaultImage from "../../images/logo.png";
+import "./product.css";
 
 const Product = ({
   title,
@@ -10,11 +11,13 @@ const Product = ({
   minQuantity,
   black,
   product_id,
+  image,
   handleEditCurrOrder,
   viewOnly = false,
   quantity,
 }) => {
   const [counter, setCounter] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (quantity === -1) {
@@ -25,7 +28,7 @@ const Product = ({
     } else {
       setCounter(quantity);
     }
-  });
+  }, [quantity, product_id]);
 
   const handleCounter = (multiplier) => {
     if (!(counter === 0 && multiplier === -1)) {
@@ -38,6 +41,10 @@ const Product = ({
         localStorage.setItem(`product-${product_id}`, newCounter);
       }
     }
+  };
+
+  const handleModalToggle = () => {
+    setShowModal(!showModal);
   };
 
   return (
@@ -61,7 +68,16 @@ const Product = ({
           />
         )}
       </div>
-      <span className="product-title">{title}</span>
+      <span className="product-title" onClick={handleModalToggle}>
+        {title}
+      </span>
+      {showModal && (
+        <div className="modal-overlay" onClick={handleModalToggle}>
+          <div className="modal-content">
+            <img src={image || defaultImage} alt={title} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

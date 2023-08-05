@@ -15,10 +15,11 @@ const ProductsPage = () => {
   const [selectedCompany, setSelectedCompany] = useState(1);
   const [blackProducts, setBlackProducts] = useState([]);
   const [serializedProducts, setSerializedProducts] = useState([]);
-
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const token = "Bearer " + Cookies.get("token");
       try {
         const [companiesResponse, productsResponse] = await Promise.all([
@@ -65,7 +66,7 @@ const ProductsPage = () => {
     if (!isUserAdmin()) {
       navigate("/home");
     } else fetchData();
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -81,13 +82,10 @@ const ProductsPage = () => {
       }
     }
   }, [selectedCompany, isLoading]);
-  
 
   const handleRemoveItem = async (id) => {
     const token = "Bearer " + Cookies.get("token");
-    const confirmed = window.confirm(
-      "?האם ברצונך למחוק את הפריט"
-    );
+    const confirmed = window.confirm("?האם ברצונך למחוק את הפריט");
     if (confirmed) {
       axios
         .delete(`${clientConfig.API_PATH}products/${id}`, {
@@ -100,10 +98,12 @@ const ProductsPage = () => {
         })
         .then((res) => {
           alert("המוצר נמחק בהצלחה");
-          window.location.reload();
+          setReload(!reload);
         })
-        .catch((err) => {if(err.response)alert(err.response.data)
-        else alert("אין חיבור לשרת")});
+        .catch((err) => {
+          if (err.response) alert(err.response.data);
+          else alert("אין חיבור לשרת");
+        });
     }
   };
 

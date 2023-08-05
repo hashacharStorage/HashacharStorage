@@ -24,7 +24,6 @@ const ProductSchema = new mongoose.Schema(
     ],
     image: {
       type: String,
-      default:"https://i.imgur.com/4ty9FQt.png"
     },
     minQuantity: {
       type: Number,

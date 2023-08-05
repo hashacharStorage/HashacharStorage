@@ -19,7 +19,7 @@ const ProductsList = ({ products, viewOnly = false }) => {
               desc={product.desc}
               companies={product.companies}
               minQuantity={product.minQuantity}
-              image={product.image}
+              image={product.image===undefined?null:product.image}
               black={product.black}
               key={index}
               product_id={product.product_id}

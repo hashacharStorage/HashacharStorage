@@ -35,7 +35,6 @@ const EditProduct = () => {
   };
 
   useEffect(() => {
-    // TODO: fix this
     const fetchData = async () => {
       try {
         const [companyResponse, productsResponse] = await Promise.all([
@@ -78,7 +77,7 @@ const EditProduct = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+            Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
           },
         }
       );
@@ -92,17 +91,15 @@ const EditProduct = () => {
   };
 
   const deleteImage = async () => {
-
     const regex = /\/([a-zA-Z0-9]+)\.(jpg|png|gif|jpeg)$/i;
     const match = product.image.match(regex);
     const imageID = match ? match[1] : null;
-    
+
     console.log(imageID);
-    
 
     await axios.delete(`https://api.imgur.com/3/image/${imageID}`, {
       headers: {
-        Authorization: `Bearer f9cdec80f1d87908437bf3dc9080d3de5249a138`,
+        Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
       },
     });
   };
