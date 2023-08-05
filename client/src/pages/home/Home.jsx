@@ -101,8 +101,7 @@ const Home = () => {
 
         setIsLoading(false);
         alert("הזמנתך נשלחה למחסן בהצלחה");
-        navigate("/home");
-        window.scrollTo(0, 0);
+        window.location.reload();
       } catch (error) {
         setIsLoading(false);
         alert(error.response.data.message);
