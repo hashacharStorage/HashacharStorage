@@ -77,7 +77,7 @@ const EditProduct = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
+            Authorization: clientConfig.REACT_APP_IMGUR_TOKEN,
           },
         }
       );
@@ -91,6 +91,7 @@ const EditProduct = () => {
   };
 
   const deleteImage = async () => {
+    console.log("in delete image")
     const regex = /\/([a-zA-Z0-9]+)\.(jpg|png|gif|jpeg)$/i;
     const match = product.image.match(regex);
     const imageID = match ? match[1] : null;
@@ -99,7 +100,7 @@ const EditProduct = () => {
 
     await axios.delete(`https://api.imgur.com/3/image/${imageID}`, {
       headers: {
-        Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
+        Authorization: clientConfig.REACT_APP_IMGUR_TOKEN,
       },
     });
   };
@@ -107,7 +108,8 @@ const EditProduct = () => {
   const onSubmit = async (data) => {
     try {
       if (selectedImage !== null) {
-        await deleteImage();
+        if (product.image !== undefined && product.image !== null)
+          await deleteImage();
         const imageUrl = await handleImageUpload();
         if (imageUrl === null) {
           alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
@@ -180,7 +182,6 @@ const EditProduct = () => {
               <input
                 type="file"
                 accept="image/*"
-                capture="environment"
                 onChange={handleImageSelected}
               />
               <input

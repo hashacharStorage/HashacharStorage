@@ -70,16 +70,16 @@ const AddProduct = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${clientConfig.REACT_APP_IMGUR_TOKEN}`,
+            Authorization: clientConfig.REACT_APP_IMGUR_TOKEN,
           },
         }
       );
-      console.log(response.data.data)
+      console.log(response.data.data);
       const uploadedImageUrl = response.data.data.link;
       console.log("Image uploaded:", uploadedImageUrl);
       return uploadedImageUrl;
     } catch (error) {
-      console.log( error);
+      console.log(error);
       return null;
     }
   };
@@ -106,11 +106,11 @@ const AddProduct = () => {
     try {
       if (selectedImage !== null) {
         const imageUrl = await handleImageUpload();
-        if(imageUrl===null){
+        if (imageUrl === null) {
           alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
           return;
         }
-        console.log("here")
+        console.log("here");
         data.image = imageUrl;
       }
 
@@ -162,9 +162,9 @@ const AddProduct = () => {
             <input
               type="file"
               accept="image/*"
-              capture="environment"
               onChange={handleImageSelected}
             />
+
             <input
               type="number"
               placeholder="כמות מינימאלית"
