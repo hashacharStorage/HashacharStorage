@@ -47,8 +47,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
 
-    console.log("the data: ");
-    console.log(data);
+   
     if (data.shirtSize === "") delete data.shirtSize;
     if (data.villa == 0) data.villa = false;
     else data.villa = true;

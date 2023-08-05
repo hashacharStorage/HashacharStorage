@@ -75,7 +75,7 @@ const EditUser = () => {
       else if (copydata[key] === "") delete copydata[key];
       else if (copydata[key] == user[key]) delete copydata[key];
     }
-    console.log(copydata);
+
     const token = "Bearer " + Cookies.get("token");
     if (JSON.stringify(copydata) !== "{}") {
       axios

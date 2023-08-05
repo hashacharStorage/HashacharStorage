@@ -2,15 +2,15 @@ const User = require("../models/User");
 const Order = require("../models/Order");
 const CryptoJS = require("crypto-js")
 const updateUserInfo = async (req, res) => {
-  console.log(req.body)
+
   if (req.body.password) {
-    console.log("first")
+
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS
     ).toString();
   }
-  console.log(req.params.id)
+
 
   try {
     const updatedUser = await User.findByIdAndUpdate(

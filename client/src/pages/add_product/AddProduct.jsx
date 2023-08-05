@@ -110,7 +110,6 @@ const AddProduct = () => {
           alert("שגיאה ביצירת הפריט נסה שוב מאוחר יותר");
           return;
         }
-        console.log("here");
         data.image = imageUrl;
       }
 
