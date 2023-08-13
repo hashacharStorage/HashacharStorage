@@ -28,6 +28,7 @@ const registerUser = async (req, res) => {
       email: req.body.email,
       shirtSize:req.body.shirtSize,
       team:req.body.team,
+      villa:req.body.villa
       password: CryptoJS.AES.encrypt(
         req.body.password,
         process.env.PASS
