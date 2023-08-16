@@ -96,6 +96,7 @@ const getOrder = async (req, res) => {
       "title",
       "product_id",
       "_id",
+      "image",
     ]);
     const productsWithQuantity = products.map((product) => {
       const orderProduct = order.products.find(

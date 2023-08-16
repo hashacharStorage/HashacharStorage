@@ -74,9 +74,7 @@ const AddProduct = () => {
           },
         }
       );
-      console.log(response.data.data);
       const uploadedImageUrl = response.data.data.link;
-      console.log("Image uploaded:", uploadedImageUrl);
       return uploadedImageUrl;
     } catch (error) {
       console.log(error);

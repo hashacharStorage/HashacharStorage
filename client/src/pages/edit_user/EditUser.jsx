@@ -52,7 +52,6 @@ const EditUser = () => {
         setTeams(teamFields);
 
         setUser(userResponse.data);
-        console.log(userResponse.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

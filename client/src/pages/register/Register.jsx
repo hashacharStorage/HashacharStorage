@@ -46,36 +46,43 @@ const Register = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    const companyName = companies.find(
+      (field) => field.id === Number(data.company)
+    ).name;
 
-   
-    if (data.shirtSize === "") delete data.shirtSize;
-    if (data.villa == 0) data.villa = false;
-    else data.villa = true;
-    data.company = Number(data.company);
-    data.team = Number(data.team);
-    data.warehouse = Number(data.warehouse);
-    data.email = data.email.toLowerCase();
-    const token = "Bearer " + Cookies.get("token");
-    axios
-      .post(
-        clientConfig.API_PATH + "auth/register",
-        {
-          ...data,
-        },
-        {
-          headers: {
-            token: token,
+    const confirmed = window.confirm(
+      `?${companyName} :האם אתה רוצה ליצור משתמש לחברה `
+    );
+    if (confirmed) {
+      if (data.shirtSize === "") delete data.shirtSize;
+      if (data.villa == 0) data.villa = false;
+      else data.villa = true;
+      data.company = Number(data.company);
+      data.team = Number(data.team);
+      data.warehouse = Number(data.warehouse);
+      data.email = data.email.toLowerCase();
+      const token = "Bearer " + Cookies.get("token");
+      axios
+        .post(
+          clientConfig.API_PATH + "auth/register",
+          {
+            ...data,
           },
-        }
-      )
-      .then(() => {
-        alert("משתמש נרשם בהצלחה!");
-        navigate("/admin/home");
-      })
-      .catch((err) => {
-        if (err.response) alert(err.response.data.message);
-        else alert("אין חיבור לשרת");
-      });
+          {
+            headers: {
+              token: token,
+            },
+          }
+        )
+        .then(() => {
+          alert("משתמש נרשם בהצלחה!");
+          navigate("/admin/home");
+        })
+        .catch((err) => {
+          if (err.response) alert(err.response.data.message);
+          else alert("אין חיבור לשרת");
+        });
+    }
   };
   const handleFormSubmit = handleSubmit(onSubmit);
 

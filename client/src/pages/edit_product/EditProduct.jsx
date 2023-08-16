@@ -91,7 +91,6 @@ const EditProduct = () => {
   };
 
   const deleteImage = async () => {
-    console.log("in delete image")
     const regex = /\/([a-zA-Z0-9]+)\.(jpg|png|gif|jpeg)$/i;
     const match = product.image.match(regex);
     const imageID = match ? match[1] : null;

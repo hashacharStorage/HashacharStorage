@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./productAdmin.css";
 import {
   BsFillXCircleFill,
@@ -7,18 +7,24 @@ import {
 
 const ProductAdmin = ({
   id,
+  image,
   title,
   _id,
   serial,
   handleEditItem,
   handleRemoveItem,
 }) => {
+  const [showModal, setShowModal] = useState(false);
   const handleEdit = () => {
     handleEditItem(_id);
   };
 
   const handleRemove = () => {
     handleRemoveItem(_id);
+  };
+
+  const handleModalToggle = () => {
+    setShowModal(!showModal);
   };
 
   return (
@@ -30,10 +36,17 @@ const ProductAdmin = ({
         />
         <BsFillXCircleFill className="remove-icon" onClick={handleRemove} />
       </div>
-      <div className="product-details">
-          <span className="product-name"> {title} </span>
-          <span className="serial"> | {serial} |</span>
+      <div className="product-details" onClick={handleModalToggle}>
+        <span className="product-name"> {title} </span>
+        <span className="serial"> | {serial} |</span>
+      </div>
+      {showModal && (
+        <div className="modal-overlay" onClick={handleModalToggle}>
+          <div className="modal-content">
+            <img src={image || defaultImage} alt={title} />
+          </div>
         </div>
+      )}
     </div>
   );
 };

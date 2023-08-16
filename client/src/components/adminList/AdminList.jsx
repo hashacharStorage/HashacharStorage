@@ -31,6 +31,7 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
+                
                 />
             );
           })}
@@ -45,6 +46,7 @@ const AdminList = ({
               key={index}
               handleEditItem={handleEditItem}
               handleRemoveItem={handleRemoveItem}
+              image={product.image===undefined?null:product.image}
               />
             );
           })}
