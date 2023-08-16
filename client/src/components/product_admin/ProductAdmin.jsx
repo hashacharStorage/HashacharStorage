@@ -4,6 +4,8 @@ import {
   BsFillXCircleFill,
   BsFillWrenchAdjustableCircleFill,
 } from "react-icons/bs";
+import defaultImage from "../../images/logo.png";
+
 
 const ProductAdmin = ({
   id,
