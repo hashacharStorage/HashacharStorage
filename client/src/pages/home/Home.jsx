@@ -133,7 +133,7 @@ const Home = () => {
           className="complete-order-button"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "שליחת פריטים"}
+          {isLoading ? "...טוען" : "שליחת פריטים"}
         </button>
 
         <Modal
