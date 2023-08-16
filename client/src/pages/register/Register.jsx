@@ -60,7 +60,7 @@ const Register = () => {
       data.company = Number(data.company);
       data.team = Number(data.team);
       data.warehouse = Number(data.warehouse);
-      data.email = data.email.toLowerCase();
+      data.email = data.email.toLowerCase().trim();
       const token = "Bearer " + Cookies.get("token");
       axios
         .post(

@@ -23,14 +23,14 @@ const Login = () => {
   };
   const isValidEmail = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
+    return emailRegex.test(email.trim());
   };
 
   const handleClick = async () => {
     if (isValidEmail()) {
       await axios
         .post(clientConfig.API_PATH + "auth/login", {
-          email: email.toLowerCase(),
+          email: email.toLowerCase().trim(),
           password: password,
         })
         .then((res) => {
