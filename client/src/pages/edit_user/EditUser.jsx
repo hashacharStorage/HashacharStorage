@@ -130,11 +130,6 @@ const EditUser = () => {
                   />
                   <input
                     type="text"
-                    placeholder="סיסמא"
-                    {...register("password")}
-                  />
-                  <input
-                    type="text"
                     placeholder="אימייל"
                     defaultValue={user.email}
                     {...register("email", {
@@ -143,9 +138,8 @@ const EditUser = () => {
                   />
                   <input
                     type="text"
-                    placeholder="מידת חולצה"
-                    defaultValue={user.shirtSize}
-                    {...register("shirtSize")}
+                    placeholder="סיסמא"
+                    {...register("password")}
                   />
                   <input
                     type="number"
@@ -157,16 +151,20 @@ const EditUser = () => {
                     className="read-only-input"
                     {...register("warehouse")}
                   />
+                  <input
+                    type="text"
+                    placeholder="מידת חולצה"
+                    defaultValue={user.shirtSize}
+                    {...register("shirtSize")}
+                  />
                   <div className="selects-container">
-                    {!isLoading && (
-                      <select {...register("team")} defaultValue={user.team}>
-                        {teams.map((team) => (
-                          <option key={team.id} value={team.id}>
-                            {team.name}
-                          </option>
-                        ))}
-                      </select>
-                    )}
+                    <select value={user.company} disabled>
+                      {companies.map((company) => (
+                        <option key={company.id} value={company.id}>
+                          {company.name}
+                        </option>
+                      ))}
+                    </select>
 
                     {!isLoading && (
                       <select
@@ -179,13 +177,15 @@ const EditUser = () => {
                       </select>
                     )}
 
-                    <select value={user.company} disabled>
-                      {companies.map((company) => (
-                        <option key={company.id} value={company.id}>
-                          {company.name}
-                        </option>
-                      ))}
-                    </select>
+                    {!isLoading && (
+                      <select {...register("team")} defaultValue={user.team}>
+                        {teams.map((team) => (
+                          <option key={team.id} value={team.id}>
+                            {team.name}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </div>
                   <SubmitButton
                     title="עריכת פרטים"
