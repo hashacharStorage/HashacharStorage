@@ -3,10 +3,12 @@ import "./adminList.css";
 import User from "../user/User";
 import ProductAdmin from "../product_admin/ProductAdmin";
 import Company from "../company/Company";
+import Form from "../form/Form";
 
-const USERS="users"
-const PRODUCTS= "products"
-const COMPANIES="companies"
+const USERS = "users";
+const PRODUCTS = "products";
+const COMPANIES = "companies";
+const FORMS = "forms";
 const AdminList = ({
   title,
   items,
@@ -14,10 +16,9 @@ const AdminList = ({
   handleEditItem,
   type,
 }) => {
-
   return (
-<>
-    <h2>{title}</h2>
+    <>
+      <h2>{title}</h2>
       <div className="admin-list">
         {type === USERS &&
           items.map((user, index) => {
@@ -31,22 +32,21 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
-                
-                />
+              />
             );
           })}
         {type === PRODUCTS &&
           items.map((product, index) => {
             return (
               <ProductAdmin
-              id={product.product_id}
-              title={product.title}
-              _id={product._id}
-              serial={product.serial}
-              key={index}
-              handleEditItem={handleEditItem}
-              handleRemoveItem={handleRemoveItem}
-              image={product.image===undefined?null:product.image}
+                id={product.product_id}
+                title={product.title}
+                _id={product._id}
+                serial={product.serial}
+                key={index}
+                handleEditItem={handleEditItem}
+                handleRemoveItem={handleRemoveItem}
+                image={product.image === undefined ? null : product.image}
               />
             );
           })}
@@ -60,11 +60,25 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
-                />
-                );
-              })}
+              />
+            );
+          })}
+        {type === FORMS &&
+          items.map((form, index) => {
+            console.log(form)
+            return (
+              <Form
+                id={index}
+                title={form.formName}
+                _id={form._id}
+                key={index}
+                handleEditItem={handleEditItem}
+                handleRemoveItem={handleRemoveItem}
+              />
+            );
+          })}
       </div>
-      </>
+    </>
   );
 };
 

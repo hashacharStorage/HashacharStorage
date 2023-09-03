@@ -5,6 +5,7 @@ import {
   BsFillBuildingFill,
   BsBuildingFillAdd,
   BsFileArrowUpFill,
+  BsFillFileArrowDownFill,
 } from "react-icons/bs";
 import FormDetailsModal from "../../components/form_details_modal/FormDetailsModal";
 import Navbar from "../../components/navbar/Navbar";
@@ -89,6 +90,11 @@ const AdminHome = () => {
       icon: BsFileArrowUpFill,
       name: "יצירת טופס חדש",
       function: () => handleFormModal(),
+    },
+    {
+      icon: BsFillFileArrowDownFill,
+      name: "הורדת טפסים ",
+      function: () => navigate("/admin/forms"),
     },
   ];
 

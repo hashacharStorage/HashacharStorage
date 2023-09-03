@@ -61,10 +61,11 @@ const deleteForm = async (req, res) => {
 //get Form
 const getForm = async (req, res) => {
   try {
-    const Form = await Form.findOne({ userId: req.params.userID });
-
-    res.status(200).json(Form);
+    console.log(req.params)
+    const form = await findById(req.params.formID);
+    res.status(200).send(form);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
