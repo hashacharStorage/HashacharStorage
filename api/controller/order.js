@@ -10,6 +10,7 @@ dotenv.config();
 
 const createOrder = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
+  console.log("product raw: ", req.body.products)
   const generateorder = async (user) => {
     let order = [];
     for (const product of req.body.products) {
@@ -33,12 +34,14 @@ const createOrder = async (req, res, next) => {
   try {
     const existingOrder = await Order.findOne({ userId: req.body.userId });
     const userResponse = await User.findById(req.body.userId);
+    console.log("user deats ", userResponse._doc)
     const company = await Company.findOne({ id: userResponse.company });
     const user = {
       ...userResponse._doc,
       company: company.name,
       company_email: company.email,
     };
+
     if (existingOrder) {
       existingOrder.products = req.body.products;
       existingOrder.updatedAt = Date.now();
@@ -48,6 +51,7 @@ const createOrder = async (req, res, next) => {
       await newOrder.save();
     }
     const order = await generateorder(user);
+
     const pdf = await generatePDF(order, user)
     emailSender.sendEmail(pdf, user).then(() => {
       res.status(200).send("ok")

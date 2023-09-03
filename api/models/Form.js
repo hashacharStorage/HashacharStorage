@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+let AutoIncrement = require("mongoose-sequence")(mongoose);
 
-const CartSchema = new mongoose.Schema(
+const FormSchema = new mongoose.Schema(
   {
-    UserID: {
+    formName: {
       type: String,
       required: true,
     },
@@ -20,5 +21,5 @@ const CartSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-module.exports = mongoose.model("Cart", CartSchema);
+FormSchema.plugin(AutoIncrement, { inc_field: "formID", start_seq: 0 });
+module.exports = mongoose.model("Form", FormSchema);

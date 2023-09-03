@@ -1,0 +1,41 @@
+@import url("../../core.css");
+
+.modal-container {
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+    position: fixed;
+    bottom: 0; /* Corrected value */
+    left: 0;
+    width: 100%;
+    height: 100%; /* Change to cover the entire viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the modal content */
+  }
+
+.modal-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    direction: rtl;
+}
+.modal-form select {
+    border-radius: 6px;
+    width: 100%;
+    text-align: right;
+    padding: 8px;
+    border: 2px solid var(--primary-dark-blue);
+    direction: rtl;
+  }
+  
+/* .modal-form .submit-button {
+    margin-top: 10px;
+} */
+
+
+@media (max-width:740px) {
+
+    .add-product-form input {
+        width: 100%;
+    }
+
+}

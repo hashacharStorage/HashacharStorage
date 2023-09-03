@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { handleUserRedirect } from '../utils/userVerification';
 import Home from '../pages/home/Home';
 import Register from '../pages/register/Register';
 import Login from '../pages/login/Login';
@@ -15,6 +13,7 @@ import AddCompany from '../pages/add_company/AddCompany';
 import CompaniesPage from '../pages/companies_page/CompaniesPage';
 import EditCompany from '../pages/edit_company/EditCompny'
 import Default from '../pages/default/Default';
+import FormGenerator from '../pages/form_generator/FormGenerator';
 
 const ClientRouter = () => {
 
@@ -23,6 +22,7 @@ const ClientRouter = () => {
       <Routes>
       <Route path="/" element={<Default />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/admin/form-generator" element={<FormGenerator/>}/>
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/add/user" element={<Register />} />
         <Route path="/login" element={<Login />} />

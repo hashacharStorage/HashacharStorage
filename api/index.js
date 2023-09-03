@@ -11,7 +11,7 @@ const authRouter = require("./router/auth");
 const teamRouter = require("./router/team");
 const productRouter = require("./router/product");
 const orderRouter = require("./router/order");
-
+const formRouter = require("./router/form")
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -33,6 +33,7 @@ app.use("/company", companyRouter);
 app.use("/products", productRouter);
 app.use("/orders", orderRouter);
 app.use("/team", teamRouter);
+app.use("/form",formRouter)
  
 
 mongoose
