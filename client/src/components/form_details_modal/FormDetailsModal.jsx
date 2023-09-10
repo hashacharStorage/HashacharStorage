@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 const FormDetailsModal = ({ companies, isOpen, onClose, onSave, isEdit }) => {
   const { register, handleSubmit } = useForm();
+  const [isDownloading,setIsDownloading] =useState("יצירת טופס")
   const modalRef = useRef();
 
   const handleCloseOutsideClick = (e) => {
@@ -15,6 +16,7 @@ const FormDetailsModal = ({ companies, isOpen, onClose, onSave, isEdit }) => {
   };
   
   const onSubmit = (data) => {
+    setIsDownloading("קובץ בהורדה אנא המתן")
     onSave(data)
   };
   const handleFormSubmit = handleSubmit(onSubmit);
@@ -92,7 +94,7 @@ const FormDetailsModal = ({ companies, isOpen, onClose, onSave, isEdit }) => {
           </>}
 
           <SubmitButton
-            title={"יצירת טופס"}
+            title={isDownloading}
             oncllickhandle={handleFormSubmit}
           />
         </form>
