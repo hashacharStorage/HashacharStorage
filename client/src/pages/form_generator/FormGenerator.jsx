@@ -44,7 +44,7 @@ const FormGenerator = () => {
     const fetchData = async () => {
         console.log(formData)
         const token = "Bearer " + Cookies.get("token");
-        let company = formData.company
+        let company = formData.company;
         try {
             setIsLoading(true);
             const response = await axios.get(
@@ -95,6 +95,7 @@ const FormGenerator = () => {
 
             const form = {};
             form.formName = formData.fileName;
+            form.company=formData.company;
             form.products = allItems;
    
           try {
@@ -113,7 +114,8 @@ const FormGenerator = () => {
 
             setIsLoading(false);
             alert("הקובץ נוצר בהצלחה");
-            window.location.reload();
+            navigate("/admin/home");
+            
           } catch (error) {
             setIsLoading(false);
             alert(error.response.data.message);

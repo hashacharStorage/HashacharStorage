@@ -4,6 +4,7 @@ const {
   getForm,
   updateForm,
   getForms,
+  getPdf,
 } = require("../controller/form");
 const {
   verifyToken,
@@ -20,12 +21,16 @@ router.put("/find/:formID", verifyTokenAndAdmin, updateForm);
 router.post("/", verifyTokenAndAdmin, createForm);
 
 //delete
-router.delete("/:formID", verifyTokenAndAdmin, deleteForm);
+router.delete("/find/:formID", verifyTokenAndAdmin, deleteForm);
 
 //get specific Form
 router.get("/find/:formID", verifyTokenAndAdmin, getForm);
 
 //get all Forms
 router.get("/", verifyTokenAndAdmin, getForms);
+
+//get pdf file from form
+router.post("/pdf/:formID", verifyTokenAndAdmin, getPdf);
+
 
 module.exports = router;

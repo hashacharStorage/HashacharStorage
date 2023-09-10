@@ -7,6 +7,7 @@ const FormSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    company: { type: String, required:true },
     products: [
       {
         productId: {

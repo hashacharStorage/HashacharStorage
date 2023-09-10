@@ -44,7 +44,6 @@ const AdminHome = () => {
         companies.shift();
 
         setCompanies(companies);
-        console.log(companies);
       } catch (error) {
         console.log(error);
       }
@@ -115,6 +114,7 @@ const AdminHome = () => {
               isOpen={true}
               onClose={handleFormModal}
               onSave={navigateCreateForm}
+              isEdit={false}
             />
           )}
         </div>

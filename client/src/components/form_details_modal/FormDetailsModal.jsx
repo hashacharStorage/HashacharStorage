@@ -4,7 +4,7 @@ import "./formDetailsModal.css";
 import SubmitButton from "../submit_button/SubmitButton";
 import { useForm } from "react-hook-form";
 
-const FormDetailsModal = ({ companies, isOpen, onClose, onSave }) => {
+const FormDetailsModal = ({ companies, isOpen, onClose, onSave, isEdit }) => {
   const { register, handleSubmit } = useForm();
   const modalRef = useRef();
 
@@ -38,25 +38,12 @@ const FormDetailsModal = ({ companies, isOpen, onClose, onSave }) => {
       <div className="whiteboard-container">
         <h1>יצירת טופס חדש</h1>
         <form className="modal-form" onSubmit={handleFormSubmit}>
+          {isEdit?
+          <>
           <input
             type="text"
-            placeholder="שם הטופס"
-            {...register("fileName", {
-              required: true,
-            })}
-          />
-          <select {...register("company")}>
-            {companies.map((company) => (
-              <option key={company.id} value={company.id}>
-                {company.name}
-              </option>
-            ))}
-          </select>
-
-          {/* <input
-            type="text"
             placeholder="שם פרטי"
-            {...register("firstName", {
+            {...register("firstname", {
               required: true,
             })}
           />
@@ -64,7 +51,7 @@ const FormDetailsModal = ({ companies, isOpen, onClose, onSave }) => {
           <input
             type="text"
             placeholder="שם משפחה"
-            {...register("lastName", {
+            {...register("lastname", {
               required: true,
             })}
           />
@@ -82,10 +69,27 @@ const FormDetailsModal = ({ companies, isOpen, onClose, onSave }) => {
           <input
             type="text"
             placeholder="מידת חולצה"
-            {...register("shirt", {
+            {...register("shirtSize", {
               required: true,
             })}
-          /> */}
+          /> 
+          </>:
+          <>
+          <input
+            type="text"
+            placeholder="שם הטופס"
+            {...register("fileName", {
+              required: true,
+            })}
+          />
+          <select {...register("company")}>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
+          </>}
 
           <SubmitButton
             title={"יצירת טופס"}

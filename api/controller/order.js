@@ -34,7 +34,6 @@ const createOrder = async (req, res, next) => {
   try {
     const existingOrder = await Order.findOne({ userId: req.body.userId });
     const userResponse = await User.findById(req.body.userId);
-    console.log("user deats ", userResponse._doc)
     const company = await Company.findOne({ id: userResponse.company });
     const user = {
       ...userResponse._doc,

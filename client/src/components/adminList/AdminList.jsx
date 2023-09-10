@@ -14,6 +14,7 @@ const AdminList = ({
   items,
   handleRemoveItem,
   handleEditItem,
+  handleSelectItem,
   type,
 }) => {
   return (
@@ -65,7 +66,6 @@ const AdminList = ({
           })}
         {type === FORMS &&
           items.map((form, index) => {
-            console.log(form)
             return (
               <Form
                 id={index}
@@ -74,6 +74,8 @@ const AdminList = ({
                 key={index}
                 handleEditItem={handleEditItem}
                 handleRemoveItem={handleRemoveItem}
+                handleSelectItem={handleSelectItem}
+                isEdit={true}
               />
             );
           })}
