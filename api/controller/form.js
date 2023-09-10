@@ -20,7 +20,7 @@ const createForm = async (req, res) => {
 const updateForm = async (req, res) => {
   try {
     const updatedForm = await Form.findByIdAndUpdate(
-      req.params.id,
+      req.params.formID,
       {
         $set: req.body,
       },
@@ -35,7 +35,6 @@ const updateForm = async (req, res) => {
 //delete Form
 const deleteForm = async (req, res) => {
   try {
-    console.log(req.params.formID)
     await Form.findByIdAndDelete(req.params.formID);
     res.status(200).json("Form Has Been deleted");
   } catch (error) {
@@ -45,7 +44,6 @@ const deleteForm = async (req, res) => {
 //get Form
 const getForm = async (req, res) => {
   try {
-    console.log(req.params)
     const form = await Form.findById(req.params.formID);
     res.status(200).send(form);
   } catch (error) {
@@ -65,7 +63,6 @@ const getForms = async (req, res) => {
 };
 
 const getPdf = async (req, res) => {
-  console.log(req.body)
   try {
     const form = await Form.findById(req.params.formID)
     let order = [];
@@ -86,7 +83,6 @@ const getPdf = async (req, res) => {
     }
     const company = await Company.findOne({ id: form.company });
     const user = {...req.body.data,team:0,villa:false,company:company.name}
-    console.log(user)
     const pdf = await generatePDF(order, user)
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="pdf"`);

@@ -29,6 +29,7 @@ const AdminHome = () => {
   };
 
   useEffect(() => {
+    if (localStorage.length > 0) localStorage.clear();
     const fetchData = async () => {
       const token = "Bearer " + Cookies.get("token");
       try {

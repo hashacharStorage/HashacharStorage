@@ -10,7 +10,6 @@ dotenv.config();
 
 const createOrder = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  console.log("product raw: ", req.body.products)
   const generateorder = async (user) => {
     let order = [];
     for (const product of req.body.products) {

@@ -52,7 +52,6 @@ const EditProduct = () => {
         setCompanies(companyFields);
         setCheckedCompanies(productsResponse.data.companies);
         setSelectedisBlack(productsResponse.data.isBlack);
-        console.log(productsResponse.data);
       } catch (error) {
         console.log(error);
       }
@@ -82,7 +81,6 @@ const EditProduct = () => {
         }
       );
       const uploadedImageUrl = response.data.data.link;
-      console.log("Image uploaded:", uploadedImageUrl);
       return uploadedImageUrl;
     } catch (error) {
       console.error("Error uploading image:", error);

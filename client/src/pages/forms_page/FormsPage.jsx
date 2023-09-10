@@ -19,6 +19,7 @@ const FormsPage = () => {
   const token = "Bearer " + Cookies.get("token");
 
   useEffect(() => {
+    if (localStorage.length > 0) localStorage.clear();
     const fetchData = async () => {
       try {
         const [formsResponse] = await Promise.all([
@@ -92,7 +93,6 @@ const FormsPage = () => {
 
   const handleRemoveItem = async (_id) => {
     const confirmed = window.confirm("האם אתה בטוח שאתה רוצה למחוק את הטופס?");
-    console.log(clientConfig.API_PATH)
     if (confirmed) {
       axios
         .delete(`${clientConfig.API_PATH}form/find/${_id}`, {
@@ -111,9 +111,26 @@ const FormsPage = () => {
     }
   };
 
-  const handleEditItem = (productId) => {
-    console.log("first");
-  };
+  const handleEditItem = (_id) => {
+    axios
+    .get(`${clientConfig.API_PATH}form/find/${_id}`, {
+      headers: {
+        token: token,
+      },
+    })
+    .then((res) => {
+      res.data.products.forEach(product => {
+        localStorage.setItem(`product-${product.productId}`, product.quantity);
+      });
+
+      navigate("/admin/form-generator", { state: { formData: {company:res.data.company,isEditId:_id} } });
+
+    })
+    .catch((err) => {
+      if (err.response) alert(err.response.data);
+      else alert("אין חיבור לשרת");
+    });
+ };
 
   return (
     <div className="body-container">
