@@ -15,4 +15,7 @@ router.get("/find/:id", verifyToken.verifyTokenAndAuthorization, getUser);
 //get all users
 router.get("/", verifyToken.verifyTokenAndAdmin, getUsers);
 
+//get users for excel thing
+router.get("/excel-users",getUsers);
+
 module.exports = router;

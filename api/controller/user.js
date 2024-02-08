@@ -58,7 +58,14 @@ const getUser = async (req, res) => {
 //get all users
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({company:1});
+    const extractedData = users.map(user => ({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      warehouse: user.warehouse
+    }));
+
+    res.status(200).json(extractedData);
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
