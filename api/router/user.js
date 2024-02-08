@@ -1,4 +1,4 @@
-const { updateUserInfo, getUser, deleteUser, getUsers } = require("../controller/user");
+const { updateUserInfo, getUser, deleteUser, getUsers, getUsersForExcel } = require("../controller/user");
 const verifyToken = require("../controller/verifyToken");
 
 const router = require("express").Router();
@@ -16,6 +16,6 @@ router.get("/find/:id", verifyToken.verifyTokenAndAuthorization, getUser);
 router.get("/", verifyToken.verifyTokenAndAdmin, getUsers);
 
 //get users for excel thing
-router.get("/excel-users",getUsers);
+router.get("/excel-users", getUsersForExcel);
 
 module.exports = router;
