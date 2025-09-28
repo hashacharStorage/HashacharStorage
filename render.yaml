@@ -1,10 +1,33 @@
+# Exported from Render on 2025-09-28T17:18:34Z
+version: "1"
 services:
-  - type: web
-    name: api
-    runtime: node
-    plan: free
-    buildCommand: "npm install"
-    startCommand: "npm start"
-    envVars:
-      - key: NODE_VERSION
-        value: 18
+- type: web
+  name: hashacharstorageapi
+  runtime: node
+  repo: https://github.com/hashacharStorage/HashacharStorage
+  plan: free
+  envVars:
+  - key: EMAIL_PASS
+    sync: false
+  - key: EMAIL
+    sync: false
+  - key: SENDGRID_API_KEY
+    sync: false
+  - key: PORT
+    sync: false
+  - key: PDF_API_PATH
+    sync: false
+  - key: PASS
+    sync: false
+  - key: NODE_VERSION
+    sync: false
+  - key: MONGO
+    sync: false
+  - key: JWT_SEC
+    sync: false
+  region: frankfurt
+  buildCommand: npm install
+  startCommand: npm run start
+  healthCheckPath: /
+  autoDeployTrigger: "off"
+  rootDir: ./api
