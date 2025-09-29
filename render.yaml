@@ -26,7 +26,7 @@ services:
   - key: JWT_SEC
     sync: false
   region: frankfurt
-  buildCommand: npm install puppeteer
+  buildCommand: npm uninstall puppeteer
   startCommand: npm run start
   healthCheckPath: /
   autoDeployTrigger: "off"
