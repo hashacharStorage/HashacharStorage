@@ -4,9 +4,6 @@ const { join } = require('path');
 const CHROMIUM_PATH = process.env.CHROMIUM_PATH || '/usr/bin/chromium';
 
 module.exports = {
-  // puppeteer cache dir (optional)
-  cacheDirectory: join(__dirname, '.cache', 'puppeteer'),
-  // launch options to use system Chromium on Render
   launch: {
     executablePath: CHROMIUM_PATH,
     args: [
