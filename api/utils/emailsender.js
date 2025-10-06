@@ -1,9 +1,9 @@
-// const client = require('@sendgrid/mail');
 require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 const sendEmail = async (pdf, user) => {
-  const  binaryPDF = Buffer.from(pdf, 'base64');
+
+  const binaryPDF = Buffer.from(pdf, 'base64');
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -26,6 +26,10 @@ const sendEmail = async (pdf, user) => {
     ],
   };
 
+  console.log(process.env.EMAIL_PASS);
+  console.log(process.env.EMAIL);
+  console.log(mailOptions)
+  
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
