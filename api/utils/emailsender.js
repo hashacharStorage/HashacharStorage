@@ -2,17 +2,13 @@ require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 const sendEmail = async (pdf, user) => {
-
-  console.log(process.env.EMAIL_PASS);
-  console.log(process.env.EMAIL);
-  console.log(user);
-  console.log(pdf);
+  console.log(`sending email to: ${user.firstname}_${user.lastname}`);
 
   const binaryPDF = Buffer.from(pdf, 'base64');
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
-    port:2525,
+    port: 2525,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.EMAIL_PASS,
@@ -32,10 +28,6 @@ const sendEmail = async (pdf, user) => {
       },
     ],
   };
-
-  console.log(process.env.EMAIL_PASS);
-  console.log(process.env.EMAIL);
-  console.log(mailOptions)
 
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
