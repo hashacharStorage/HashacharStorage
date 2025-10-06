@@ -8,11 +8,9 @@ const sendEmail = async (pdf, user) => {
   console.log(user);
   console.log(pdf);
 
-
   const binaryPDF = Buffer.from(pdf, 'base64');
 
   const transporter = nodemailer.createTransport({
-
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
