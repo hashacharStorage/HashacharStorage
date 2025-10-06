@@ -12,6 +12,7 @@ const sendEmail = async (pdf, user) => {
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
+    port:2525,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.EMAIL_PASS,
