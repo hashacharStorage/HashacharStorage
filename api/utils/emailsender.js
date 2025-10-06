@@ -3,8 +3,16 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (pdf, user) => {
 
+  console.log(process.env.EMAIL_PASS);
+  console.log(process.env.EMAIL);
+  console.log(user);
+  console.log(pdf);
+
+
   const binaryPDF = Buffer.from(pdf, 'base64');
+
   const transporter = nodemailer.createTransport({
+
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
@@ -29,7 +37,7 @@ const sendEmail = async (pdf, user) => {
   console.log(process.env.EMAIL_PASS);
   console.log(process.env.EMAIL);
   console.log(mailOptions)
-  
+
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
