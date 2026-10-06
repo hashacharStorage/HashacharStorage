@@ -82,11 +82,14 @@ const getPdf = async (req, res) => {
       }
     }
     const company = await Company.findOne({ id: form.company });
-    const user = {...req.body.data,team:0,villa:false,company:company.name}
+    const user = { ...req.body.data, team: 0, villa: false, company: company.name }
     const pdf = await generatePDF(order, user)
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="pdf"`);
-    res.status(200).send(pdf);
+    res.setHeader('Content-Disposition', `attachment; filename="order.pdf"`);
+    console.log("PDF type:", Buffer.isBuffer(pdf));
+    console.log("PDF length:", pdf.length);
+    console.log("PDF first bytes:", pdf.subarray(0, 5));
+    res.status(200).end(pdf);
 
   } catch (error) {
     console.log(error)
